@@ -1,23 +1,23 @@
 const modules=[
-["01","HTML","Structure du web","Balises, structure et sémantique.","Débutant","HTML est le langage qui décrit la structure d'une page. Tu vas apprendre les balises, les titres, les paragraphes, les liens, les images, les formulaires et la sémantique.","Créer une page personnelle avec un titre, une navigation, une image et un formulaire."],
-["02","CSS","Style & responsive","Mise en page, composants et mobile.","Débutant","CSS sert à présenter une page HTML. Tu vas apprendre les sélecteurs, les couleurs, les espacements, Flexbox, Grid, les cartes et les media queries.","Transformer une page HTML simple en interface responsive."],
-["03","JavaScript","Logique & interaction","Variables, conditions, fonctions et DOM.","Débutant","JavaScript permet de rendre une page interactive. Tu vas découvrir les variables, conditions, boucles, fonctions, événements et la modification du DOM.","Créer une mini-calculatrice ou un quiz interactif."],
-["04","Python","Programmer","Syntaxe, fonctions, listes et dictionnaires.","Débutant","Python est un langage polyvalent. Tu vas apprendre variables, conditions, boucles, fonctions, listes, dictionnaires et lecture simple de données.","Créer un petit outil de calcul ou de traitement de données."],
-["05","Git & GitHub","Versionner","Commits, branches, dépôts et publication.","Débutant","Git permet de suivre les versions d'un projet. GitHub héberge les dépôts et facilite le travail collaboratif et la publication de sites.","Publier ton premier site avec GitHub Pages et conserver son historique."],
-["06","SQL","Données","Tables, requêtes et relations.","Intermédiaire","SQL permet d'interroger des bases de données. Tu vas découvrir tables, colonnes, SELECT, WHERE, INSERT et les relations.","Concevoir une petite base fictive de livres ou de cours."],
-["07","Réseaux","Internet","IP, DNS, HTTP, ports et client-serveur.","Intermédiaire","Les réseaux permettent aux machines de communiquer. Tu vas comprendre IP, DNS, HTTP, ports et le modèle client-serveur.","Analyser le trajet théorique d'une requête vers un site web."],
-["08","Linux","Système","Terminal, fichiers, permissions et processus.","Intermédiaire","Linux est très présent dans les serveurs et la cybersécurité. Tu vas apprendre les commandes essentielles, les fichiers, permissions et processus.","Créer une petite arborescence de projet et la manipuler dans un terminal."],
-["09","Cybersécurité","Défense","Menaces, vulnérabilités et défense en profondeur.","Intermédiaire","La cybersécurité vise notamment à protéger confidentialité, intégrité et disponibilité. Tu découvriras menaces, vulnérabilités, risques et mesures de défense.","Étudier un scénario fictif et proposer des protections."],
-["10","Cryptographie","Secrets","Hachage, chiffrement, clés et usages.","Intermédiaire","La cryptographie protège l'information grâce à des mécanismes mathématiques. Tu vas distinguer hachage, chiffrement symétrique et asymétrique, clés et signatures.","Comparer des exemples fictifs de hachage et de chiffrement."],
-["11","Sécurité web","Applications","Sessions, entrées et principes de sécurité web.","Intermédiaire","Tu vas apprendre les grands risques des applications web et les principes de validation des entrées, gestion des sessions et contrôle des accès.","Auditer une petite application volontairement fictive et corriger ses problèmes."],
-["12","OSINT","Information","Évaluer des sources et informations publiques légalement.","Intermédiaire","L'OSINT consiste à exploiter des informations publiquement accessibles. Le cours insiste sur la vérification des sources, le recoupement et le respect de la vie privée.","Vérifier un dossier documentaire composé uniquement de sources fictives."],
-["13","Analyse","Incidents","Observer et documenter un incident fictif.","Avancé","L'analyse d'incident consiste à comprendre ce qui s'est passé, préserver les éléments utiles et documenter les faits. Ici, tout scénario est fictif et autorisé.","Construire une chronologie d'un incident simulé et proposer des mesures correctives."],
-["14","Projet final","Portfolio","Assembler tes compétences dans un projet documenté.","Avancé","Le projet final rassemble développement, documentation et bonnes pratiques de sécurité. L'objectif est de produire un projet personnel compréhensible et présentable.","Créer une application ou un site complet et rédiger sa documentation."]
+["01","HTML","Structure du web","Balises, structure et sémantique.","Débutant","HTML construit la structure d'une page avec des éléments sémantiques. Objectif : savoir créer une page propre, accessible et organisée.","Créer une page personnelle complète avec navigation, image, liste et formulaire."],
+["02","CSS","Style & responsive","Mise en page, composants et mobile.","Débutant","CSS contrôle la présentation : sélecteurs, cascade, box model, Flexbox, Grid et responsive design.","Transformer une page HTML en interface responsive sur mobile et ordinateur."],
+["03","JavaScript","Logique & interaction","Variables, conditions, fonctions et DOM.","Débutant","JavaScript ajoute de la logique et de l'interactivité grâce aux variables, fonctions, événements et au DOM.","Créer un quiz interactif avec score et validation."],
+["04","Python","Programmer","Syntaxe, fonctions, listes et dictionnaires.","Débutant","Python permet de programmer avec une syntaxe claire. Découvre variables, conditions, boucles, fonctions et structures de données.","Créer un outil de calcul avec plusieurs fonctions."],
+["05","Git & GitHub","Versionner","Commits, branches, dépôts et publication.","Débutant","Git conserve l'historique du code et GitHub permet de collaborer et publier des projets.","Créer un dépôt, faire des commits et publier un site avec GitHub Pages."],
+["06","SQL","Données","Tables, requêtes et relations.","Intermédiaire","SQL sert à organiser et interroger des données avec des tables, requêtes et relations.","Concevoir une base fictive de livres et écrire des requêtes SELECT."],
+["07","Réseaux","Internet","IP, DNS, HTTP, ports et client-serveur.","Intermédiaire","Comprendre comment les machines communiquent : IP, DNS, HTTP, ports et architecture client-serveur.","Dessiner le trajet d'une requête entre navigateur, DNS et serveur."],
+["08","Linux","Système","Terminal, fichiers, permissions et processus.","Intermédiaire","Découvrir le terminal, les fichiers, les permissions et les processus dans un environnement Linux.","Créer une arborescence de projet et manipuler des fichiers avec le terminal."],
+["09","Cybersécurité","Défense","Menaces, vulnérabilités et défense en profondeur.","Intermédiaire","Identifier les risques et apprendre les principes de défense, de réduction de surface d'attaque et de protection des données.","Analyser un scénario fictif et proposer plusieurs mesures défensives."],
+["10","Cryptographie","Secrets","Hachage, chiffrement, clés et usages.","Intermédiaire","Comprendre la différence entre hachage et chiffrement, ainsi que les rôles des clés et des signatures.","Comparer plusieurs usages cryptographiques dans un scénario fictif."],
+["11","Sécurité web","Applications","Sessions, entrées et principes de sécurité web.","Intermédiaire","Étudier les bonnes pratiques de sécurité des applications web : validation, authentification, sessions et contrôle d'accès.","Auditer une petite application volontairement fictive et proposer des corrections."],
+["12","OSINT","Information","Évaluer des sources et informations publiques légalement.","Intermédiaire","Apprendre à rechercher, vérifier et recouper des informations publiques en respectant la vie privée et la légalité.","Vérifier une information publique fictive avec plusieurs sources."],
+["13","Analyse","Incidents","Observer et documenter un incident fictif.","Avancé","Apprendre à structurer une analyse d'incident : chronologie, indices, hypothèses et mesures correctives.","Rédiger un rapport sur un incident entièrement fictif."],
+["14","Projet final","Portfolio","Assembler tes compétences dans un projet documenté.","Avancé","Mettre en pratique programmation, web, Git et sécurité défensive dans un projet personnel documenté.","Construire, tester et documenter ton projet final de portfolio."]
 ];
 
 const path=document.querySelector("#path"),courses=document.querySelector("#courses");
 
-modules.forEach(([n,t,d,p,l,c,e])=>{
+function createLearningCard([n,t,d,p,l,c,e]){
   const card=document.createElement("article");
   card.className="path-card";
   card.tabIndex=0;
@@ -25,9 +25,9 @@ modules.forEach(([n,t,d,p,l,c,e])=>{
   card.innerHTML=`<span class="num">${n}</span><h3>${t}</h3><p>${d} — ${p}</p><span class="tag">Ouvrir l'étape →</span>`;
   card.addEventListener("click",()=>openPath(n,t,d,p,l,c,e));
   card.addEventListener("keydown",event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();openPath(n,t,d,p,l,c,e)}});
-  path.appendChild(card);
-});
-
+  return card;
+}
+modules.forEach(m=>path.appendChild(createLearningCard(m)));
 
 modules.forEach(([n,t,d,p,l,c,e])=>{
   const card=document.createElement("article");
@@ -42,13 +42,32 @@ modules.forEach(([n,t,d,p,l,c,e])=>{
 
 const pathModal=document.createElement("div");
 pathModal.className="course-modal";
-pathModal.innerHTML=`<div class="course-overlay"></div><article class="course-window" role="dialog" aria-modal="true"><button class="course-close" aria-label="Fermer">×</button><span id="pathNum" class="num"></span><h2 id="pathTitle"></h2><p id="pathSubtitle" class="course-subtitle"></p><div class="course-body"><h3>Objectifs</h3><p id="pathText"></p><h3>Exercice / projet</h3><p id="pathExercise"></p><button id="pathToCourse" class="btn">Voir les cours associés →</button></div></article>`;
+pathModal.innerHTML=`<div class="course-overlay"></div><article class="course-window" role="dialog" aria-modal="true"><button class="course-close" aria-label="Fermer">×</button><span id="pathNum" class="num"></span><h2 id="pathTitle"></h2><p id="pathSubtitle" class="course-subtitle"></p><div class="course-body"><h3>Petit résumé</h3><p id="pathText"></p><h3>Exercice / projet</h3><p id="pathExercise"></p><div class="path-actions"><button id="pathFull" class="btn">Cours entier →</button><button id="pathPrev" class="btn">← Étape précédente</button><button id="pathNext" class="btn">Étape suivante →</button></div></div></article></div>`;
 document.body.appendChild(pathModal);
-function openPath(n,t,d,p,l,c,e){document.querySelector("#pathNum").textContent=n+" • "+l;document.querySelector("#pathTitle").textContent=t;document.querySelector("#pathSubtitle").textContent=d+" — "+p;document.querySelector("#pathText").textContent=c;document.querySelector("#pathExercise").textContent=e;pathModal.classList.add("show");document.body.classList.add("modal-open");}
+let currentPathIndex=0;
+function openPath(n,t,d,p,l,c,e){
+  currentPathIndex=modules.findIndex(m=>m[0]===n);
+  renderPath();
+  pathModal.classList.add("show");
+  document.body.classList.add("modal-open");
+}
+function renderPath(){
+  const [n,t,d,p,l,c,e]=modules[currentPathIndex];
+  document.querySelector("#pathNum").textContent=n+" • "+l;
+  document.querySelector("#pathTitle").textContent=t;
+  document.querySelector("#pathSubtitle").textContent=d+" — "+p;
+  document.querySelector("#pathText").textContent=c;
+  document.querySelector("#pathExercise").textContent=e;
+  document.querySelector("#pathPrev").disabled=currentPathIndex===0;
+  document.querySelector("#pathNext").disabled=currentPathIndex===modules.length-1;
+}
 function closePath(){pathModal.classList.remove("show");document.body.classList.remove("modal-open")}
 pathModal.querySelector(".course-close").onclick=closePath;
 pathModal.querySelector(".course-overlay").onclick=closePath;
-pathModal.querySelector("#pathToCourse").onclick=()=>{closePath();document.querySelector("#cours").scrollIntoView({behavior:"smooth"})};
+pathModal.querySelector("#pathPrev").onclick=()=>{if(currentPathIndex>0){currentPathIndex--;renderPath()}};
+pathModal.querySelector("#pathNext").onclick=()=>{if(currentPathIndex<modules.length-1){currentPathIndex++;renderPath()}};
+pathModal.querySelector("#pathFull").onclick=()=>{closePath();document.querySelector("#cours").scrollIntoView({behavior:"smooth"})};
+
 const modal=document.createElement("div");
 modal.className="course-modal";
 modal.id="courseModal";
