@@ -17,9 +17,17 @@ const modules=[
 
 const path=document.querySelector("#path"),courses=document.querySelector("#courses");
 
-modules.forEach(([n,t,d,p,l])=>{
-  path.insertAdjacentHTML("beforeend",`<article><span class="num">${n}</span><h3>${t}</h3><p>${d} — ${p}</p><span class="tag">${l}</span></article>`);
+modules.forEach(([n,t,d,p,l,c,e])=>{
+  const card=document.createElement("article");
+  card.className="path-card";
+  card.tabIndex=0;
+  card.setAttribute("role","button");
+  card.innerHTML=`<span class="num">${n}</span><h3>${t}</h3><p>${d} — ${p}</p><span class="tag">Ouvrir l'étape →</span>`;
+  card.addEventListener("click",()=>openPath(n,t,d,p,l,c,e));
+  card.addEventListener("keydown",event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();openPath(n,t,d,p,l,c,e)}});
+  path.appendChild(card);
 });
+
 
 modules.forEach(([n,t,d,p,l,c,e])=>{
   const card=document.createElement("article");
@@ -32,6 +40,15 @@ modules.forEach(([n,t,d,p,l,c,e])=>{
   courses.appendChild(card);
 });
 
+const pathModal=document.createElement("div");
+pathModal.className="course-modal";
+pathModal.innerHTML=`<div class="course-overlay"></div><article class="course-window" role="dialog" aria-modal="true"><button class="course-close" aria-label="Fermer">×</button><span id="pathNum" class="num"></span><h2 id="pathTitle"></h2><p id="pathSubtitle" class="course-subtitle"></p><div class="course-body"><h3>Objectifs</h3><p id="pathText"></p><h3>Exercice / projet</h3><p id="pathExercise"></p><button id="pathToCourse" class="btn">Voir les cours associés →</button></div></article>`;
+document.body.appendChild(pathModal);
+function openPath(n,t,d,p,l,c,e){document.querySelector("#pathNum").textContent=n+" • "+l;document.querySelector("#pathTitle").textContent=t;document.querySelector("#pathSubtitle").textContent=d+" — "+p;document.querySelector("#pathText").textContent=c;document.querySelector("#pathExercise").textContent=e;pathModal.classList.add("show");document.body.classList.add("modal-open");}
+function closePath(){pathModal.classList.remove("show");document.body.classList.remove("modal-open")}
+pathModal.querySelector(".course-close").onclick=closePath;
+pathModal.querySelector(".course-overlay").onclick=closePath;
+pathModal.querySelector("#pathToCourse").onclick=()=>{closePath();document.querySelector("#cours").scrollIntoView({behavior:"smooth"})};
 const modal=document.createElement("div");
 modal.className="course-modal";
 modal.id="courseModal";
