@@ -75,11 +75,19 @@ modal.innerHTML=`<div class="course-overlay"></div><article class="course-window
 document.body.appendChild(modal);
 
 function openCourse(n,t,d,p,l,c,e){
+  const data=window.courseData&&window.courseData[n];
   document.querySelector("#courseNum").textContent=n+" • "+l;
-  document.querySelector("#courseTitle").textContent=t;
+  document.querySelector("#courseTitle").textContent=data?.title||t;
   document.querySelector("#courseSubtitle").textContent=d+" — "+p;
-  document.querySelector("#courseText").textContent=c;
-  document.querySelector("#courseExercise").textContent=e;
+  const body=document.querySelector("#courseText");
+  const exercise=document.querySelector("#courseExercise");
+  if(data){
+    body.innerHTML="<p>"+data.intro+"</p>"+data.sections.map((section,index)=>"<section class=\"lesson-section\"><h4>"+(index+1)+". "+section[0]+"</h4><p>"+section[1]+"</p></section>").join("");
+    exercise.innerHTML="<ol>"+data.exercises.map(x=>"<li>"+x+"</li>").join("")+"</ol>";
+  }else{
+    body.textContent=c;
+    exercise.textContent=e;
+  }
   modal.classList.add("show");
   document.body.classList.add("modal-open");
 }
