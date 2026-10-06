@@ -71,4 +71,4 @@ function render(data){
 }
 function nav(id){const n=Number(id),prev=String(n-1).padStart(2,"0"),next=String(n+1).padStart(2,"0");return `<div class="nav-course">${n>1?`<a class="btn secondary" href="${COURSES[prev].slug}.html">← ${esc(COURSES[prev].title)}</a>`:"<span></span>"}<a class="btn secondary" href="../index.html#cours">Sommaire</a>${n<14?`<a class="btn" href="${COURSES[next].slug}.html">${esc(COURSES[next].title)} →</a>`:"<span></span>"}</div>`}
 document.querySelector("#courseTitle").textContent=meta.title;
-const p=document.createElement("script");p.src="project-curriculum.js";document.body.appendChild(p);const s=document.createElement("script");s.src=meta.file;s.onload=()=>render(window.courseData?.[id]||{});document.body.appendChild(s);
+const p=document.createElement("script");p.src="project-curriculum.js";p.onload=()=>{const s=document.createElement("script");s.src=meta.file;s.onload=()=>render(window.courseData?.[id]||{});document.body.appendChild(s)};document.body.appendChild(p);
