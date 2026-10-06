@@ -24,16 +24,30 @@ const LEVELS=[
  {name:"Avancé",icon:"🟠",intro:"Maîtrise : analyser, diagnostiquer, optimiser et justifier ses choix."},
  {name:"Expert / Projet",icon:"🔴",intro:"Mise en pratique : réaliser un travail complet, le tester, le documenter et l’évaluer."}
 ];
+function sectionData(section,index){
+ if(Array.isArray(section)) return {title:section[0]||("Leçon "+(index+1)),body:section[1]||""};
+ return {title:"Leçon "+(index+1),body:String(section||"")};
+}
 function renderLevel(level,sections,start,end){
  const lessons=sections.slice(start,end);
  return `<section class="level level-${level+1}" id="niveau-${level+1}">
  <div class="level-head"><span class="level-number">${LEVELS[level].icon} NIVEAU ${level+1}</span><h2>${LEVELS[level].name}</h2><p>${esc(LEVELS[level].intro)}</p></div>
- ${lessons.map((s,i)=>`<article class="lesson"><div class="lesson-tag">Leçon ${start+i+1}</div><h3>${esc(s[0]||"Notion")}</h3><p>${esc(s[1]||s)}</p>
- <div class="learning-path"><span>1. Comprendre</span><span>2. Reproduire</span><span>3. Pratiquer</span><span>4. Vérifier</span></div></article>`).join("")}
- <div class="level-check"><strong>Validation du niveau</strong><p>Avant de continuer, refais les exercices liés à ce niveau sans regarder la correction, puis vérifie que tu peux expliquer les notions avec tes propres mots.</p><a class="btn secondary" href="#niveau-${level<3?level+2:4}">${level<3?"Passer au niveau suivant →":"Aller au projet final →"}</a></div>
+ ${lessons.map((raw,i)=>{const s=sectionData(raw,start+i);return `<article class="lesson"><div class="lesson-tag">Leçon ${start+i+1}</div><h3>${esc(s.title)}</h3>
+ <div class="lesson-course"><h4>Cours</h4><p>${esc(s.body)}</p></div>
+ <div class="lesson-grid"><div><h4>À retenir</h4><p>Identifie la règle principale, les termes importants et le cas où cette notion doit être utilisée.</p></div><div><h4>Pratique</h4><p>Reproduis l'exemple dans ton environnement, modifie une valeur puis observe le résultat.</p></div></div>
+ <div class="learning-path"><span>1. Comprendre</span><span>2. Reproduire</span><span>3. Pratiquer</span><span>4. Vérifier</span></div></article>`;}).join("")}
+ <div class="level-check"><strong>Validation du niveau</strong><p>Refais les exercices sans regarder le cours et explique les notions avec tes propres mots avant de continuer.</p><a class="btn secondary" href="#niveau-${level<3?level+2:4}">${level<3?"Passer au niveau suivant →":"Aller au projet final →"}</a></div>
  </section>`;
 }
 
+function progressBar(total){
+ return '<div class="course-progress" id="courseProgress"><div class="course-progress-inner"><span id="progressLabel">Progression du cours</span><strong id="progressPercent">0%</strong></div><div class="course-progress-track"><span id="progressFill"></span></div></div>';
+}
+function initProgress(){
+ const bar=document.querySelector("#courseProgress"),fill=document.querySelector("#progressFill"),percent=document.querySelector("#progressPercent");if(!bar)return;
+ function update(){const doc=document.documentElement,max=doc.scrollHeight-doc.clientHeight,p=max>0?Math.min(100,Math.round((doc.scrollTop/max)*100)):0;fill.style.width=p+"%";percent.textContent=p+"%";bar.classList.toggle("near-end",p>=95);}
+ addEventListener("scroll",update,{passive:true});addEventListener("resize",update);update();
+}
 function playground(){return '<section class="playground" id="atelier"><div class="playground-head"><div><div class="eyebrow">ATELIER DE CODE</div><h2>Écris ton code et teste-le</h2><p>Un mini-laboratoire directement dans le cours. Tes essais restent dans ton navigateur.</p></div><button class="btn" id="runCode">▶ Exécuter</button></div><div class="code-tabs"><button class="code-tab active" data-lang="html">HTML</button><button class="code-tab" data-lang="css">CSS</button><button class="code-tab" data-lang="js">JavaScript</button></div><textarea id="codeEditor" spellcheck="false"></textarea><div class="playground-actions"><button class="btn secondary" id="resetCode">Réinitialiser</button><button class="btn secondary" id="clearCode">Effacer</button><span id="runStatus">Prêt.</span></div><iframe id="codePreview" title="Résultat du code" sandbox="allow-scripts"></iframe></section>';}
 function initPlayground(){
  const editor=document.querySelector("#codeEditor"),preview=document.querySelector("#codePreview"),status=document.querySelector("#runStatus");if(!editor||!preview)return;
@@ -47,13 +61,13 @@ function initPlayground(){
 function render(data){
  const sections=Array.isArray(data.sections)?data.sections:[];const exercises=Array.isArray(data.exercises)?data.exercises:[];
  const cuts=[0,Math.ceil(sections.length/4),Math.ceil(sections.length/2),Math.ceil(sections.length*3/4),sections.length];
- root.innerHTML=`<header class="hero"><div class="eyebrow">COURS ${id} • PROGRESSION COMPLÈTE</div><h1>${esc(meta.title)}</h1><p class="lead">${esc(data.intro||meta.subtitle)}</p><div class="meta"><span class="pill">${esc(meta.subtitle)}</span><span class="pill">Débutant → Expert</span><span class="pill">Environnement autorisé</span></div></header>
+ root.innerHTML=progressBar(sections.length)+`<header class="hero"><div class="eyebrow">COURS ${id} • PROGRESSION COMPLÈTE</div><h1>${esc(meta.title)}</h1><p class="lead">${esc(data.intro||meta.subtitle)}</p><div class="meta"><span class="pill">${esc(meta.subtitle)}</span><span class="pill">Débutant → Expert</span><span class="pill">Environnement autorisé</span></div></header>
  <div class="progression"><strong>Parcours :</strong> 🟢 Débutant → 🟡 Intermédiaire → 🟠 Avancé → 🔴 Expert / Projet</div>${playground()}
  <div class="course-content"><h2>Le cours, du début à la fin</h2><p>Chaque cours suit désormais une progression en quatre niveaux. Pour chaque leçon : comprends la notion, reproduis l’exemple, réalise la pratique, puis valide avant de monter de niveau.</p>
  ${LEVELS.map((_,i)=>renderLevel(i,sections,cuts[i],cuts[i+1])).join("")}
  <section id="exercices"><h2>Exercices & validation finale</h2>${exercises.map((x,i)=>`<div class="exercise"><strong>Exercice ${i+1}</strong><p>${esc(x)}</p></div>`).join("")}</section>
  <div class="final-check"><h2>Validation du cours</h2><p>Objectif atteint lorsque tu peux refaire le mini-projet, expliquer tes choix, corriger tes erreurs et produire un résultat propre sans suivre pas à pas le cours.</p></div>
- </div>${nav(id)}`;initPlayground();
+ </div>${nav(id)}`;initPlayground();initProgress();
 }
 function nav(id){const n=Number(id),prev=String(n-1).padStart(2,"0"),next=String(n+1).padStart(2,"0");return `<div class="nav-course">${n>1?`<a class="btn secondary" href="${COURSES[prev].slug}.html">← ${esc(COURSES[prev].title)}</a>`:"<span></span>"}<a class="btn secondary" href="../index.html#cours">Sommaire</a>${n<14?`<a class="btn" href="${COURSES[next].slug}.html">${esc(COURSES[next].title)} →</a>`:"<span></span>"}</div>`}
 document.querySelector("#courseTitle").textContent=meta.title;
