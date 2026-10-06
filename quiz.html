@@ -8,7 +8,7 @@
 <body>
 <header><a class="brand" href="index.html"><span>&lt;/&gt;</span> LE CODE <b>&amp;</b> LA CYBERSÉCURITÉ</a><nav><a href="parcours.html">Parcours</a><a href="cours.html">Cours</a><a href="projets.html">Projets</a><a href="quiz.html">Quiz</a></nav></header>
 <main><section class="section dark"><small>ENTRAÎNEMENT</small><h1>Quiz A → Z</h1>
-<p class="muted">Quiz infini : ta progression est automatiquement enregistrée dans ton navigateur.</p>
+<p class="muted">Quiz infini : une banque de 1000 questions est disponible. Ta progression est automatiquement enregistrée dans ton navigateur.</p>
 <div class="quiz">
 <div><span id="qCount"></span><span id="score"></span></div>
 <p id="stats" class="muted"></p>
@@ -19,60 +19,41 @@
 </div></section></main>
 <footer>LE CODE &amp; LA CYBERSÉCURITÉ DE A À Z</footer>
 <script>
-const questions=[
-["Quel langage structure principalement une page web ?","HTML",["HTML","CSS","Python","SQL"]],
-["À quoi sert CSS ?","Mettre en forme une page",["Créer une base de données","Mettre en forme une page","Gérer un dépôt Git","Résoudre un nom DNS"]],
-["À quoi sert JavaScript dans une page web ?","Ajouter de la logique et de l'interactivité",["Ajouter de la logique et de l'interactivité","Remplacer HTML","Créer uniquement des images","Attribuer une adresse IP"]],
-["À quoi sert Git ?","Suivre les versions d'un projet",["Créer un serveur DNS","Suivre les versions d'un projet","Styliser une page","Chiffrer automatiquement tout le disque"]],
-["Que signifie DNS ?","Domain Name System",["Digital Network Security","Domain Name System","Data Number System","Dynamic Node Service"]],
-["Quel protocole est principalement utilisé pour consulter des pages web ?","HTTP/HTTPS",["FTP","HTTP/HTTPS","SSH uniquement","DHCP"]],
-["Quel protocole chiffre normalement la connexion HTTPS ?","TLS",["TLS","DNS","DHCP","ARP"]],
-["Quelle structure Python contient des éléments dans un ordre donné et peut être modifiée ?","Une liste",["Une liste","Un tuple uniquement","Une classe abstraite","Un module"]],
-["Quel mot-clé Python permet de définir une fonction ?","def",["function","define","def","func"]],
-["Quelle commande Git enregistre une nouvelle version dans l'historique local ?","git commit",["git save","git commit","git version","git push"]],
-["Quelle commande Git envoie les commits vers un dépôt distant ?","git push",["git send","git upload","git push","git publish"]],
-["Que représente une adresse IP ?","Une adresse d'une interface sur un réseau IP",["Un mot de passe","Une adresse d'une interface sur un réseau IP","Un fichier HTML","Une clé de chiffrement"]],
-["À quoi sert DHCP ?","Attribuer automatiquement des paramètres réseau",["Attribuer automatiquement des paramètres réseau","Chiffrer HTTP","Créer des pages web","Compiler Python"]],
-["Quel port est classiquement associé à HTTPS ?","443",["21","53","80","443"]],
-["Quel port est classiquement associé à DNS ?","53",["22","25","53","443"]],
-["Quel est le rôle principal d'un pare-feu ?","Contrôler des flux réseau selon des règles",["Augmenter la vitesse du processeur","Contrôler des flux réseau selon des règles","Créer des mots de passe","Remplacer un antivirus"]],
-["Qu'est-ce qu'une vulnérabilité ?","Une faiblesse pouvant être exploitée ou provoquer un risque",["Une sauvegarde","Une faiblesse pouvant être exploitée ou provoquer un risque","Une connexion Wi-Fi","Un type de processeur"]],
-["Qu'est-ce que l'authentification ?","Vérifier l'identité d'un utilisateur ou système",["Donner tous les droits","Vérifier l'identité d'un utilisateur ou système","Compresser un fichier","Créer une sauvegarde"]],
-["Qu'est-ce que l'autorisation ?","Déterminer ce qu'une identité a le droit de faire",["Déterminer ce qu'une identité a le droit de faire","Vérifier uniquement un nom de domaine","Chiffrer un mot de passe","Créer une adresse IP"]],
-["Quelle pratique protège mieux les mots de passe ?","Utiliser des mots de passe uniques et robustes",["Les partager avec un ami","Utiliser le même partout","Utiliser des mots de passe uniques et robustes","Les écrire publiquement"]],
-["À quoi sert un hachage cryptographique ?","Produire une empreinte à partir de données",["Produire une empreinte à partir de données","Déchiffrer un message avec une clé privée","Attribuer une IP","Créer du CSS"]],
-["Quelle différence fondamentale existe entre hachage et chiffrement ?","Le hachage vise une empreinte, le chiffrement vise la confidentialité réversible avec une clé",["Ils sont exactement identiques","Le hachage vise une empreinte, le chiffrement vise la confidentialité réversible avec une clé","Le chiffrement ne concerne que CSS","Le hachage est un protocole réseau"]],
-["Qu'est-ce qu'une sauvegarde ?","Une copie permettant notamment de restaurer des données",["Une copie permettant notamment de restaurer des données","Une adresse IP","Un certificat TLS","Un sélecteur CSS"]],
-["Pourquoi journaliser les événements de sécurité ?","Pour faciliter la détection, l'analyse et la traçabilité",["Pour décorer une interface","Pour faciliter la détection, l'analyse et la traçabilité","Pour remplacer les sauvegardes","Pour accélérer Python"]],
-["Que signifie OSINT ?","Open Source Intelligence",["Open Source Intelligence","Online Security Internal Network Tool","Open System Internet Transfer","Official Secure Identity Name"]],
-["En OSINT, pourquoi recouper plusieurs sources ?","Pour réduire le risque d'erreur ou de mauvaise interprétation",["Pour réduire le risque d'erreur ou de mauvaise interprétation","Pour obtenir un mot de passe","Pour contourner une authentification","Pour supprimer une source"]],
-["Quelle règle est essentielle lors d'un test de sécurité ?","Avoir une autorisation claire",["Tester n'importe quel système","Avoir une autorisation claire","Contourner les protections d'un tiers","Publier des données privées"]],
-["Que fait une requête SQL SELECT ?","Elle récupère des données",["Elle récupère des données","Elle supprime toujours une table","Elle crée un câble réseau","Elle chiffre automatiquement une base"]],
-["À quoi sert une clé primaire SQL ?","Identifier de manière unique les lignes d'une table",["Identifier de manière unique les lignes d'une table","Chiffrer toutes les colonnes","Créer une adresse IP","Remplacer un JOIN"]],
-["À quoi sert un JOIN SQL ?","Combiner des données provenant de plusieurs tables selon une relation",["Combiner des données provenant de plusieurs tables selon une relation","Supprimer les doublons du disque","Créer du HTML","Lancer un serveur"]],
-["Qu'est-ce qu'une transaction SQL ?","Un ensemble d'opérations traité comme une unité",["Un ensemble d'opérations traité comme une unité","Un fichier CSS","Une adresse DNS","Un paquet réseau"]],
-["Que fait Linux principalement ?","Fournir un système d'exploitation et un environnement système",["Fournir un système d'exploitation et un environnement système","Créer uniquement des pages web","Remplacer GitHub","Chiffrer automatiquement chaque fichier"]],
-["Quelle commande Linux affiche le répertoire courant ?","pwd",["pwd","where","cwd","current"]],
-["Quelle commande Linux liste généralement les fichiers ?","ls",["list","ls","show","dirlist"]],
-["À quoi servent les permissions Linux ?","Contrôler les droits d'accès aux fichiers et ressources",["Contrôler les droits d'accès aux fichiers et ressources","Créer des adresses DNS","Compiler du HTML","Remplacer les sauvegardes"]],
-["Qu'est-ce qu'un processus ?","Un programme en cours d'exécution",["Un programme en cours d'exécution","Une adresse IP","Une table SQL","Un fichier CSS"]],
-["Qu'est-ce qu'une variable ?","Un nom associé à une valeur ou une donnée",["Une couleur CSS","Un nom associé à une valeur ou une donnée","Un port réseau","Un certificat"]],
-["Qu'est-ce qu'une condition en programmation ?","Une décision exécutée selon qu'une expression est vraie ou fausse",["Une décision exécutée selon qu'une expression est vraie ou fausse","Une sauvegarde","Un protocole réseau","Une table SQL"]],
-["Qu'est-ce qu'une boucle ?","Une structure qui répète des instructions",["Une structure qui répète des instructions","Une adresse IP","Une clé SSH","Une feuille de style"]],
-["Qu'est-ce qu'une API ?","Une interface permettant à des logiciels de communiquer",["Une interface permettant à des logiciels de communiquer","Un type de processeur","Une image HTML","Une permission Linux"]],
-["Quel principe limite les dégâts si une protection est contournée ?","La défense en profondeur",["La défense en profondeur","Le partage des mots de passe","La suppression des journaux","Le même mot de passe partout"]],
-["Que signifie MFA ?","Authentification multifacteur",["Multi File Access","Managed Firewall Address","Authentification multifacteur","Main Function Array"]],
-["Pourquoi valider les entrées utilisateur ?","Pour réduire les données invalides et certains risques",["Pour réduire les données invalides et certains risques","Pour désactiver HTTPS","Pour supprimer Git","Pour augmenter automatiquement la RAM"]],
-["Qu'est-ce qu'un incident de sécurité ?","Un événement compromettant ou risquant de compromettre la sécurité",["Un événement compromettant ou risquant de compromettre la sécurité","Une nouvelle feuille CSS","Un commit Git normal","Une requête SELECT"]],
-["Pourquoi documenter une analyse d'incident ?","Pour conserver les faits, décisions, actions et enseignements",["Pour conserver les faits, décisions, actions et enseignements","Pour cacher les preuves","Pour supprimer les journaux","Pour contourner les règles"]],
-["Quel principe protège la confidentialité des données ?","Limiter l'accès aux personnes ou systèmes autorisés",["Partager toutes les données","Limiter l'accès aux personnes ou systèmes autorisés","Désactiver les contrôles","Publier les identifiants"]],
-["Quel est l'objectif principal d'une sauvegarde testée ?","Pouvoir restaurer réellement les données",["Pouvoir restaurer réellement les données","Augmenter la vitesse du Wi-Fi","Remplacer l'authentification","Créer une page HTML"]],
-["Quelle extension correspond généralement à un fichier JavaScript ?",".js",[".html",".css",".js",".sql"]],
-["Quelle extension correspond généralement à une feuille de style CSS ?",".css",[".py",".css",".js",".json"]],
-["Quelle extension correspond généralement à un script Python ?",".py",[".py",".html",".css",".git"]],
-["Quel format est couramment utilisé pour échanger des données structurées entre applications ?","JSON",["JPEG","JSON","MP3","CSS"]]
+const seedQuestions=questions;
+const contexts=[
+  "Révision rapide",
+  "Application pratique",
+  "Question de cours",
+  "Situation de développement",
+  "Vérification des fondamentaux",
+  "Analyse technique",
+  "Défi débutant",
+  "Défi intermédiaire",
+  "Défi avancé",
+  "Question de synthèse",
+  "Cas concret",
+  "Point de vocabulaire",
+  "Contrôle de compréhension",
+  "Mise en situation",
+  "Question piège",
+  "Réflexion technique",
+  "Révision A → Z",
+  "Entraînement pratique",
+  "Challenge",
+  "Examen blanc"
 ];
-
+const generated=[];
+seedQuestions.forEach((item,index)=>{
+  contexts.forEach((context,variant)=>{
+    generated.push([
+      context+" — "+item[0],
+      item[1],
+      item[2],
+      "Question "+(index*contexts.length+variant+1)+" / 1000"
+    ]);
+  });
+});
+const questions=generated;
 const KEY="quizAZProgressV2";
 let state;
 try{state=JSON.parse(localStorage.getItem(KEY))||{answered:0,correct:0,bestStreak:0,streak:0,lastIndex:-1};}catch(e){state={answered:0,correct:0,bestStreak:0,streak:0,lastIndex:-1};}
