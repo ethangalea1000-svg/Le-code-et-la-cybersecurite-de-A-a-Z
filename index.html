@@ -1,8 +1,98 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Le Code et la Cybersécurité de A à Z"><title>Le Code & la Cybersécurité de A à Z</title><link rel="stylesheet" href="style.css"></head><body>
-<header><a class="brand" href="#accueil"><span>&lt;/&gt;</span> LE CODE <b>&amp;</b> LA CYBERSÉCURITÉ</a><button id="menuBtn">☰</button><nav id="nav"><a href="parcours.html">Parcours</a><a href="cours.html">Cours</a><a href="projets.html">Projets</a><a href="quiz.html">Quiz</a></nav></header>
-<main><section id="accueil" class="hero"><div class="heroIn"><small>FORMATION • A → Z • GRATUITE</small><h1>Apprends à <em>coder</em>.<br>Comprends la <em>cybersécurité</em>.</h1><p>Un parcours progressif pour partir de zéro, apprendre le développement et découvrir la sécurité informatique de façon responsable.</p><a class="btn" href="parcours.html">Commencer le parcours</a><a class="btn ghost" href="cours.html">Voir les cours</a><div class="stats"><b>14 <small>domaines</small></b><b>A → Z <small>progressif</small></b><b>100% <small>local</small></b></div></div></section>
-<section id="parcours" class="section"><small>LE PARCOURS</small><h2>De débutant à autonome</h2><p class="muted">Chaque étape construit les bases de la suivante.</p><div id="path" class="cards"></div></section>
-<section id="cours" class="section dark"><small>COURS</small><h2>Les fondamentaux</h2><p class="muted">Fiches courtes, exemples et exercices en environnement sûr.</p><div id="courses" class="cards"></div></section>
-<section id="projets" class="section"><small>LABORATOIRE INTÉGRÉ</small><h2>50 projets de code — directement dans ton site</h2><p class="muted">Pas une liste de liens : les projets sont construits dans ce projet. Ouvre un projet, lis l’objectif, récupère un code de départ et teste-le dans l’atelier.</p><div id="projectGrid" class="projects project-directory"></div></section>
-<section id="quiz" class="section dark"><small>ENTRAÎNEMENT</small><h2>Quiz express</h2><div class="quiz"><div><span id="qCount"></span><span id="score"></span></div><h3 id="question"></h3><div id="answers"></div><button id="next" class="btn" disabled>Question suivante</button><p id="result"></p></div></section>
-<section class="section safety"><div><small>CYBERSÉCURITÉ RESPONSABLE</small><h2>Apprendre dans un cadre sûr</h2><p>Les exercices de sécurité sont destinés à des environnements autorisés et à des données fictives : comprendre, tester, corriger et prévenir.</p></div><div class="rules"><span>✓ Systèmes autorisés</span><span>✓ Données fictives</span><span>✓ Défense et prévention</span><span>✓ Documentation</span></div></section></main><footer>LE CODE &amp; LA CYBERSÉCURITÉ DE A À Z <span>Site statique • GitHub Pages</span></footer><script src="courses-01.js"></script><script src="courses-02.js"></script><script src="courses-03.js"></script><script src="courses-04.js"></script><script src="courses-05.js"></script><script src="courses-06.js"></script><script src="courses-07.js"></script><script src="courses-08.js"></script><script src="courses-09.js"></script><script src="courses-10.js"></script><script src="courses-11.js"></script><script src="courses-12.js"></script><script src="courses-13.js"></script><script src="courses-14.js"></script><script src="script.js"></script></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Formation gratuite au code et à la cybersécurité, organisée en plusieurs pages GitHub Pages.">
+<title>Le Code & la Cybersécurité de A à Z</title>
+<link rel="stylesheet" href="style.css?v=20261006">
+</head>
+<body>
+<header>
+<a class="brand" href="index.html"><span>&lt;/&gt;</span> LE CODE <b>&amp;</b> LA CYBERSÉCURITÉ</a>
+<button id="menuBtn" type="button" aria-label="Ouvrir le menu">☰</button>
+<nav id="nav" aria-label="Navigation principale">
+<a href="parcours.html">Parcours</a>
+<a href="cours.html">Cours</a>
+<a href="projets.html">Projets</a>
+<a href="quiz.html">Quiz</a>
+</nav>
+</header>
+
+<main>
+<section class="hero">
+<div class="heroIn">
+<small>FORMATION • A → Z • GRATUITE</small>
+<h1>Apprends à <em>coder</em>.<br>Comprends la <em>cybersécurité</em>.</h1>
+<p>Un véritable espace d'apprentissage organisé en plusieurs pages : parcours, cours complets, projets pratiques et entraînement.</p>
+<div class="path-actions">
+<a class="btn" href="parcours.html">Commencer le parcours →</a>
+<a class="btn ghost" href="cours.html">Voir tous les cours →</a>
+</div>
+<div class="stats">
+<b>14 <small>domaines</small></b>
+<b>14 <small>cours dédiés</small></b>
+<b>50 <small>projets</small></b>
+</div>
+</div>
+</section>
+
+<section class="section">
+<small>LE SITE</small>
+<h2>Tout est séparé en vraies pages</h2>
+<p class="muted">Chaque grande partie possède sa propre page GitHub Pages. Tu peux naviguer entre elles sans dépendre d'une seule longue page.</p>
+<div class="cards">
+<article class="path-card">
+<span class="num">01</span>
+<h3>Parcours</h3>
+<p>Les 14 étapes, de HTML jusqu'au projet final.</p>
+<a class="btn" href="parcours.html">Ouvrir le parcours →</a>
+</article>
+<article class="path-card">
+<span class="num">02</span>
+<h3>Cours</h3>
+<p>Une page complète pour chaque matière, avec les leçons et la progression.</p>
+<a class="btn" href="cours.html">Ouvrir les cours →</a>
+</article>
+<article class="path-card">
+<span class="num">03</span>
+<h3>Projets</h3>
+<p>Les 50 projets pratiques sont regroupés dans leur propre laboratoire.</p>
+<a class="btn" href="projets.html">Ouvrir les projets →</a>
+</article>
+<article class="path-card">
+<span class="num">04</span>
+<h3>Quiz</h3>
+<p>Une page dédiée pour vérifier tes connaissances.</p>
+<a class="btn" href="quiz.html">Ouvrir le quiz →</a>
+</article>
+</div>
+</section>
+
+<section class="section dark">
+<small>STRUCTURE</small>
+<h2>14 cours → 50 projets → 1 projet final</h2>
+<p class="muted">Le site est conçu comme une petite plateforme de formation statique : les pages restent hébergées directement sur ton dépôt GitHub Pages.</p>
+<div class="rules">
+<span>✓ HTML / CSS / JavaScript</span>
+<span>✓ Python / SQL</span>
+<span>✓ Réseaux / Linux</span>
+<span>✓ Cybersécurité / cryptographie</span>
+<span>✓ OSINT / sécurité web</span>
+<span>✓ Analyse d'incidents</span>
+</div>
+</section>
+
+<section class="section safety">
+<div>
+<small>CYBERSÉCURITÉ RESPONSABLE</small>
+<h2>Apprendre dans un cadre sûr</h2>
+<p>Les exercices de sécurité utilisent des environnements autorisés et des données fictives : comprendre, tester, corriger et prévenir.</p>
+</div>
+</section>
+</main>
+
+<footer>LE CODE &amp; LA CYBERSÉCURITÉ DE A À Z <span>Site statique • GitHub Pages • Plusieurs pages</span></footer>
+<script src="script.js?v=20261006"></script>
+</body>
+</html>
