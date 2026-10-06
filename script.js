@@ -34,7 +34,7 @@ modules.forEach(([n,t,d,p,l,c,e])=>{
   card.className="course-card";
   card.tabIndex=0;
   card.setAttribute("role","button");
-  card.innerHTML=`<span class="num">${n}</span><h3>${t}</h3><p>${p}</p><span class="tag">Ouvrir le cours →</span>`;
+  card.innerHTML=`<span class="num">${n}</span><h3>${t}</h3><p>${p}</p><a class="tag course-link" href="cours/${{"01":"html","02":"css","03":"javascript","04":"python","05":"git-github","06":"sql","07":"reseaux","08":"linux","09":"cybersecurite","10":"cryptographie","11":"securite-web","12":"osint","13":"analyse-incidents","14":"projet-final"}[n]}.html">Ouvrir la page du cours →</a>`;
   card.addEventListener("click",()=>{location.href="cours/"+({"01":"html","02":"css","03":"javascript","04":"python","05":"git-github","06":"sql","07":"reseaux","08":"linux","09":"cybersecurite","10":"cryptographie","11":"securite-web","12":"osint","13":"analyse-incidents","14":"projet-final"}[n])+".html"});
   card.addEventListener("keydown",event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();location.href="cours/"+({"01":"html","02":"css","03":"javascript","04":"python","05":"git-github","06":"sql","07":"reseaux","08":"linux","09":"cybersecurite","10":"cryptographie","11":"securite-web","12":"osint","13":"analyse-incidents","14":"projet-final"}[n])+".html"}});
   courses.appendChild(card);
