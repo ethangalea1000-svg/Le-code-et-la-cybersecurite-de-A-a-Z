@@ -35,8 +35,8 @@ modules.forEach(([n,t,d,p,l,c,e])=>{
   card.tabIndex=0;
   card.setAttribute("role","button");
   card.innerHTML=`<span class="num">${n}</span><h3>${t}</h3><p>${p}</p><span class="tag">Ouvrir le cours →</span>`;
-  card.addEventListener("click",()=>openCourse(n,t,d,p,l,c,e));
-  card.addEventListener("keydown",event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();openCourse(n,t,d,p,l,c,e)}});
+  card.addEventListener("click",()=>{location.href="cours/"+({"01":"html","02":"css","03":"javascript","04":"python","05":"git-github","06":"sql","07":"reseaux","08":"linux","09":"cybersecurite","10":"cryptographie","11":"securite-web","12":"osint","13":"analyse-incidents","14":"projet-final"}[n])+".html"});
+  card.addEventListener("keydown",event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();location.href="cours/"+({"01":"html","02":"css","03":"javascript","04":"python","05":"git-github","06":"sql","07":"reseaux","08":"linux","09":"cybersecurite","10":"cryptographie","11":"securite-web","12":"osint","13":"analyse-incidents","14":"projet-final"}[n])+".html"}});
   courses.appendChild(card);
 });
 
@@ -66,7 +66,7 @@ pathModal.querySelector(".course-close").onclick=closePath;
 pathModal.querySelector(".course-overlay").onclick=closePath;
 pathModal.querySelector("#pathPrev").onclick=()=>{if(currentPathIndex>0){currentPathIndex--;renderPath()}};
 pathModal.querySelector("#pathNext").onclick=()=>{if(currentPathIndex<modules.length-1){currentPathIndex++;renderPath()}};
-pathModal.querySelector("#pathFull").onclick=()=>{closePath();document.querySelector("#cours").scrollIntoView({behavior:"smooth"})};
+pathModal.querySelector("#pathFull").onclick=()=>{location.href="cours/"+({"01":"html","02":"css","03":"javascript","04":"python","05":"git-github","06":"sql","07":"reseaux","08":"linux","09":"cybersecurite","10":"cryptographie","11":"securite-web","12":"osint","13":"analyse-incidents","14":"projet-final"}[modules[currentPathIndex][0]])+".html"};
 
 const modal=document.createElement("div");
 modal.className="course-modal";
