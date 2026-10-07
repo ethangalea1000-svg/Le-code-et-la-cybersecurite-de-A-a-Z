@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ethangalea1000-svg.github.io/Le-code-et-la-cybersecurite-de-A-a-Z/sitemap.xml
