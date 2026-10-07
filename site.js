@@ -3,7 +3,7 @@ const COURSES=[
 ["01","HTML","Structure du web","cours/html.html"],["02","CSS","Style & responsive","cours/css.html"],["03","JavaScript","Logique & interaction","cours/javascript.html"],["04","Python","Programmer","cours/python.html"],["05","Git & GitHub","Versionner","cours/git-github.html"],["06","SQL","Données","cours/sql.html"],["07","Réseaux","Internet","cours/reseaux.html"],["08","Linux","Système","cours/linux.html"],["09","Cybersécurité","Défense","cours/cybersecurite.html"],["10","Cryptographie","Secrets","cours/cryptographie.html"],["11","Sécurité web","Applications","cours/securite-web.html"],["12","OSINT","Information","cours/osint.html"],["13","Analyse d'incidents","Incidents","cours/analyse-incidents.html"],["14","Projet final","Portfolio","cours/projet-final.html"]
 ];
 const PROJECTS=[...document.querySelectorAll(".project-card-integrated")].map((el,i)=>({id:String(i+1).padStart(2,"0"),name:el.querySelector("p")?.textContent||"Projet "+(i+1),href:el.querySelector("a")?.getAttribute("href")||"projets.html"}));
-window.AZ=window.AZ||{};
+const AZ=window.AZ=window.AZ||{};
 AZ.getProgress=function(){try{return JSON.parse(localStorage.getItem("azProgressV1"))||{courses:{},projects:{},favorites:[],xp:0,badges:[]}}catch{return{courses:{},projects:{},favorites:[],xp:0,badges:[]}}};
 AZ.saveProgress=function(s){localStorage.setItem("azProgressV1",JSON.stringify(s));};
 AZ.favorite=function(key){const s=AZ.getProgress();s.favorites=s.favorites||[];const i=s.favorites.indexOf(key);i>=0?s.favorites.splice(i,1):s.favorites.push(key);AZ.saveProgress(s);return i<0;};
