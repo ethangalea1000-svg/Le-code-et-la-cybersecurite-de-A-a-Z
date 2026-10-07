@@ -16,6 +16,8 @@ const COURSES={
 };
 const params=new URLSearchParams(location.search);const id=params.get("id")||document.body.dataset.course||"01";const meta=COURSES[id]||COURSES["01"];
 document.title=meta.title+" — Le Code & la Cybersécurité de A à Z";
+const progressStateKey="azProgressV1";
+function saveCourseProgress(p){try{const s=JSON.parse(localStorage.getItem(progressStateKey))||{courses:{},projects:{},favorites:[],xp:0,badges:[],};s.courses=s.courses||{};s.courses[id]=Math.max(s.courses[id]||0,p);s.xp=Math.max(s.xp||0,Object.values(s.courses).reduce((a,b)=>a+b,0)*2);if(p>=90){s.badges=s.badges||[];if(!s.badges.includes("course-"+id))s.badges.push("course-"+id)}localStorage.setItem(progressStateKey,JSON.stringify(s))}catch(e){}}
 const root=document.querySelector("#courseRoot");
 function esc(v){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 const LEVELS=[
@@ -46,7 +48,7 @@ function progressBar(total){
 function initProgress(){
  const bar=document.querySelector("#courseProgress"),fill=document.querySelector("#progressFill"),percent=document.querySelector("#progressPercent");if(!bar)return;
  function update(){const doc=document.documentElement,max=doc.scrollHeight-doc.clientHeight,p=max>0?Math.min(100,Math.round((doc.scrollTop/max)*100)):0;fill.style.width=p+"%";percent.textContent=p+"%";bar.classList.toggle("near-end",p>=95);}
- addEventListener("scroll",update,{passive:true});addEventListener("resize",update);update();
+ addEventListener("scroll",()=>{update();const doc=document.documentElement,max=doc.scrollHeight-doc.clientHeight,p=max>0?Math.min(100,Math.round((doc.scrollTop/max)*100)):0;saveCourseProgress(p)},{passive:true});addEventListener("resize",update);update();saveCourseProgress(1);
 }
 function projectLab(){const items=window.localProjectLab?.[id]||[];if(!items.length)return "";return `<section class="project-lab" id="projets-cours"><div class="eyebrow">PROJETS DU COURS</div><h2>Construis au lieu de seulement lire</h2><p class="muted">Missions originales intégrées au site : objectif, niveau et livrable.</p><div class="course-project-grid">${items.map((p,i)=>`<article class="course-project"><span class="lesson-tag">Projet ${i+1} • ${esc(p[1])}</span><h3>${esc(p[0])}</h3><p>${esc(p[2])}</p><strong>Livrable</strong><p>${esc(p[3])}</p></article>`).join("")}</div></section>`;}\nfunction playground(){return '<section class="playground" id="atelier"><div class="playground-head"><div><div class="eyebrow">ATELIER DE CODE</div><h2>Écris ton code et teste-le</h2><p>Un mini-laboratoire directement dans le cours. Tes essais restent dans ton navigateur.</p></div><button class="btn" id="runCode">▶ Exécuter</button></div><div class="code-tabs"><button class="code-tab active" data-lang="html">HTML</button><button class="code-tab" data-lang="css">CSS</button><button class="code-tab" data-lang="js">JavaScript</button></div><textarea id="codeEditor" spellcheck="false"></textarea><div class="playground-actions"><button class="btn secondary" id="resetCode">Réinitialiser</button><button class="btn secondary" id="clearCode">Effacer</button><span id="runStatus">Prêt.</span></div><iframe id="codePreview" title="Résultat du code" sandbox="allow-scripts"></iframe></section>';}
 function initPlayground(){
@@ -71,4 +73,5 @@ function render(data){
 }
 function nav(id){const n=Number(id),prev=String(n-1).padStart(2,"0"),next=String(n+1).padStart(2,"0");return `<div class="nav-course">${n>1?`<a class="btn secondary" href="${COURSES[prev].slug}.html">← ${esc(COURSES[prev].title)}</a>`:"<span></span>"}<a class="btn secondary" href="../index.html#cours">Sommaire</a>${n<14?`<a class="btn" href="${COURSES[next].slug}.html">${esc(COURSES[next].title)} →</a>`:"<span></span>"}</div>`}
 document.querySelector("#courseTitle").textContent=meta.title;
+const headNav=document.querySelector("header nav");if(headNav){headNav.insertAdjacentHTML("beforeend","<a href=\"../progression.html\">Progression</a><a href=\"../recherche.html\">Recherche</a>")}
 const p=document.createElement("script");p.src="project-curriculum.js";p.onload=()=>{const s=document.createElement("script");s.src=meta.file;s.onload=()=>render(window.courseData?.[id]||{});document.body.appendChild(s)};document.body.appendChild(p);
