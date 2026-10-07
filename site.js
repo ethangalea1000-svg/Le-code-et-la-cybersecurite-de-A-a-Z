@@ -23,3 +23,4 @@ AZ.initSearch=function(){
 };
 window.AZ=AZ;
 })();
+function syncGlobalNav(){const base="/Le-code-et-la-cybersecurite-de-A-a-Z/";const links=[["Accueil","index.html"],["Parcours","parcours.html"],["Cours","cours.html"],["Projets","projets.html"],["Quiz","quiz.html"],["Progression","progression.html"],["Recherche","recherche.html"]];const h=document.querySelector("header");if(!h)return;let n=h.querySelector("nav");if(!n){n=document.createElement("nav");n.setAttribute("aria-label","Navigation principale");h.appendChild(n)}n.innerHTML=links.map(x=>'<a href="'+base+x[1]+'">'+x[0]+"</a>").join("");const b=h.querySelector(".brand")||h.querySelector("a");if(b){b.className="brand";b.href=base+"index.html";b.innerHTML="<span>&lt;/&gt;</span> LE CODE <b>&amp;</b> LA CYBERSÉCURITÉ";}}\nsyncGlobalNav();
