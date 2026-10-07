@@ -1,86 +1,44 @@
-<!doctype html>
-<html lang="fr">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Quiz — Le Code & la Cybersécurité</title>
-<link rel="stylesheet" href="style.css?v=20261006">
-</head>
-<body>
-<header><a class="brand" href="index.html"><span>&lt;/&gt;</span> LE CODE <b>&amp;</b> LA CYBERSÉCURITÉ</a><nav><a href="parcours.html">Parcours</a><a href="cours.html">Cours</a><a href="projets.html">Projets</a><a href="quiz.html">Quiz</a></nav></header>
-<main><section class="section dark"><small>ENTRAÎNEMENT</small><h1>Quiz A → Z</h1>
-<p class="muted">Quiz infini : une banque de 1000 questions est disponible. Ta progression est automatiquement enregistrée dans ton navigateur.</p>
-<div class="quiz">
-<div><span id="qCount"></span><span id="score"></span></div>
-<p id="stats" class="muted"></p>
-<h2 id="question"></h2><div id="answers"></div>
-<button id="next" class="btn" disabled>Question suivante</button>
-<button id="reset" class="btn ghost" type="button">Réinitialiser la progression</button>
-<p id="result"></p>
-</div></section></main>
-<footer>LE CODE &amp; LA CYBERSÉCURITÉ DE A À Z</footer>
-<script>
-const seedQuestions=questions;
-const contexts=[
-  "Révision rapide",
-  "Application pratique",
-  "Question de cours",
-  "Situation de développement",
-  "Vérification des fondamentaux",
-  "Analyse technique",
-  "Défi débutant",
-  "Défi intermédiaire",
-  "Défi avancé",
-  "Question de synthèse",
-  "Cas concret",
-  "Point de vocabulaire",
-  "Contrôle de compréhension",
-  "Mise en situation",
-  "Question piège",
-  "Réflexion technique",
-  "Révision A → Z",
-  "Entraînement pratique",
-  "Challenge",
-  "Examen blanc"
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Quiz infini et examens sur le code et la cybersécurité."><title>Quiz — Le Code & la Cybersécurité</title><link rel="stylesheet" href="style.css"></head><body><header><a class="brand" href="index.html"><span>&lt;/&gt;</span> LE CODE <b>&amp;</b> LA CYBERSÉCURITÉ</a><nav><a href="parcours.html">Parcours</a><a href="cours.html">Cours</a><a href="projets.html">Projets</a><a href="quiz.html">Quiz</a><a href="progression.html">Progression</a></nav></header><main><section class="section dark"><small>ENTRAÎNEMENT</small><h1>Quiz A → Z</h1><p class="muted">Une banque de 1000 questions pédagogiques, réparties par cours et niveau. Le mode normal est infini ; les examens sont limités et chronométrés.</p><div class="quiz-controls"><label>Matière <select id="domain"><option value="all">Toutes</option></select></label><label>Niveau <select id="level"><option value="all">Tous</option><option>Débutant</option><option>Intermédiaire</option><option>Avancé</option><option>Expert</option></select></label></div><div class="quiz"><div><span id="qCount"></span><span id="score"></span></div><p id="stats" class="muted"></p><div id="examInfo" class="exam-info"></div><h2 id="question"></h2><div id="answers"></div><button id="next" class="btn" disabled>Question suivante</button> <button id="reset" class="btn ghost" type="button">Réinitialiser</button><p id="result" aria-live="polite"></p></div></section></main><footer>LE CODE &amp; LA CYBERSÉCURITÉ DE A À Z</footer><script src="data/quiz-bank.js"></script><script>
+const courseNames={"01":"HTML","02":"CSS","03":"JavaScript","04":"Python","05":"Git & GitHub","06":"SQL","07":"Réseaux","08":"Linux","09":"Cybersécurité","10":"Cryptographie","11":"Sécurité web","12":"OSINT","13":"Analyse d'incidents","14":"Projet final"};
+const levels=["Débutant","Intermédiaire","Avancé","Expert"];
+const seeds=window.quizSeeds||[];
+const questions=[];
+const forms=[
+ s=>["Quel concept correspond à cette description ? "+s.body.split(".")[0]+".",s.title],
+ s=>["Dans quel thème faut-il chercher cette notion : "+s.title+" ?",s.title],
+ s=>["Quel est le sujet central de la leçon « "+s.title+" » ?",s.title],
+ s=>["Quelle notion du parcours est directement liée à cette idée : "+s.body.split(".")[0]+".",s.title],
+ s=>["Quelle proposition décrit correctement « "+s.title+" » ?",s.body.split(".")[0]+"."],
+ s=>["Quel intitulé de leçon correspond à cette description : "+s.body.split(".")[0]+".",s.title],
+ s=>["Dans quel cours trouve-t-on « "+s.title+" » ?",courseNames[s.course]],
+ s=>["Quelle notion doit être maîtrisée pour comprendre : « "+s.title+" » ?",s.title],
+ s=>["Quelle affirmation correspond au contenu de « "+s.title+" » ?",s.body.split(".")[0]+"."],
+ s=>["Quel élément du parcours est le plus directement concerné par cette explication : "+s.body.split(".")[0]+".",s.title]
 ];
-const generated=[];
-seedQuestions.forEach((item,index)=>{
-  contexts.forEach((context,variant)=>{
-    generated.push([
-      context+" — "+item[0],
-      item[1],
-      item[2],
-      "Question "+(index*contexts.length+variant+1)+" / 1000"
-    ]);
-  });
-});
-const questions=generated;
-const KEY="quizAZProgressV2";
-let state;
-try{state=JSON.parse(localStorage.getItem(KEY))||{answered:0,correct:0,bestStreak:0,streak:0,lastIndex:-1};}catch(e){state={answered:0,correct:0,bestStreak:0,streak:0,lastIndex:-1};}
-let current=-1,answered=false;
-const q=document.querySelector("#question"),a=document.querySelector("#answers"),n=document.querySelector("#next"),r=document.querySelector("#result"),sc=document.querySelector("#score"),ct=document.querySelector("#qCount"),stats=document.querySelector("#stats");
-
-function save(){localStorage.setItem(KEY,JSON.stringify(state));}
-function nextQuestion(){
- let candidate;
- do{candidate=Math.floor(Math.random()*questions.length)}while(questions.length>1&&candidate===state.lastIndex);
- current=candidate;state.lastIndex=current;save();answered=false;n.disabled=true;r.textContent="";
- const item=questions[current];ct.textContent="Question "+(state.answered+1)+" • Quiz infini";sc.textContent="Score : "+state.correct;
- stats.textContent="Répondues : "+state.answered+" • Réussites : "+state.correct+" • Série : "+state.streak+" • Meilleure série : "+state.bestStreak;
- q.textContent=item[0];a.innerHTML="";
- [...item[2]].sort(()=>Math.random()-.5).forEach(x=>{const b=document.createElement("button");b.className="answer";b.textContent=x;b.onclick=()=>pick(b,x);a.appendChild(b);});
-}
-function pick(button,value){
- if(answered)return;answered=true;
- const good=questions[current][1];
- document.querySelectorAll(".answer").forEach(b=>{b.disabled=true;if(b.textContent===good)b.classList.add("correct");});
- state.answered++;
- if(value===good){state.correct++;state.streak++;if(state.streak>state.bestStreak)state.bestStreak=state.streak;r.textContent="Correct.";}
- else{state.streak=0;button.classList.add("wrong");r.textContent="La bonne réponse est : "+good+".";}
- save();sc.textContent="Score : "+state.correct;stats.textContent="Répondues : "+state.answered+" • Réussites : "+state.correct+" • Série : "+state.streak+" • Meilleure série : "+state.bestStreak;n.disabled=false;
-}
-n.onclick=nextQuestion;
-document.querySelector("#reset").onclick=()=>{if(confirm("Réinitialiser toute ta progression ?")){state={answered:0,correct:0,bestStreak:0,streak:0,lastIndex:-1};save();nextQuestion();}};
+const all=[];
+seeds.forEach((s,i)=>forms.forEach((make,j)=>{const [q,a]=make(s);all.push({q,a,course:s.course,domain:courseNames[s.course]||"Autre",level:levels[(i+j)%4],source:s.title});}));
+const questionsPool=all.slice(0,1000);
+const domain=document.querySelector("#domain"),level=document.querySelector("#level");
+[...new Set(questionsPool.map(x=>x.domain))].forEach(x=>domain.insertAdjacentHTML("beforeend",'<option>'+x+'</option>'));
+const KEY="quizAZProgressV3";
+let state=(()=>{try{return JSON.parse(localStorage.getItem(KEY))||{answered:0,correct:0,streak:0,best:0,last:"",byDomain:{}}}catch{return{answered:0,correct:0,streak:0,best:0,last:"",byDomain:{}}}})();
+let current=null,locked=false,exam=null,examIndex=0,examScore=0,examQuestions=[],examTimer=null;
+const params=new URLSearchParams(location.search),examType=params.get("exam");
+const examSizes={web:20,code:30,infra:40,cyber:40,final:100};
+if(examType&&examSizes[examType]){exam={size:examSizes[examType],seconds:examSizes[examType]===100?5400:examSizes[examType]*60};document.querySelector("#examInfo").textContent="MODE EXAMEN • "+exam.size+" questions • "+Math.round(exam.seconds/60)+" min";examQuestions=shuffle([...questionsPool]).slice(0,exam.size);startExamTimer();}
+function shuffle(a){return a.sort(()=>Math.random()-.5)}
+function filtered(){return questionsPool.filter(x=>(domain.value==="all"||x.domain===domain.value)&&(level.value==="all"||x.level===level.value));}
+function distractors(answer){return shuffle([...new Set(questionsPool.filter(x=>x.a!==answer).map(x=>x.a))]).slice(0,3)}
+function save(){localStorage.setItem(KEY,JSON.stringify(state));localStorage.setItem("quizAnswered",state.answered);localStorage.setItem("quizCorrect",state.correct);}
+function renderStats(){const pct=state.answered?Math.round(state.correct/state.answered*100):0;document.querySelector("#stats").textContent="Répondues : "+state.answered+" • Réussites : "+state.correct+" • "+pct+" % • Série : "+state.streak+" • Meilleure série : "+state.best;document.querySelector("#score").textContent="Score : "+state.correct;}
+function nextQuestion(){if(exam){if(examIndex>=examQuestions.length){finishExam();return}current=examQuestions[examIndex++]}else{const pool=filtered();if(!pool.length)return;let p;do{p=pool[Math.floor(Math.random()*pool.length)]}while(pool.length>1&&p.source===state.last);current=p;state.last=p.source;save()}locked=false;document.querySelector("#next").disabled=true;document.querySelector("#result").textContent="";document.querySelector("#qCount").textContent=exam?"Question "+examIndex+" / "+exam.size+" • Examen":"Question "+(state.answered+1)+" • Quiz infini";document.querySelector("#question").textContent=current.q;const answers=shuffle([current.a,...distractors(current.a)]);document.querySelector("#answers").innerHTML=answers.map(x=>'<button class="answer">'+escapeHtml(x)+"</button>").join("");document.querySelectorAll(".answer").forEach(b=>b.onclick=()=>pick(b));renderStats();}
+function pick(button){if(locked)return;locked=true;document.querySelectorAll(".answer").forEach(b=>{b.disabled=true;if(b.textContent===current.a)b.classList.add("correct")});if(button.textContent===current.a){button.classList.add("correct");state.correct++;state.streak++;if(state.streak>state.best)state.best=state.streak;if(exam)examScore++;document.querySelector("#result").textContent="Correct.";}else{button.classList.add("wrong");state.streak=0;document.querySelector("#result").textContent="Bonne réponse : "+current.a+".";}if(!exam){state.answered++;state.byDomain[current.domain]=(state.byDomain[current.domain]||0)+1;save();}document.querySelector("#next").disabled=false;renderStats();}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",""":"&quot;","'":"&#39;"}[c]));}
+function finishExam(){clearInterval(examTimer);document.querySelector("#qCount").textContent="Examen terminé";document.querySelector("#question").textContent="Résultat : "+examScore+" / "+exam.size;document.querySelector("#answers").innerHTML="<p class='muted'>"+Math.round(examScore/exam.size*100)+" % de réussite.</p>";document.querySelector("#next").disabled=true;document.querySelector("#result").textContent="Retourne au quiz infini pour continuer à t'entraîner.";}
+function startExamTimer(){let left=exam.seconds;const el=document.querySelector("#examInfo");examTimer=setInterval(()=>{left--;el.textContent="MODE EXAMEN • "+exam.size+" questions • "+Math.floor(left/60)+" min "+String(left%60).padStart(2,"0");if(left<=0)finishExam()},1000);}
+document.querySelector("#next").onclick=nextQuestion;
+document.querySelector("#domain").onchange=()=>{if(!exam)nextQuestion()};
+document.querySelector("#level").onchange=()=>{if(!exam)nextQuestion()};
+document.querySelector("#reset").onclick=()=>{if(confirm("Réinitialiser la progression du quiz ?")){state={answered:0,correct:0,streak:0,best:0,last:"",byDomain:{}};save();nextQuestion()}};
 nextQuestion();
-</script>
-</body></html>
+</script></body></html>
