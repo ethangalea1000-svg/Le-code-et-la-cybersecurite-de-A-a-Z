@@ -40,7 +40,7 @@ function render(data){
  '<div class="lesson-step" data-panel="3"><article class="card lesson-card"><div class="step-label">ÉTAPE 3 · LABORATOIRE</div><h2>Manipule le code</h2><p>'+esc(chunks[2])+'</p><div class="code-workshop"><textarea id="lessonCode" spellcheck="false">'+esc(starter)+'</textarea><div class="workshop-actions"><button class="btn" id="runLessonCode">▶ Exécuter</button><button class="btn alt" id="resetLessonCode">Réinitialiser</button><span id="codeFeedback">Prêt.</span></div><iframe id="lessonPreview" sandbox="allow-scripts" title="Aperçu du code"></iframe></div><button class="btn next-step" data-next="4">Passer au défi →</button></article></div>'+
  '<div class="lesson-step" data-panel="4"><article class="card lesson-card"><div class="step-label">ÉTAPE 4 · MINI-DÉFI</div><h2>À toi de jouer</h2><div class="challenge-text">'+esc(exercise)+'</div><label class="check-line"><input type="checkbox" id="challengeCheck"> J’ai réalisé le défi.</label><div class="box"><strong>Mentor</strong><p>Ne cherche pas la perfection du premier coup : teste, observe, corrige.</p></div><button class="btn" id="finishLesson" disabled>✓ Valider la leçon · +20 XP</button></article></div>'+
  '<div class="pager"><a class="btn alt" href="'+prev+'">← '+(n>1?"Leçon précédente":"Sommaire")+'</a><a class="btn alt" href="'+next+'">'+(n<sections.length?"Leçon suivante →":"Terminer le cours ✓")+'</a></div>';
- initSteps(); initQuestion(answer); initCode(starter); initFinish();
+ initSteps(); initQuestion(answer); initCode(starter); initFinish(); if(window.Mentor) window.Mentor.init();
 }
 function initSteps(){
  document.querySelectorAll(".next-step").forEach(b=>b.onclick=()=>showStep(Number(b.dataset.next)));
