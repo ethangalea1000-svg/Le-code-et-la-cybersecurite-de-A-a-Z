@@ -11,6 +11,34 @@ function load(){try{return JSON.parse(localStorage.getItem(KEY))||null}catch(e){
 function save(){localStorage.setItem(KEY,JSON.stringify(state))}
 function esc(v){return String(v).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 function ctx(){return window.mentorContext||{type:"other"}}
+function focus(c){
+ const t=(c.title||"").toLowerCase();
+ if(t.includes("html")||t.includes("structure")||t.includes("dom")||t.includes("formulaire")||t.includes("accessibilité"))return "le HTML, sa structure et le rôle des éléments";
+ if(t.includes("css")||t.includes("flex")||t.includes("grid")||t.includes("responsive"))return "la mise en forme CSS et la relation entre structure et présentation";
+ if(t.includes("javascript")||t.includes("dom"))return "JavaScript et la logique qui permet de rendre la page interactive";
+ if(t.includes("python"))return "Python et la logique du programme";
+ if(t.includes("git")||t.includes("github"))return "Git et le suivi propre des versions du projet";
+ if(t.includes("sql")||t.includes("base"))return "les bases de données et les requêtes SQL";
+ if(t.includes("réseau")||t.includes("http")||t.includes("tcp")||t.includes("ip"))return "les réseaux et la circulation des données";
+ if(t.includes("linux")||t.includes("terminal")||t.includes("commande"))return "Linux et le raisonnement en ligne de commande";
+ if(t.includes("cyber")||t.includes("sécurité"))return "la cybersécurité et le raisonnement défensif";
+ if(t.includes("crypto"))return "la cryptographie et les mécanismes qui protègent l'information";
+ if(t.includes("osint")||t.includes("source"))return "l'OSINT et la vérification méthodique des sources";
+ if(t.includes("incident")||t.includes("analyse"))return "l'analyse d'incident et la recherche de faits vérifiables";
+ if(t.includes("projet"))return "la construction d'un projet complet";
+ return "la notion de cette leçon";
+}
+function contextual(type,c){
+ const f=focus(c), key=(c.title||"").toLowerCase();
+ if(type==="start")return "Aujourd’hui, on travaille sur "+f+". Commence par repérer ce que la leçon cherche à te faire comprendre.";
+ if(type==="understand")return "Le point à vérifier ici : "+f+". Essaie de l'expliquer avec tes propres mots avant de passer à la suite.";
+ if(type==="wrong")return state.style==="enquête"?"Indice : relis l'élément de la leçon qui concerne "+f+". Vérifie ton hypothèse avant de retenter.":"Reviens à l'idée centrale de cette leçon sur "+f+", puis reformule-la simplement.";
+ if(type==="right")return "Oui. Tu viens de valider l'idée centrale de "+f+". Maintenant, vérifie-la dans la pratique.";
+ if(type==="code")return "Le test porte sur "+f+". Compare le résultat obtenu avec ce que tu voulais produire, puis corrige si nécessaire.";
+ if(type==="challenge")return "Pour le défi, ne recopie pas seulement l'exemple : utilise "+f+" pour construire ta propre solution.";
+ if(type==="finish")return "Leçon terminée : tu as travaillé concrètement sur "+f+". La prochaine étape doit réutiliser cette notion.";
+ return "";
+}
 function baseMessage(c){
  if(c.type==="lesson"){
   if(c.n===1)return "On commence. Je vais intervenir pendant la leçon : je t’explique, je réagis à tes réponses et je te donne un indice si tu bloques.";
