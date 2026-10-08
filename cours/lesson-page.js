@@ -80,6 +80,20 @@ function initFinish(){
    finish.disabled=true;
  };
 }
-const s=document.createElement("script");s.src="../courses-"+id+".js";s.onload=()=>render(window.courseData?.[id]||{});document.body.appendChild(s);
+function loadCourseData(){
+ const script=document.createElement("script");
+ script.src="../courses-"+encodeURIComponent(id)+".js?v="+Date.now();
+ script.onload=()=>{
+   const data=window.courseData&&window.courseData[id];
+   if(data) render(data);
+   else showLoadError("Le contenu de ce cours n’a pas été trouvé.");
+ };
+ script.onerror=()=>showLoadError("Impossible de charger le fichier du cours. Vérifie que GitHub Pages a bien publié la dernière version.");
+ document.body.appendChild(script);
+}
+function showLoadError(message){
+ document.querySelector("#app").innerHTML='<section class="card lesson-card"><div class="step-label">ERREUR DE CHARGEMENT</div><h1>Leçon indisponible</h1><p>'+esc(message)+'</p><p>Recharge la page avec Ctrl + F5 après le déploiement GitHub Pages.</p><a class="btn" href="'+slug+'.html">Retour au cours</a></section>';
+}
+loadCourseData();
 function syncGlobalNav(){const base="/Le-code-et-la-cybersecurite-de-A-a-Z/";const links=[["Accueil","index.html"],["Parcours","parcours.html"],["Cours","cours.html"],["Projets","projets.html"],["Quiz","quiz.html"],["Progression","progression.html"],["Recherche","recherche.html"]];const h=document.querySelector("header");if(!h)return;let nav=h.querySelector("nav");if(!nav){nav=document.createElement("nav");nav.setAttribute("aria-label","Navigation principale");h.appendChild(nav)}nav.innerHTML=links.map(x=>'<a href="'+base+x[1]+'">'+x[0]+"</a>").join("");const brand=h.querySelector(".brand")||h.querySelector("a");if(brand){brand.className="brand";brand.href=base+"index.html";brand.innerHTML="<span>&lt;/&gt;</span> LE CODE <b>&amp;</b> LA CYBERSÉCURITÉ";}}
 syncGlobalNav();
