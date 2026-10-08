@@ -48,23 +48,23 @@ function initSteps(){
 function showStep(num){
  document.querySelectorAll(".lesson-step").forEach(x=>x.classList.toggle("active",Number(x.dataset.panel)===num));
  document.querySelectorAll(".step-track span").forEach(x=>x.classList.toggle("active",Number(x.dataset.step)===num));
- window.scrollTo({top:0,behavior:"smooth"});
+ window.scrollTo({top:0,behavior:"smooth"}); if(window.Mentor&&window.Mentor.onStep) window.Mentor.onStep(num);
 }
 function initQuestion(answer){
  const input=document.querySelector("#answer"),check=document.querySelector("#checkAnswer"),feedback=document.querySelector("#answerFeedback"),cont=document.querySelector("#continueQuestion");
  check.onclick=()=>{
    const value=input.value.trim().toLowerCase(), expected=String(answer).toLowerCase();
    const ok=expected&&value.length>1&&(expected.split(/[,.]/)[0].split(/\s+/).slice(0,3).some(w=>value.includes(w))||value.length>Math.min(12,expected.length*.55));
-   if(ok){feedback.className="feedback good";feedback.textContent="✓ Bonne piste. "+(answer?"Réponse attendue : "+answer:"Tu as formulé une réponse cohérente.");cont.disabled=false;addXP(5)}
-   else{feedback.className="feedback retry";feedback.textContent="Pas encore. Relis la notion et essaie de formuler l’idée principale.";input.focus()}
+   if(ok){feedback.className="feedback good";feedback.textContent="✓ Bonne piste. "+(answer?"Réponse attendue : "+answer:"Tu as formulé une réponse cohérente.");cont.disabled=false;addXP(5);if(window.Mentor&&window.Mentor.onAnswer)window.Mentor.onAnswer(true)}
+   else{feedback.className="feedback retry";feedback.textContent="Pas encore. Relis la notion et essaie de formuler l’idée principale.";if(window.Mentor&&window.Mentor.onAnswer)window.Mentor.onAnswer(false);input.focus()}
  };
 }
 function initCode(starter){
  const editor=document.querySelector("#lessonCode"),preview=document.querySelector("#lessonPreview"),run=document.querySelector("#runLessonCode"),reset=document.querySelector("#resetLessonCode"),status=document.querySelector("#codeFeedback");
  function execute(){
    const code=editor.value;
-   if(id==="01"||id==="02"||id==="11"){preview.srcdoc=code;status.textContent="Aperçu mis à jour."}
-   else{preview.srcdoc="<pre style='font:15px system-ui;padding:20px;white-space:pre-wrap'>"+esc(code)+"</pre>";status.textContent="Code envoyé au laboratoire."}
+   if(id==="01"||id==="02"||id==="11"){preview.srcdoc=code;status.textContent="Aperçu mis à jour.";if(window.Mentor&&window.Mentor.onCode)window.Mentor.onCode()}
+   else{preview.srcdoc="<pre style='font:15px system-ui;padding:20px;white-space:pre-wrap'>"+esc(code)+"</pre>";status.textContent="Code envoyé au laboratoire.";if(window.Mentor&&window.Mentor.onCode)window.Mentor.onCode()}
    addXP(5);
  }
  run.onclick=execute;reset.onclick=()=>{editor.value=starter;execute()};editor.addEventListener("keydown",e=>{if(e.key==="Tab"){e.preventDefault();const p=editor.selectionStart;editor.value=editor.value.slice(0,p)+"  "+editor.value.slice(editor.selectionEnd);editor.selectionStart=editor.selectionEnd=p+2}});
@@ -77,7 +77,7 @@ function initFinish(){
    const s=getState();s.lessons=s.lessons||{};const key=id+"-"+n;
    if(!s.lessons[key]){s.lessons[key]=true;saveState(s);addXP(10)}
    finish.textContent="✓ Leçon validée · +20 XP";
-   finish.disabled=true;
+   finish.disabled=true; if(window.Mentor&&window.Mentor.onFinish)window.Mentor.onFinish();
  };
 }
 function loadCourseData(){
