@@ -22,7 +22,7 @@ const starters={
 };
 function splitBody(body){const parts=String(body).split(/(?<=[.!?])\s+/).filter(Boolean);if(parts.length<3)return [body,"Teste l'idée principale dans un exemple.","Explique ensuite ce que tu observes."];return [parts.slice(0,2).join(" "),parts.slice(2,4).join(" "),parts.slice(4,7).join(" ")||parts.slice(2,4).join(" ")]}
 function render(data){
- window.mentorContext={type:"lesson",id:id,n:n,title:""};
+ window.mentorContext={type:"lesson",id:id,n:n,title:"",courseTitle:data.title||"",courseIntro:data.intro||"",chunks:[],question:"",answer:"",exercise:""};
  const sections=Array.isArray(data.sections)?data.sections:[], exercises=Array.isArray(data.exercises)?data.exercises:[], quizzes=Array.isArray(data.quiz)?data.quiz:[];
  const raw=sections[n-1]; if(!raw){location.href=slug+".html";return}
  const title=Array.isArray(raw)?raw[0]:"Leçon "+n, body=Array.isArray(raw)?raw[1]:"", chunks=splitBody(body);
@@ -61,13 +61,13 @@ function initQuestion(answer){
 }
 function initCode(starter){
  const editor=document.querySelector("#lessonCode"),preview=document.querySelector("#lessonPreview"),run=document.querySelector("#runLessonCode"),reset=document.querySelector("#resetLessonCode"),status=document.querySelector("#codeFeedback");
- function execute(){
+ function execute(notifyMentor=true){
    const code=editor.value;
-   if(id==="01"||id==="02"||id==="11"){preview.srcdoc=code;status.textContent="Aperçu mis à jour.";if(window.Mentor&&window.Mentor.onCode)window.Mentor.onCode()}
+   if(id==="01"||id==="02"||id==="11"){preview.srcdoc=code;status.textContent="Aperçu mis à jour.";if(notifyMentor&&window.Mentor&&window.Mentor.onCode)window.Mentor.onCode()}
    else{preview.srcdoc="<pre style='font:15px system-ui;padding:20px;white-space:pre-wrap'>"+esc(code)+"</pre>";status.textContent="Code envoyé au laboratoire.";if(window.Mentor&&window.Mentor.onCode)window.Mentor.onCode()}
    addXP(5);
  }
- run.onclick=execute;reset.onclick=()=>{editor.value=starter;execute()};editor.addEventListener("keydown",e=>{if(e.key==="Tab"){e.preventDefault();const p=editor.selectionStart;editor.value=editor.value.slice(0,p)+"  "+editor.value.slice(editor.selectionEnd);editor.selectionStart=editor.selectionEnd=p+2}});
+ run.onclick=execute;reset.onclick=()=>{editor.value=starter;execute(false)};editor.addEventListener("keydown",e=>{if(e.key==="Tab"){e.preventDefault();const p=editor.selectionStart;editor.value=editor.value.slice(0,p)+"  "+editor.value.slice(editor.selectionEnd);editor.selectionStart=editor.selectionEnd=p+2}});
  execute();
 }
 function initFinish(){
