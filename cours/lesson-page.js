@@ -81,15 +81,29 @@ function initFinish(){
  };
 }
 function loadCourseData(){
- const script=document.createElement("script");
- script.src="../courses-"+encodeURIComponent(id)+".js?v="+Date.now();
- script.onload=()=>{
+ const app=document.querySelector("#app");
+ app.innerHTML='<section class="card lesson-card"><div class="step-label">CHARGEMENT</div><h1>Préparation de la leçon…</h1><p>Je charge le contenu du cours.</p></section>';
+ const sources=[
+  "../courses-"+id+".js?v="+Date.now(),
+  "https://raw.githubusercontent.com/ethangalea1000-svg/Le-code-et-la-cybersecurite-de-A-a-Z/main/courses-"+id+".js"
+ ];
+ let attempt=0;
+ function trySource(){
+  if(attempt>=sources.length){
+   showLoadError("Le fichier courses-"+id+".js est introuvable depuis GitHub Pages et GitHub Raw. Le déploiement peut être incomplet ou le fichier absent.");
+   return;
+  }
+  const script=document.createElement("script");
+  script.src=sources[attempt++];
+  script.onload=()=>{
    const data=window.courseData&&window.courseData[id];
    if(data) render(data);
-   else showLoadError("Le contenu de ce cours n’a pas été trouvé.");
- };
- script.onerror=()=>showLoadError("Impossible de charger le fichier du cours. Vérifie que GitHub Pages a bien publié la dernière version.");
- document.body.appendChild(script);
+   else trySource();
+  };
+  script.onerror=()=>trySource();
+  document.body.appendChild(script);
+ }
+ trySource();
 }
 function showLoadError(message){
  document.querySelector("#app").innerHTML='<section class="card lesson-card"><div class="step-label">ERREUR DE CHARGEMENT</div><h1>Leçon indisponible</h1><p>'+esc(message)+'</p><p>Recharge la page avec Ctrl + F5 après le déploiement GitHub Pages.</p><a class="btn" href="'+slug+'.html">Retour au cours</a></section>';
