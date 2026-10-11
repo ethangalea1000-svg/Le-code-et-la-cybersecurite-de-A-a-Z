@@ -16,10 +16,20 @@ AZ.renderProgression=function(){
  const fav=(s.favorites||[]).filter(k=>typeof k==="string").slice(0,100),favRoot=document.querySelector("#favorites");favRoot.replaceChildren();if(!fav.length){const empty=document.createElement("p");empty.className="muted";empty.textContent="Aucun favori pour le moment.";favRoot.appendChild(empty)}else fav.forEach(function(k){const article=document.createElement("article"),title=document.createElement("h3"),button=document.createElement("button");title.textContent=k;button.className="btn ghost";button.type="button";button.textContent="Retirer";button.addEventListener("click",function(){AZ.favorite(k);location.reload()});article.append(title,button);favRoot.appendChild(article)});
 };
 AZ.initSearch=function(){
- const box=document.querySelector("#searchBox"),out=document.querySelector("#searchResults");
+ const box=document.querySelector("#searchBox"),out=document.querySelector("#searchResults"),filter=document.querySelector("#searchType"),status=document.querySelector("#searchStatus");
+ if(!box||!out)return;
  const items=COURSES.map(c=>({name:c[1],type:"Cours",text:c[2],href:c[3]}));
- function render(){const q=(box.value||"").trim().toLowerCase();const results=q?items.filter(x=>(x.name+" "+x.text).toLowerCase().includes(q)):items;out.innerHTML=results.map(x=>'<article><span class="tag">'+x.type+'</span><h3>'+x.name+'</h3><p>'+x.text+'</p><a class="btn" href="'+x.href+'">Ouvrir →</a></article>').join("")||'<p class="muted">Aucun résultat.</p>';}
- box.addEventListener("input",render);render();
+ out.setAttribute("aria-live","polite");
+ function render(){
+  const q=(box.value||"").trim().toLocaleLowerCase("fr"),kind=filter?filter.value:"all";
+  const results=items.filter(x=>(kind==="all"||kind===x.type)&&(!q||(x.name+" "+x.text).toLocaleLowerCase("fr").includes(q)));
+  out.replaceChildren();
+  if(!results.length){const empty=document.createElement("p");empty.className="muted";empty.textContent="Aucun résultat pour cette recherche.";out.appendChild(empty)}
+  results.slice(0,100).forEach(function(x){const card=document.createElement("article"),tag=document.createElement("span"),title=document.createElement("h3"),desc=document.createElement("p"),link=document.createElement("a");tag.className="tag";tag.textContent=x.type;title.textContent=x.name;desc.textContent=x.text;link.className="btn";link.href=x.href;link.textContent="Ouvrir →";card.append(tag,title,desc,link);out.appendChild(card)});
+  if(status)status.textContent=results.length+" résultat"+(results.length>1?"s":"")+" affiché"+(results.length>1?"s":"")+".";
+ }
+ box.addEventListener("input",render);if(filter)filter.addEventListener("change",render);render();
+ fetch(new URL("projets.html",location.href)).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.text()}).then(function(markup){const doc=new DOMParser().parseFromString(markup,"text/html");doc.querySelectorAll(".project-card-integrated").forEach(function(card){const name=card.querySelector("h3")?.textContent?.trim();if(!name)return;items.push({name:name,type:"Projets",text:card.querySelector("p")?.textContent?.trim()||"Projet pratique",href:card.querySelector("a")?.getAttribute("href")||"projets.html"})});render()}).catch(function(){if(status)status.textContent="Recherche des cours disponible ; les projets n’ont pas pu être chargés."});
 };
 window.AZ=AZ;
 })();
