@@ -396,3 +396,100 @@ body.home-page footer span{
   color:#d5dee8!important;
   opacity:1!important;
 }
+
+
+/* ACCUEIL — remplacement du texte blanc par un thème clair cohérent */
+body.home-page{
+  background:#f7f9f5!important;
+  color:#202b35!important;
+}
+body.home-page .hero{
+  background-color:#f7f9f5!important;
+  background-image:linear-gradient(#e5e9e3 1px,transparent 1px),linear-gradient(90deg,#e5e9e3 1px,transparent 1px)!important;
+}
+body.home-page .hero h1,
+body.home-page .hero h1 *{
+  color:#202b35!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+body.home-page .hero h1 em{
+  color:#176b20!important;
+}
+body.home-page .heroIn>small,
+body.home-page main .section>small,
+body.home-page main .section.safety>div>small{
+  color:#176b20!important;
+  opacity:1!important;
+}
+body.home-page .hero p{
+  color:#374151!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+body.home-page .hero .stats,
+body.home-page .hero .stats b,
+body.home-page .hero .stats small{
+  color:#202b35!important;
+  opacity:1!important;
+}
+body.home-page main .section,
+body.home-page main .section.dark,
+body.home-page main .section.safety{
+  background:#f7f9f5!important;
+  color:#202b35!important;
+  opacity:1!important;
+}
+body.home-page main .section h2,
+body.home-page main .section h3,
+body.home-page main .section h4,
+body.home-page main .section strong,
+body.home-page main .section b{
+  color:#202b35!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+body.home-page main .section p,
+body.home-page main .section li,
+body.home-page main .section .muted{
+  color:#374151!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+body.home-page main .section .cards article,
+body.home-page main .section .cards article h3,
+body.home-page main .section .cards article p{
+  background:#ffffff!important;
+  color:#202b35!important;
+  opacity:1!important;
+}
+body.home-page main .section .cards article p{
+  color:#374151!important;
+}
+body.home-page main .section .rules span{
+  background:#e8f2e5!important;
+  color:#173b20!important;
+  border:1px solid #8ca88a!important;
+  opacity:1!important;
+  text-shadow:none!important;
+  font-weight:750!important;
+}
+body.home-page .path-actions .btn.ghost{
+  color:#172033!important;
+  background:#e8edf4!important;
+  border:1px solid #697586!important;
+}
+body.home-page .path-actions .btn:not(.ghost){
+  color:#06100b!important;
+  background:#42e8a4!important;
+  border-color:#176b20!important;
+}
+body.home-page footer{
+  background:#e9eee7!important;
+  color:#202b35!important;
+  border-top:1px solid #aab5a7!important;
+}
+body.home-page footer span{
+  color:#374151!important;
+  opacity:1!important;
+}
