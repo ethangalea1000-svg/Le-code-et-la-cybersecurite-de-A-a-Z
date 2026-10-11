@@ -20,3 +20,5 @@
 .load-error li{margin:6px 0}
 .loading-card{min-height:220px}
 @media(max-width:560px){.tutorial-backdrop{padding:10px}.tutorial-dialog{max-height:calc(100vh - 20px);border-radius:18px;padding:22px 17px}.tutorial-list li{padding:11px}.tutorial-list p{font-size:13px}}
+
+.lesson-header{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}.lesson-header nav{display:flex;gap:12px;align-items:center;overflow-x:auto;max-width:100%;white-space:nowrap}.lesson-header nav a{font-size:13px;font-weight:700;color:#4c5365;flex:0 0 auto}.lesson-header nav a:focus-visible,.lesson-header>a:focus-visible{outline:3px solid #635bff;outline-offset:3px;border-radius:4px}@media(max-width:620px){.lesson-header{align-items:flex-start}.lesson-header nav{order:2;width:100%;padding:6px 0}.lesson-header nav a{font-size:12px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
