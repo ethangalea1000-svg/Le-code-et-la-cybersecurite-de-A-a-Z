@@ -2,3 +2,15 @@
 .lesson-section{padding:14px 0;border-top:1px solid var(--line)}.lesson-section h4{font-size:18px;margin:0 0 5px;color:var(--text)}.lesson-section p{color:var(--muted);margin:0}.course-body ol{color:var(--muted);padding-left:22px}.course-body li{margin:8px 0}.course-link{position:relative;z-index:2}.course-link:hover{text-decoration:underline}.project-source{display:inline-block;margin-top:12px;color:var(--green);font:12px monospace;font-weight:700}.project-source:hover{text-decoration:underline}.projects article{display:flex;flex-direction:column}.projects article .project-source{margin-top:auto;padding-top:14px}
 .project-directory{grid-template-columns:repeat(3,1fr)}.project-card-integrated{display:flex;flex-direction:column;min-height:255px}.project-card-integrated p{flex:1}.project-card-integrated .btn{font-size:13px;margin-top:14px}.project-code{white-space:pre-wrap;overflow:auto;background:#070a0f;border:1px solid var(--line);border-radius:10px;padding:18px;color:#dce7f0;font:13px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace}.project-window{max-width:900px}@media(max-width:900px){.project-directory{grid-template-columns:repeat(2,1fr)}}@media(max-width:760px){.project-directory{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+/* Navigation et contrôles communs — harmonisation globale */
+header{min-height:68px;height:auto;gap:16px;flex-wrap:wrap}
+header .brand{flex:0 0 auto;white-space:nowrap}
+header nav{display:flex;align-items:center;gap:clamp(8px,1.3vw,20px);flex-wrap:wrap}
+header nav a{display:inline-flex;align-items:center;min-height:38px;padding:7px 9px;border:1px solid transparent;border-radius:8px;color:var(--muted);font-size:13px;font-weight:650;transition:color .15s,border-color .15s,background .15s}
+header nav a:hover,header nav a[aria-current="page"]{color:var(--green);border-color:var(--line);background:#0e141c}
+header nav a:focus-visible,#menuBtn:focus-visible,.btn:focus-visible,button:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+button,.btn{font:inherit}
+button:not(.plain-button){cursor:pointer}
+@media(max-width:1050px){header{align-items:flex-start}header nav{width:100%;order:3;overflow-x:auto;flex-wrap:nowrap;white-space:nowrap;padding:4px 0 8px}header nav a{flex:0 0 auto}#menuBtn{display:none}}
+@media(max-width:560px){header{padding-left:14px;padding-right:14px;gap:6px}.brand{font-size:10px}header nav{gap:6px}header nav a{font-size:12px;min-height:34px;padding:6px 8px}}
