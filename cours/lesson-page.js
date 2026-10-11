@@ -34,13 +34,13 @@ function render(data){
  document.title=title+" — Le Code & la Cybersécurité";
  document.querySelector("#app").innerHTML=
  '<div class="crumb"><a href="'+slug+'.html">← '+slug.toUpperCase()+'</a> · Leçon '+n+' / '+sections.length+'</div>'+
- '<section class="hero"><div class="eyebrow">LEÇON '+String(n).padStart(2,"0")+' / '+sections.length+'</div><h1>'+esc(title)+'</h1><p>Une notion à la fois. Comprends, réponds, manipule et valide.</p><div class="step-track"><span class="active" data-step="1">1 Comprendre</span><span data-step="2">2 Question</span><span data-step="3">3 Coder</span><span data-step="4">4 Défi</span></div></section>'+
+ '<section class="hero"><div class="eyebrow">LEÇON '+String(n).padStart(2,"0")+' / '+sections.length+'</div><h1>'+esc(title)+'</h1><p>Une notion à la fois. Comprends, réponds, manipule et valide.</p><button class="btn alt tutorial-open" id="openTutorial" type="button">Voir le tutoriel : comment ça marche ?</button><div class="step-track"><span class="active" data-step="1">1 Comprendre</span><span data-step="2">2 Question</span><span data-step="3">3 Coder</span><span data-step="4">4 Défi</span></div></section>'+
  '<div class="lesson-step active" data-panel="1"><article class="card lesson-card"><div class="step-label">ÉTAPE 1 · COMPRENDRE</div><h2>La notion essentielle</h2><p class="chunk">'+esc(chunks[0])+'</p><div class="box"><strong>À retenir</strong><p>'+esc(chunks[1])+'</p></div><button class="btn next-step" data-next="2">J’ai compris →</button></article></div>'+
  '<div class="lesson-step" data-panel="2"><article class="card lesson-card"><div class="step-label">ÉTAPE 2 · VÉRIFIER</div><h2>Question express</h2><p>'+esc(question)+'</p><div class="answer-row"><input id="answer" placeholder="Écris ta réponse..." autocomplete="off"><button class="btn" id="checkAnswer">Vérifier</button></div><div id="answerFeedback" class="feedback" aria-live="polite"></div><button class="btn next-step" id="continueQuestion" data-next="3" disabled>Continuer →</button></article></div>'+
  '<div class="lesson-step" data-panel="3"><article class="card lesson-card"><div class="step-label">ÉTAPE 3 · LABORATOIRE</div><h2>Manipule le code</h2><p>'+esc(chunks[2])+'</p><div class="code-workshop"><textarea id="lessonCode" spellcheck="false">'+esc(starter)+'</textarea><div class="workshop-actions"><button class="btn" id="runLessonCode">▶ Exécuter</button><button class="btn alt" id="resetLessonCode">Réinitialiser</button><span id="codeFeedback">Prêt.</span></div><iframe id="lessonPreview" sandbox="allow-scripts" title="Aperçu du code"></iframe></div><button class="btn next-step" data-next="4">Passer au défi →</button></article></div>'+
  '<div class="lesson-step" data-panel="4"><article class="card lesson-card"><div class="step-label">ÉTAPE 4 · MINI-DÉFI</div><h2>À toi de jouer</h2><div class="challenge-text">'+esc(exercise)+'</div><label class="check-line"><input type="checkbox" id="challengeCheck"> J’ai réalisé le défi.</label><div class="box"><strong>Mentor</strong><p>Ne cherche pas la perfection du premier coup : teste, observe, corrige.</p></div><button class="btn" id="finishLesson" disabled>✓ Valider la leçon · +20 XP</button></article></div>'+
  '<div class="pager"><a class="btn alt" href="'+prev+'">← '+(n>1?"Leçon précédente":"Sommaire")+'</a><a class="btn alt" href="'+next+'">'+(n<sections.length?"Leçon suivante →":"Terminer le cours ✓")+'</a></div>';
- initSteps(); initQuestion(answer); initCode(starter); initFinish(); if(window.Mentor) window.Mentor.init();
+ initSteps(); initQuestion(answer); initCode(starter); initFinish(); initTutorial(); if(window.Mentor) window.Mentor.init();
 }
 function initSteps(){
  document.querySelectorAll(".next-step").forEach(b=>b.onclick=()=>showStep(Number(b.dataset.next)));
@@ -82,31 +82,46 @@ function initFinish(){
 }
 function loadCourseData(){
  const app=document.querySelector("#app");
- app.innerHTML='<section class="card lesson-card"><div class="step-label">CHARGEMENT</div><h1>Préparation de la leçon…</h1><p>Je charge le contenu du cours.</p></section>';
+ app.innerHTML='<section class="card lesson-card loading-card"><div class="step-label">CHARGEMENT</div><h1>Préparation de la leçon…</h1><p>Je cherche le fichier du cours. Cela ne devrait prendre que quelques secondes.</p></section>';
+ const base="/Le-code-et-la-cybersecurite-de-A-a-Z/";
  const sources=[
-  "../courses-"+id+".js?v="+Date.now(),
+  base+"courses-"+id+".js?v="+Date.now(),
   "https://raw.githubusercontent.com/ethangalea1000-svg/Le-code-et-la-cybersecurite-de-A-a-Z/main/courses-"+id+".js"
  ];
  let attempt=0;
  function trySource(){
   if(attempt>=sources.length){
-   showLoadError("Le fichier courses-"+id+".js est introuvable depuis GitHub Pages et GitHub Raw. Le déploiement peut être incomplet ou le fichier absent.");
+   showLoadError("Le cours n’a pas pu être chargé. Le fichier recherché est courses-"+id+".js. Cela peut venir d’une publication GitHub Pages pas encore terminée, d’une connexion interrompue ou d’un fichier manquant.");
    return;
   }
   const script=document.createElement("script");
   script.src=sources[attempt++];
   script.onload=()=>{
    const data=window.courseData&&window.courseData[id];
-   if(data) render(data);
-   else trySource();
+   if(data&&Array.isArray(data.sections)) render(data);
+   else {script.remove();trySource();}
   };
-  script.onerror=()=>trySource();
+  script.onerror=()=>{script.remove();trySource();};
   document.body.appendChild(script);
  }
  trySource();
 }
 function showLoadError(message){
- document.querySelector("#app").innerHTML='<section class="card lesson-card"><div class="step-label">ERREUR DE CHARGEMENT</div><h1>Leçon indisponible</h1><p>'+esc(message)+'</p><p>Recharge la page avec Ctrl + F5 après le déploiement GitHub Pages.</p><a class="btn" href="'+slug+'.html">Retour au cours</a></section>';
+ document.querySelector("#app").innerHTML='<section class="card lesson-card load-error"><div class="step-label">LE COURS NE S’EST PAS OUVERT</div><h1>On n’a pas réussi à charger cette leçon.</h1><p>'+esc(message)+'</p><div class="box"><strong>Que faire ?</strong><ol><li>Appuie sur « Réessayer ».</li><li>Si le message revient, attends une minute puis actualise la page avec Ctrl + F5.</li><li>Si le problème continue, retourne au cours et réessaie plus tard : le site doit finir sa publication.</li></ol></div><div class="actions"><button class="btn" id="retryLesson" type="button">Réessayer</button><a class="btn alt" href="'+slug+'.html">Retour au cours</a></div></section>';
+ document.querySelector("#retryLesson").onclick=loadCourseData;
+}
+function initTutorial(){
+ if(document.querySelector("#lessonTutorial"))return;
+ const html='<div class="tutorial-backdrop" id="lessonTutorial" role="dialog" aria-modal="true" aria-labelledby="tutorialTitle"><section class="tutorial-dialog"><button class="tutorial-close" id="closeTutorial" type="button" aria-label="Fermer le tutoriel">×</button><div class="step-label">GUIDE DE DÉPART</div><h2 id="tutorialTitle">Comment suivre cette leçon ?</h2><p class="tutorial-intro">Tu avances en quatre petites étapes. Tu peux rouvrir ce guide quand tu veux.</p><ol class="tutorial-list"><li><span>1</span><div><strong>Comprendre</strong><p>Lis l’explication et le bloc « À retenir », puis appuie sur « J’ai compris ».</p></div></li><li><span>2</span><div><strong>Répondre</strong><p>Écris une réponse avec tes mots. Si elle ne convient pas, tu peux relire et réessayer.</p></div></li><li><span>3</span><div><strong>Tester le code</strong><p>Modifie le code dans le laboratoire, puis appuie sur « Exécuter » pour voir le résultat.</p></div></li><li><span>4</span><div><strong>Faire le mini-défi</strong><p>Réalise le défi, coche la case et valide la leçon pour enregistrer ta progression.</p></div></li></ol><p class="tutorial-note">Astuce : ton mentor peut te donner des indices. Le bouton « Tutoriel » reste disponible en haut de la leçon.</p><button class="btn tutorial-start" id="startTutorial" type="button">D’accord, commencer la leçon →</button></section></div>';
+ document.body.insertAdjacentHTML("beforeend",html);
+ const modal=document.querySelector("#lessonTutorial");
+ const close=()=>modal.classList.remove("visible");
+ document.querySelector("#openTutorial").onclick=()=>modal.classList.add("visible");
+ document.querySelector("#closeTutorial").onclick=close;
+ document.querySelector("#startTutorial").onclick=()=>{close();showStep(1);};
+ modal.onclick=e=>{if(e.target===modal)close();};
+ if(localStorage.getItem("azLessonTutorialSeen")!=="1")modal.classList.add("visible");
+ document.querySelector("#startTutorial").addEventListener("click",()=>localStorage.setItem("azLessonTutorialSeen","1"));
 }
 loadCourseData();
 function syncGlobalNav(){const base="/Le-code-et-la-cybersecurite-de-A-a-Z/";const links=[["Accueil","index.html"],["Parcours","parcours.html"],["Cours","cours.html"],["Projets","projets.html"],["Quiz","quiz.html"],["Progression","progression.html"],["Recherche","recherche.html"]];const h=document.querySelector("header");if(!h)return;let nav=h.querySelector("nav");if(!nav){nav=document.createElement("nav");nav.setAttribute("aria-label","Navigation principale");h.appendChild(nav)}nav.innerHTML=links.map(x=>'<a href="'+base+x[1]+'">'+x[0]+"</a>").join("");const brand=h.querySelector(".brand")||h.querySelector("a");if(brand){brand.className="brand";brand.href=base+"index.html";brand.innerHTML="<span>&lt;/&gt;</span> LE CODE <b>&amp;</b> LA CYBERSÉCURITÉ";}}
