@@ -109,3 +109,16 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 button:disabled{opacity:.7}.progress-mini,.course-progress-track{background:#dce2ec}
 @media(prefers-contrast:more){body{color:#000;background:#fff}.hero,.card,.lesson-card{border-color:#555}.muted,.hero p,.lesson-body p{color:#202020}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+
+/* AUDIT CONTRASTE — pages de cours */
+body{color:#172033;background:#f7f8fc}
+body p,body li,body label,body .muted,body .subtitle,body .description,body .level-head p,body .lesson-body p,body .course-content>p,body .exercise p,body .crumb{color:#354158}
+body small,body .eyebrow,body .lesson-tag,body .course-progress-inner strong{color:#3427b5}
+body .pill,body .badge,body .tag{color:#253047;background:#fff;border-color:#aeb8c9}
+body .lesson-card,body .exercise,body .level-check,body .project-lab,body .playground,body .course-content,body .quiz-card,body .quiz-filter-panel{color:#172033;border-color:#b7c1d0}
+body input,body select,body textarea{color:#172033;background:#fff;border:1px solid #68758a}
+body input::placeholder,body textarea::placeholder{color:#4b566a;opacity:1}
+body button:disabled{color:#3e4859;background:#e5e9f0;opacity:1}
+body a:focus-visible,body button:focus-visible,body input:focus-visible,body select:focus-visible,body textarea:focus-visible{outline:3px solid #211a83!important;outline-offset:3px!important}
+@media(prefers-contrast:more){body,body main{color:#000;background:#fff}body p,body li,body .muted{color:#111}.lesson-card,.exercise,.level-check,.course-content{border:2px solid #222}}
