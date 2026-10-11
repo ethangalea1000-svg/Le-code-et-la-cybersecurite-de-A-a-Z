@@ -9,3 +9,14 @@
 .mentor-field input,.mentor-field select{color:#172033;background:#fff;border:1px solid #68758a}
 .mentor-field input::placeholder{color:#4b566a;opacity:1}
 .mentor-option:focus-visible,.mentor-btn:focus-visible,.mentor-save:focus-visible,.mentor-avatar:focus-visible{outline:3px solid #211a83;outline-offset:3px}
+
+
+/* CONTRASTE FINAL — widget mentor */
+.mentor-panel,.mentor-dialog,.mentor-option{background:#fff!important;color:#111827!important;border-color:#9ca3af!important}
+.mentor-panel p,.mentor-dialog p,.mentor-option strong,.mentor-field label{color:#111827!important;opacity:1!important}
+.mentor-name,.mentor-option small{color:#3730a3!important;opacity:1!important}
+.mentor-btn,.mentor-save{background:#3730a3!important;color:#fff!important;border:2px solid #3730a3!important}
+.mentor-btn.secondary{background:#f3f4f6!important;color:#111827!important;border:2px solid #6b7280!important}
+.mentor-field input,.mentor-field select{background:#fff!important;color:#111827!important;border:2px solid #6b7280!important}
+.mentor-field input::placeholder{color:#4b5563!important;opacity:1!important}
+.mentor-option:focus-visible,.mentor-btn:focus-visible,.mentor-save:focus-visible,.mentor-avatar:focus-visible{outline:3px solid #111827!important;outline-offset:3px!important}
