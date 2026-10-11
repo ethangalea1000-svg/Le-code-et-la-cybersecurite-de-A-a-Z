@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Tableau de pilotage technique du site Le Code & la Cybersécurité de A à Z.">
+<meta name="robots" content="noindex,nofollow">
+<title>Tableau de pilotage — Le Code & la Cybersécurité</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="enhancements.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-page">
+<a class="skip-link" href="#mainContent">Aller directement au contenu</a>
+<header>
+<a class="brand" href="index.html"><span>&lt;/&gt;</span> LE CODE <b>&amp;</b> LA CYBERSÉCURITÉ</a>
+<nav aria-label="Navigation principale"><a href="index.html">Accueil</a><a href="progression.html">Progression</a><a href="cours.html">Cours</a></nav>
+</header>
+<section class="admin-hero">
+<div class="admin-wrap">
+<p class="admin-eyebrow">CONSOLE DE PILOTAGE · V1</p>
+<h1>État du site<span style="color:var(--green)">.</span></h1>
+<p>Vue technique rapide du site, de ses pages et des données enregistrées dans <strong>ce navigateur uniquement</strong>.</p>
+</div>
+</section>
+<main id="mainContent" class="admin-wrap">
+<div class="admin-alert" role="note">
+<div aria-hidden="true">!</div><div><strong>Limite de sécurité importante</strong><p>Cette page est un tableau de diagnostic public, pas une administration privée. GitHub Pages ne protège pas les pages HTML par mot de passe côté serveur. Les statistiques affichées ici viennent de ton navigateur et ne représentent pas les visiteurs du site.</p></div>
+</div>
+<div class="admin-toolbar"><h2>Indicateurs locaux</h2><button class="btn ghost" id="refreshBtn" type="button">Actualiser les contrôles</button></div>
+<section id="localStats" class="admin-grid" aria-label="Statistiques locales" aria-live="polite">
+<article class="admin-stat"><small>ÉTAT</small><strong>Chargement…</strong><p>Lecture des données locales</p></article>
+</section>
+<section class="admin-panel">
+<h2>Contrôle des pages</h2>
+<p>Le navigateur vérifie les pages essentielles accessibles depuis ce site. Un contrôle réussi signifie que la requête HTTP a répondu, pas que toutes les fonctions internes ont été testées.</p>
+<div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Page</th><th>Contrôle</th><th>Résultat</th></tr></thead><tbody id="pageChecks"><tr><td colspan="3">Vérification en cours…</td></tr></tbody></table></div>
+</section>
+<section class="admin-panel">
+<h2>Raccourcis de gestion</h2>
+<p>Accès rapide aux outils de suivi et au dépôt source.</p>
+<div class="admin-actions">
+<a class="admin-action" href="progression.html"><strong>Progression personnelle</strong><span>Consulter les cours, quiz et favoris de ce navigateur.</span></a>
+<a class="admin-action" href="quiz.html"><strong>Tester le quiz</strong><span>Vérifier manuellement le parcours de quiz.</span></a>
+<a class="admin-action" href="https://github.com/ethangalea1000-svg/Le-code-et-la-cybersecurite-de-A-a-Z"><strong>Dépôt GitHub ↗</strong><span>Consulter le code source et les fichiers.</span></a>
+<a class="admin-action" href="https://github.com/ethangalea1000-svg/Le-code-et-la-cybersecurite-de-A-a-Z/actions"><strong>Déploiements ↗</strong><span>Voir les workflows et l’état des publications GitHub Pages.</span></a>
+<a class="admin-action" href="https://github.com/ethangalea1000-svg/Le-code-et-la-cybersecurite-de-A-a-Z/issues"><strong>Suivi des problèmes ↗</strong><span>Créer ou consulter les signalements du dépôt.</span></a>
+<a class="admin-action" href="404.html"><strong>Tester la page 404</strong><span>Prévisualiser la page d’erreur personnalisée.</span></a>
+</div>
+</section>
+<section class="admin-panel">
+<h2>Ce que ce tableau ne mesure pas</h2>
+<p class="admin-note">Les statistiques des autres visiteurs, les connexions, les erreurs serveur, les tentatives de connexion et les journaux de sécurité ne sont pas disponibles dans ce site statique sans service d’analyse ou backend dédié. Aucune donnée de visiteur n’est inventée ni collectée ici.</p>
+</section>
+</main>
+<footer>LE CODE &amp; LA CYBERSÉCURITÉ DE A À Z <span>Diagnostic local · GitHub Pages</span></footer>
+<script src="site.js"></script>
+<script>
+(function(){
+ const paths=[["Accueil","index.html"],["Parcours","parcours.html"],["Cours","cours.html"],["Quiz","quiz.html"],["Progression","progression.html"],["Recherche","recherche.html"],["Ressources","ressources.html"],["Examens","examens.html"],["Certificats","certificats.html"],["Page 404","404.html"]];
+ const stats=document.getElementById("localStats"),table=document.getElementById("pageChecks"),refresh=document.getElementById("refreshBtn");
+ function card(label,value,detail){const a=document.createElement("article"),k=document.createElement("small"),v=document.createElement("strong"),p=document.createElement("p");a.className="admin-stat";k.textContent=label;v.textContent=value;p.textContent=detail;a.append(k,v,p);return a}
+ function localStats(){
+  stats.replaceChildren();
+  let progress={courses:{},projects:{},favorites:[],xp:0,courseLessons:{}},quiz={answered:0,correct:0};
+  try{if(window.AZ&&typeof AZ.getProgress==="function")progress=AZ.getProgress();}catch(e){}
+  try{const q=JSON.parse(localStorage.getItem("quizAZProgressV3")||"null");if(q&&typeof q==="object"){quiz.answered=Math.max(0,Number(q.answered)||0);quiz.correct=Math.max(0,Math.min(quiz.answered,Number(q.correct)||0));}}catch(e){}
+  const courses=progress.courses&&typeof progress.courses==="object"?progress.courses:{};
+  const completed=Object.values(courses).filter(x=>Number(x)>=100).length;
+  const lessonCount=progress.courseLessons&&typeof progress.courseLessons==="object"?Object.values(progress.courseLessons).filter(x=>x===true).length:0;
+  const total=Object.values(courses).filter(x=>Number.isFinite(Number(x))).length;
+  const dataBytes=new Blob([localStorage.getItem("azProgressV1")||""]).size+new Blob([localStorage.getItem("quizAZProgressV3")||""]).size;
+  [
+   ["COURS TERMINÉS",String(completed),"Cours marqués à 100 % dans ce navigateur"],
+   ["COURS AVEC PROGRESSION",String(total),"Cours présents dans le stockage local"],
+   ["LEÇONS VALIDÉES",String(lessonCount),"Leçons enregistrées comme terminées"],
+   ["QUESTIONS RÉPONDUES",String(quiz.answered),"Compteur local du quiz"],
+   ["RÉUSSITE AU QUIZ",quiz.answered?Math.round(quiz.correct/quiz.answered*100)+" %":"—",quiz.answered?quiz.correct+" bonnes réponses sur "+quiz.answered:"Aucune réponse enregistrée"],
+   ["XP LOCAUX",String(Number(progress.xp)||0),"Points présents sur cet appareil"],
+   ["FAVORIS",String(Array.isArray(progress.favorites)?progress.favorites.length:0),"Favoris enregistrés localement"],
+   ["DONNÉES LUES",dataBytes<1024?dataBytes+" octets":(dataBytes/1024).toFixed(1)+" Ko","Taille approximative de deux clés de progression"]
+  ].forEach(x=>stats.appendChild(card(x[0],x[1],x[2])));
+ }
+ async function checkPages(){
+  table.replaceChildren();
+  for(const item of paths){
+   const row=document.createElement("tr"),name=document.createElement("td"),control=document.createElement("td"),result=document.createElement("td"),status=document.createElement("span");
+   name.textContent=item[0];control.textContent=item[1];status.className="admin-status wait";status.textContent="Test…";result.appendChild(status);row.append(name,control,result);table.appendChild(row);
+  }
+  const rows=Array.from(table.querySelectorAll("tr"));
+  await Promise.all(paths.map(async(item,i)=>{
+   const status=rows[i].querySelector(".admin-status");
+   try{
+    const response=await fetch(new URL(item[1],location.href),{cache:"no-store"});
+    if(response.ok){status.className="admin-status ok";status.textContent="HTTP "+response.status;}
+    else{status.className="admin-status fail";status.textContent="HTTP "+response.status;}
+   }catch(e){status.className="admin-status fail";status.textContent="Échec réseau";}
+  }));
+ }
+ async function refreshAll(){refresh.disabled=true;refresh.textContent="Contrôle en cours…";localStats();await checkPages();refresh.disabled=false;refresh.textContent="Actualiser les contrôles";}
+ refresh.addEventListener("click",refreshAll);refreshAll();
+})();
+</script>
+</body>
+</html>
