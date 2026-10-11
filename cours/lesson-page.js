@@ -68,8 +68,7 @@ function initCode(starter){
  const editor=document.querySelector("#lessonCode"),preview=document.querySelector("#lessonPreview"),run=document.querySelector("#runLessonCode"),reset=document.querySelector("#resetLessonCode"),status=document.querySelector("#codeFeedback");
  function execute(notifyMentor=true){
    const code=editor.value;
-   if(id==="02"){preview.srcdoc="<!doctype html><html lang='fr'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><style>"+code+"</style></head><body><h1>Mon aperçu CSS</h1><p>Modifie le CSS pour changer cette page.</p><button>Un bouton de démonstration</button></body></html>";status.textContent="Aperçu CSS mis à jour."}else if(id==="01"||id==="11"){preview.srcdoc=code;status.textContent="Aperçu HTML mis à jour."}else{preview.srcdoc="<pre style='font:15px system-ui;padding:20px;white-space:pre-wrap'>"+esc(code)+"</pre>";status.textContent="Code affiché dans le laboratoire."}if(notifyMentor&&window.Mentor&&window.Mentor.onCode)window.Mentor.onCode()
-   else{preview.srcdoc="<pre style='font:15px system-ui;padding:20px;white-space:pre-wrap'>"+esc(code)+"</pre>";status.textContent="Code envoyé au laboratoire.";if(window.Mentor&&window.Mentor.onCode)window.Mentor.onCode()}
+   if(id==="02"){preview.srcdoc="<!doctype html><html lang='fr'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><style>"+code+"</style></head><body><h1>Mon aperçu CSS</h1><p>Modifie le CSS pour changer cette page.</p><button>Un bouton de démonstration</button></body></html>";status.textContent="Aperçu CSS mis à jour."}else if(id==="01"||id==="11"){preview.srcdoc=code;status.textContent="Aperçu HTML mis à jour."}else{preview.srcdoc="<pre style='font:15px system-ui;padding:20px;white-space:pre-wrap'>"+esc(code)+"</pre>";status.textContent="Code affiché dans le laboratoire."}if(notifyMentor&&window.Mentor&&window.Mentor.onCode)window.Mentor.onCode();
    addXP(5);
  }
  run.onclick=execute;reset.onclick=()=>{editor.value=starter;execute(false)};editor.addEventListener("keydown",e=>{if(e.key==="Tab"){e.preventDefault();const p=editor.selectionStart;editor.value=editor.value.slice(0,p)+"  "+editor.value.slice(editor.selectionEnd);editor.selectionStart=editor.selectionEnd=p+2}});
@@ -80,7 +79,7 @@ function initFinish(){
  check.onchange=()=>finish.disabled=!check.checked;
  finish.onclick=()=>{
    const s=getState();s.lessons=s.lessons||{};const key=id+"-"+n;
-   if(!s.lessons[key]){s.lessons[key]=true;saveState(s);addXP(10)}
+   if(!s.lessons[key]){s.lessons[key]=true;s.courseLessons=s.courseLessons||{};s.courseLessons[key]=true;saveState(s);addXP(10)}else{s.courseLessons=s.courseLessons||{};s.courseLessons[key]=true;saveState(s)}
    finish.textContent="✓ Leçon validée · +20 XP";
    finish.disabled=true; if(window.Mentor&&window.Mentor.onFinish)window.Mentor.onFinish();
  };
