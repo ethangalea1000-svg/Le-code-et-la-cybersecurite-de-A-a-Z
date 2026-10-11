@@ -493,3 +493,113 @@ body.home-page footer span{
   color:#374151!important;
   opacity:1!important;
 }
+
+
+/* CORRECTION FINALE — supprimer les conflits clair/sombre sur les pages générales */
+:root{color-scheme:light}
+body:not(.course-page):not(.lesson-page){
+  background:#f7f9f5!important;
+  color:#202b35!important;
+}
+body:not(.course-page):not(.lesson-page) header{
+  background:#ffffff!important;
+  color:#202b35!important;
+  border-bottom:1px solid #d5ded2!important;
+}
+body:not(.course-page):not(.lesson-page) header nav,
+body:not(.course-page):not(.lesson-page) header nav a,
+body:not(.course-page):not(.lesson-page) header .brand{
+  color:#202b35!important;
+}
+body:not(.course-page):not(.lesson-page) header nav a:hover,
+body:not(.course-page):not(.lesson-page) header nav a[aria-current="page"]{
+  color:#176b20!important;
+}
+body:not(.course-page):not(.lesson-page) main,
+body:not(.course-page):not(.lesson-page) main .section{
+  background:#f7f9f5!important;
+  color:#202b35!important;
+}
+body:not(.course-page):not(.lesson-page) main h1,
+body:not(.course-page):not(.lesson-page) main h2,
+body:not(.course-page):not(.lesson-page) main h3,
+body:not(.course-page):not(.lesson-page) main h4,
+body:not(.course-page):not(.lesson-page) main strong,
+body:not(.course-page):not(.lesson-page) main b{
+  color:#202b35!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+body:not(.course-page):not(.lesson-page) main p,
+body:not(.course-page):not(.lesson-page) main li,
+body:not(.course-page):not(.lesson-page) main label,
+body:not(.course-page):not(.lesson-page) main small,
+body:not(.course-page):not(.lesson-page) main summary,
+body:not(.course-page):not(.lesson-page) main figcaption,
+body:not(.course-page):not(.lesson-page) main .muted{
+  color:#374151!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+body:not(.course-page):not(.lesson-page) main article,
+body:not(.course-page):not(.lesson-page) main .card,
+body:not(.course-page):not(.lesson-page) main .panel,
+body:not(.course-page):not(.lesson-page) main [class*="card"],
+body:not(.course-page):not(.lesson-page) main [class*="panel"]{
+  background:#ffffff!important;
+  color:#202b35!important;
+  border-color:#cbd5c8!important;
+}
+body:not(.course-page):not(.lesson-page) main a:not(.btn):not(.brand){
+  color:#174f9b!important;
+  text-decoration-thickness:1px;
+  text-underline-offset:3px;
+}
+body:not(.course-page):not(.lesson-page) main .tag,
+body:not(.course-page):not(.lesson-page) main .badge,
+body:not(.course-page):not(.lesson-page) main .pill{
+  color:#17451f!important;
+  background:#e8f2e5!important;
+  border-color:#8ca88a!important;
+}
+body:not(.course-page):not(.lesson-page) main input,
+body:not(.course-page):not(.lesson-page) main select,
+body:not(.course-page):not(.lesson-page) main textarea{
+  background:#ffffff!important;
+  color:#202b35!important;
+  border:2px solid #697586!important;
+}
+body:not(.course-page):not(.lesson-page) main input::placeholder,
+body:not(.course-page):not(.lesson-page) main textarea::placeholder{
+  color:#4b5563!important;
+  opacity:1!important;
+}
+body:not(.course-page):not(.lesson-page) footer{
+  background:#e9eee7!important;
+  color:#202b35!important;
+  border-top:1px solid #aab5a7!important;
+}
+body:not(.course-page):not(.lesson-page) footer span{color:#374151!important;opacity:1!important}
+
+/* Quiz : le titre et le mot mis en évidence restent foncés sur le fond clair */
+.quiz-page{background:#f7f9f5!important;color:#202b35!important}
+.quiz-hero,.quiz-workspace{color:#202b35!important}
+.quiz-heading h1,.quiz-heading h1 span,
+.quiz-side-note strong,.quiz-workspace-head h2,.quiz-question{
+  color:#202b35!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+.quiz-heading h1 span{color:#176b20!important}
+.quiz-intro,.quiz-side-note p,.quiz-workspace-desc,
+.quiz-filter-panel>p,.quiz-filter-tip p,.quiz-key-hint,.quiz-stats,
+.quiz-side-index,.quiz-panel-index,.quiz-mode-label,.quiz-count,
+.quiz-filter-panel label,.quiz-controls label,.quiz-kicker,.quiz-question-label{
+  color:#374151!important;
+  opacity:1!important;
+}
+.quiz-mode-link{color:#202b35!important}
+.quiz-mode-link span,.quiz-overline,.quiz-question-label span:last-child{color:#176b20!important}
+.quiz-score{color:#17451f!important;background:#e8f2e5!important;border-color:#8ca88a!important}
+.quiz-answers .answer{color:#202b35!important;background:#ffffff!important;border-color:#cbd5c8!important}
+.quiz-result{color:#374151!important}
