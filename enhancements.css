@@ -777,3 +777,18 @@ body.home-page main section.section.safety > div > small{
 body.home-page main section.section.safety h2{
   font-weight:800!important;
 }
+
+
+/* Fix ciblé : description sous le titre principal de l'accueil */
+body.home-page main .hero .heroIn > p{
+  color:#17212b!important;
+  background:transparent!important;
+  opacity:1!important;
+  text-shadow:none!important;
+  filter:none!important;
+  -webkit-text-fill-color:#17212b!important;
+  font-weight:500!important;
+}
+body.home-page main .hero .heroIn{
+  background:transparent!important;
+}
