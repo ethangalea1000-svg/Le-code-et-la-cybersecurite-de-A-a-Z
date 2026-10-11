@@ -28,6 +28,7 @@ AZ.renderProgression=function(){
 AZ.initSearch=function(){
  const box=document.querySelector("#searchBox"),out=document.querySelector("#searchResults"),filter=document.querySelector("#searchType"),status=document.querySelector("#searchStatus");
  if(!box||!out)return;
+ try{const params=new URLSearchParams(location.search);const initial=params.get("q");if(initial!==null)box.value=initial.slice(0,200)}catch(e){}
  const items=COURSES.map(c=>({name:c[1],type:"Cours",text:c[2],href:c[3]}));
  out.setAttribute("aria-live","polite");
  function render(){
