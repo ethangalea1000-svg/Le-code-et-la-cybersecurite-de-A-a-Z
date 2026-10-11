@@ -46,3 +46,22 @@ window.AZ=AZ;
 })();
 function syncGlobalNav(){const main=document.querySelector("main");if(main&&!main.id)main.id="mainContent";if(!document.querySelector(".skip-link")&&main){const skip=document.createElement("a");skip.className="skip-link";skip.href="#"+main.id;skip.textContent="Aller directement au contenu";document.body.insertBefore(skip,main)}const base="/Le-code-et-la-cybersecurite-de-A-a-Z/";const links=[["Accueil","index.html"],["Parcours","parcours.html"],["Cours","cours.html"],["Projets","projets.html"],["Quiz","quiz.html"],["Progression","progression.html"],["Recherche","recherche.html"],["Ressources","ressources.html"],["Examens","examens.html"],["Certificats","certificats.html"]];const h=document.querySelector("header");if(!h)return;let n=h.querySelector("nav");if(!n){n=document.createElement("nav");n.setAttribute("aria-label","Navigation principale");h.appendChild(n)}n.setAttribute("aria-label","Navigation principale");n.innerHTML=links.map(x=>'<a href="'+base+x[1]+'">'+x[0]+"</a>").join("");const current=location.pathname.split("/").pop()||"index.html";n.querySelectorAll("a").forEach(a=>{if(a.getAttribute("href").endsWith("/"+current)||a.getAttribute("href")===base+current)a.setAttribute("aria-current","page")});const b=h.querySelector(".brand")||h.querySelector("a");if(b){b.className="brand";b.href=base+"index.html";b.innerHTML="<span>&lt;/&gt;</span> LE CODE <b>&amp;</b> LA CYBERSÉCURITÉ";}}
 syncGlobalNav();
+
+/* Reprise personnalisée : une prochaine étape claire, sans pression ni compte à rebours. */
+(function(){
+ if(!document.querySelector(".hero")||!document.querySelector("#mainContent")||document.querySelector(".quick-start-card"))return;
+ const courses=[["01","HTML","cours/html.html"],["02","CSS","cours/css.html"],["03","JavaScript","cours/javascript.html"],["04","Python","cours/python.html"],["05","Git & GitHub","cours/git-github.html"],["06","SQL","cours/sql.html"],["07","Réseaux","cours/reseaux.html"],["08","Linux","cours/linux.html"],["09","Cybersécurité","cours/cybersecurite.html"],["10","Cryptographie","cours/cryptographie.html"],["11","Sécurité web","cours/securite-web.html"],["12","OSINT","cours/osint.html"],["13","Analyse d'incidents","cours/analyse-incidents.html"],["14","Projet final","cours/projet-final.html"]];
+ let saved={courses:{}};try{const v=JSON.parse(localStorage.getItem("azProgressV1")||"{}");if(v&&typeof v==="object")saved=v}catch(e){}
+ const vals=courses.map(c=>Math.max(0,Math.min(100,Number(saved.courses&&saved.courses[c[0]])||0)));
+ let idx=vals.findIndex(v=>v>0&&v<100);if(idx<0)idx=vals.findIndex(v=>v<100);
+ const done=idx<0,course=courses[Math.max(0,idx)],pct=done?100:vals[Math.max(0,idx)];
+ const section=document.createElement("section");section.className="progress-starter";section.setAttribute("aria-label","Prochaine étape conseillée");
+ const card=document.createElement("div");card.className="quick-start-card";const copy=document.createElement("div"),k=document.createElement("div"),h=document.createElement("h2"),p=document.createElement("p"),bar=document.createElement("div"),fill=document.createElement("span"),a=document.createElement("a");
+ k.className="quick-kicker";k.textContent=done?"PARCOURS ACCOMPLI":"TA PROCHAINE ÉTAPE";
+ h.textContent=done?"Tu as terminé le parcours de base.":pct>0?"Reprends "+course[1]+".":"Commence par "+course[1]+".";
+ p.textContent=done?"Passe aux quiz et aux projets pour consolider tes acquis.":pct>0?"Tu as déjà commencé : continue là où tu en es, à ton rythme.":"Une petite séance suffit pour lancer ta progression. Tu pourras reprendre plus tard.";
+ bar.className="quick-meter";bar.setAttribute("role","progressbar");bar.setAttribute("aria-label","Progression du cours "+course[1]);bar.setAttribute("aria-valuemin","0");bar.setAttribute("aria-valuemax","100");bar.setAttribute("aria-valuenow",String(pct));bar.setAttribute("aria-valuetext",pct+" % terminé");fill.style.width=pct+"%";bar.appendChild(fill);
+ a.className="btn";a.href=done?"quiz.html":course[2];a.textContent=done?"Faire un quiz →":pct>0?"Continuer le cours →":"Commencer le cours →";
+ copy.append(k,h,p);if(!done)copy.appendChild(bar);card.append(copy,a);section.appendChild(card);
+ const hero=document.querySelector(".hero");hero.parentNode.insertBefore(section,hero.nextSibling);
+})();
