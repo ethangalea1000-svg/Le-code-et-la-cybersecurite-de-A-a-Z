@@ -1,5 +1,5 @@
 const courses={"01":"html","02":"css","03":"javascript","04":"python","05":"git-github","06":"sql","07":"reseaux","08":"linux","09":"cybersecurite","10":"cryptographie","11":"securite-web","12":"osint","13":"analyse-incidents","14":"projet-final"};
-const q=new URLSearchParams(location.search),id=q.get("id")||"01",n=Math.max(1,Number(q.get("lesson")||1)),slug=courses[id]||"html";
+const q=new URLSearchParams(location.search);\n// Tolère aussi les liens mal formés où « &lesson=1 » a été inclus dans id.\nconst rawId=(q.get("id")||"01").split("&")[0];\nconst id=(rawId.match(/\\d+/)||["01"])[0].padStart(2,"0").slice(0,2);\nconst rawLesson=(q.get("lesson")||"1").split("&")[0];\nconst n=Math.max(1,Number(rawLesson)||1),slug=courses[id]||"html";
 function esc(v){return String(v).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 function getState(){try{return JSON.parse(localStorage.getItem("azProgressV1")||"{}")}catch(e){return {}}}
 function saveState(s){localStorage.setItem("azProgressV1",JSON.stringify(s))}
