@@ -46,3 +46,33 @@ button:disabled{opacity:.65;cursor:not-allowed}
 @media(max-width:900px){header{align-items:flex-start;flex-direction:column;gap:8px}header nav{max-width:100%;width:100%;justify-content:flex-start;gap:5px 13px}}
 @media(max-width:560px){.quick-start-card{grid-template-columns:1fr;padding:19px}.quick-start-card .btn{width:100%;text-align:center}.heroIn{padding-top:55px;padding-bottom:55px}.hero p{font-size:17px}.stats{gap:20px;flex-wrap:wrap}.stats b{font-size:22px}.section{padding-top:58px;padding-bottom:58px}.cards,.projects{gap:12px}.cards article,.projects article{padding:18px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+
+/* Accueil : centrage réel du contenu, sans modifier les autres pages */
+.home-page .hero{place-items:center;text-align:center}
+.home-page .heroIn{margin-inline:auto;text-align:center}
+.home-page .hero h1{margin-inline:auto}
+.home-page .hero p{max-width:720px;margin:0 auto;color:#c6d1dc}
+.home-page .path-actions{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:10px}
+.home-page .path-actions .btn{margin:18px 0 0}
+.home-page .stats{justify-content:center;align-items:flex-start;flex-wrap:wrap;gap:24px 48px}
+.home-page .stats b{text-align:center;min-width:100px}
+.home-page .section{text-align:center}
+.home-page .section>p{max-width:780px;margin:12px auto 0}
+.home-page .cards{align-items:stretch;text-align:center}
+.home-page .cards article{display:flex;flex-direction:column;align-items:center}
+.home-page .cards article p{max-width:34ch}
+.home-page .cards article .btn{margin-top:auto}
+.home-page .rules{grid-template-columns:repeat(3,minmax(0,1fr));max-width:900px;margin:28px auto 0}
+.home-page .rules span{display:flex;align-items:center;justify-content:center;text-align:center;min-height:64px}
+.home-page .safety{display:block;text-align:center}
+.home-page .safety>div{max-width:760px;margin-inline:auto}
+.home-page .safety p{max-width:680px;margin:12px auto 0;color:#c6d1dc}
+.home-page footer{justify-content:center;text-align:center;flex-wrap:wrap;gap:8px 24px}
+@media(max-width:760px){
+ .home-page .heroIn{padding:58px 20px}
+ .home-page .hero h1{font-size:clamp(38px,10vw,58px)}
+ .home-page .stats{gap:20px 28px;margin-top:36px}
+ .home-page .rules{grid-template-columns:1fr}
+ .home-page .rules span{min-height:48px}
+}
