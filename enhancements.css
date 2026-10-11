@@ -308,3 +308,91 @@ body.home-page main .section>small{
   font-weight:850!important;
   opacity:1!important;
 }
+
+
+/* FIX LISIBILITÉ ACCUEIL — couleurs explicites et contrastées, sans opacité */
+body.home-page main .section:not(.dark),
+body.home-page main .section.safety{
+  background:#f7f9f5!important;
+  color:#202b35!important;
+  opacity:1!important;
+}
+body.home-page main .section:not(.dark) h2,
+body.home-page main .section:not(.dark) h3,
+body.home-page main .section:not(.dark) h4,
+body.home-page main .section.safety h2{
+  color:#202b35!important;
+  opacity:1!important;
+}
+body.home-page main .section:not(.dark)>p,
+body.home-page main .section:not(.dark) p,
+body.home-page main .section:not(.dark) li,
+body.home-page main .section.safety p{
+  color:#374151!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+body.home-page main .section:not(.dark)>small,
+body.home-page main .section.safety>div>small{
+  color:#176b20!important;
+  opacity:1!important;
+  font-weight:850!important;
+}
+body.home-page main .section:not(.dark) .cards article,
+body.home-page main .section:not(.dark) .cards article h3{
+  background:#ffffff!important;
+  color:#202b35!important;
+  opacity:1!important;
+}
+body.home-page main .section:not(.dark) .cards article p{
+  color:#374151!important;
+  opacity:1!important;
+}
+body.home-page main .section.dark{
+  background:#070a0f!important;
+  color:#f7f9fc!important;
+  opacity:1!important;
+}
+body.home-page main .section.dark h2,
+body.home-page main .section.dark h3,
+body.home-page main .section.dark h4,
+body.home-page main .section.dark strong{
+  color:#ffffff!important;
+  opacity:1!important;
+}
+body.home-page main .section.dark>p,
+body.home-page main .section.dark p,
+body.home-page main .section.dark li{
+  color:#f1f5f9!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+body.home-page main .section.dark>small{
+  color:#7df4bd!important;
+  opacity:1!important;
+}
+body.home-page main .section.dark .rules span{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:58px;
+  padding:12px 16px;
+  background:#111b26!important;
+  color:#ffffff!important;
+  border:1px solid #526170!important;
+  border-radius:12px;
+  opacity:1!important;
+  font-weight:750;
+  text-shadow:none!important;
+}
+body.home-page main .section.dark .rules span::first-letter{
+  color:#63f5b7!important;
+}
+body.home-page footer{
+  background:#070a0f!important;
+  color:#f1f5f9!important;
+}
+body.home-page footer span{
+  color:#d5dee8!important;
+  opacity:1!important;
+}
