@@ -56,3 +56,12 @@
 @media(max-width:760px){.admin-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.admin-actions,.error-links{grid-template-columns:1fr}.admin-panel{padding:17px}.error-hero{padding:48px 0 60px}.error-search-row{flex-direction:column}.error-search .btn{width:100%}}
 @media(max-width:420px){.admin-grid{grid-template-columns:1fr}.admin-toolbar{align-items:flex-start}}
 @media(prefers-reduced-motion:reduce){.admin-action,.error-links a{transition:none}.admin-action:hover{transform:none}}
+
+
+/* AUDIT CONTRASTE — tableau technique et page 404 */
+.admin-page,.error-page{color:#f7f9fc}
+.admin-page p,.admin-page li,.admin-note,.admin-action span,.error-copy,.error-path,.error-links small{color:#c7d2dd}
+.admin-page h1,.admin-page h2,.admin-page h3,.error-hero h1{color:#f7f9fc}
+.admin-page input,.admin-page select,.admin-page textarea,.error-search input{color:#f7f9fc;background:#080e14;border:1px solid #8292a3}
+.admin-page input::placeholder,.error-search input::placeholder{color:#c3ced8;opacity:1}
+.admin-page a:focus-visible,.admin-page button:focus-visible,.error-page a:focus-visible,.error-page button:focus-visible{outline:3px solid #fff;outline-offset:3px}
