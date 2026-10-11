@@ -603,3 +603,129 @@ body:not(.course-page):not(.lesson-page) footer span{color:#374151!important;opa
 .quiz-score{color:#17451f!important;background:#e8f2e5!important;border-color:#8ca88a!important}
 .quiz-answers .answer{color:#202b35!important;background:#ffffff!important;border-color:#cbd5c8!important}
 .quiz-result{color:#374151!important}
+
+
+/* THEME DE LECTURE — texte foncé sur fonds clairs pour toutes les pages générales.
+   Les pages de cours conservent leur feuille de style dédiée. */
+body:not(.course-page):not(.lesson-page){
+  background:#f5f7f3!important;
+  color:#202b35!important;
+}
+body:not(.course-page):not(.lesson-page) main{
+  background:#f5f7f3!important;
+  color:#202b35!important;
+}
+body:not(.course-page):not(.lesson-page) main .hero,
+body:not(.course-page):not(.lesson-page) main section,
+body:not(.course-page):not(.lesson-page) main .section,
+body:not(.course-page):not(.lesson-page) main .section.dark,
+body:not(.course-page):not(.lesson-page) main .safety{
+  background-color:#f5f7f3!important;
+  background-image:none!important;
+  color:#202b35!important;
+  opacity:1!important;
+}
+body:not(.course-page):not(.lesson-page) main h1,
+body:not(.course-page):not(.lesson-page) main h2,
+body:not(.course-page):not(.lesson-page) main h3,
+body:not(.course-page):not(.lesson-page) main h4,
+body:not(.course-page):not(.lesson-page) main h5,
+body:not(.course-page):not(.lesson-page) main h6,
+body:not(.course-page):not(.lesson-page) main strong,
+body:not(.course-page):not(.lesson-page) main b,
+body:not(.course-page):not(.lesson-page) main .stats b{
+  color:#17212b!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+body:not(.course-page):not(.lesson-page) main p,
+body:not(.course-page):not(.lesson-page) main li,
+body:not(.course-page):not(.lesson-page) main label,
+body:not(.course-page):not(.lesson-page) main small,
+body:not(.course-page):not(.lesson-page) main summary,
+body:not(.course-page):not(.lesson-page) main figcaption,
+body:not(.course-page):not(.lesson-page) main .muted,
+body:not(.course-page):not(.lesson-page) main .stats small{
+  color:#374151!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+body:not(.course-page):not(.lesson-page) main em,
+body:not(.course-page):not(.lesson-page) main .tag,
+body:not(.course-page):not(.lesson-page) main .num,
+body:not(.course-page):not(.lesson-page) main .eyebrow{
+  color:#176b20!important;
+  opacity:1!important;
+}
+body:not(.course-page):not(.lesson-page) main article,
+body:not(.course-page):not(.lesson-page) main .card,
+body:not(.course-page):not(.lesson-page) main .panel,
+body:not(.course-page):not(.lesson-page) main .quiz,
+body:not(.course-page):not(.lesson-page) main .rules span,
+body:not(.course-page):not(.lesson-page) main .answer,
+body:not(.course-page):not(.lesson-page) main [class*="card"],
+body:not(.course-page):not(.lesson-page) main [class*="panel"]{
+  background:#ffffff!important;
+  color:#202b35!important;
+  border-color:#aab5c0!important;
+  opacity:1!important;
+  box-shadow:0 3px 14px #17212b0a;
+}
+body:not(.course-page):not(.lesson-page) main article h1,
+body:not(.course-page):not(.lesson-page) main article h2,
+body:not(.course-page):not(.lesson-page) main article h3,
+body:not(.course-page):not(.lesson-page) main article h4,
+body:not(.course-page):not(.lesson-page) main article p,
+body:not(.course-page):not(.lesson-page) main .card *,
+body:not(.course-page):not(.lesson-page) main .panel *,
+body:not(.course-page):not(.lesson-page) main .quiz *,
+body:not(.course-page):not(.lesson-page) main .rules span,
+body:not(.course-page):not(.lesson-page) main .answer{
+  color:#202b35!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+body:not(.course-page):not(.lesson-page) main a:not(.btn){
+  color:#174ea6!important;
+  opacity:1!important;
+  text-decoration-color:currentColor;
+}
+body:not(.course-page):not(.lesson-page) main .btn,
+body:not(.course-page):not(.lesson-page) main button{
+  color:#10251b!important;
+  background:#42e8a4!important;
+  border:1px solid #176b20!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+body:not(.course-page):not(.lesson-page) main .btn.ghost{
+  color:#17212b!important;
+  background:#e8edf4!important;
+  border:1px solid #697586!important;
+}
+body:not(.course-page):not(.lesson-page) main input,
+body:not(.course-page):not(.lesson-page) main select,
+body:not(.course-page):not(.lesson-page) main textarea{
+  background:#ffffff!important;
+  color:#17212b!important;
+  border:2px solid #697586!important;
+  opacity:1!important;
+}
+body:not(.course-page):not(.lesson-page) main input::placeholder,
+body:not(.course-page):not(.lesson-page) main textarea::placeholder{
+  color:#4b5563!important;
+  opacity:1!important;
+}
+body:not(.course-page):not(.lesson-page) footer{
+  background:#e9eee7!important;
+  color:#202b35!important;
+  border-top:1px solid #aab5a7!important;
+}
+body:not(.course-page):not(.lesson-page) footer *{
+  color:#374151!important;
+  opacity:1!important;
+}
+body:not(.course-page):not(.lesson-page) :focus-visible{
+  outline:3px solid #174ea6!important;
+  outline-offset:3px!important;
+}
