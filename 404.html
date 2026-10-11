@@ -1,1 +1,55 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>404 — Page introuvable</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="enhancements.css"></head><body><a class="skip-link" href="#mainContent">Aller directement au contenu</a><main id="mainContent"><section class="section" style="text-align:center"><small>ERREUR 404</small><h1>Cette page n'existe pas.</h1><p class="muted">Le lien est peut-être incorrect ou la page a été déplacée.</p><a class="btn" href="index.html">Retour à l'accueil</a> <a class="btn ghost" href="parcours.html">Voir le parcours</a></section></main></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Cette page est introuvable. Retrouve les cours, projets et ressources de la formation Le Code & la Cybersécurité de A à Z.">
+<meta name="robots" content="noindex,follow">
+<title>404 — Page introuvable | Le Code & la Cybersécurité</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="enhancements.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body class="error-page">
+<a class="skip-link" href="#mainContent">Aller directement au contenu</a>
+<header>
+<a class="brand" href="index.html"><span>&lt;/&gt;</span> LE CODE <b>&amp;</b> LA CYBERSÉCURITÉ</a>
+<nav aria-label="Navigation principale">
+<a href="parcours.html">Parcours</a><a href="cours.html">Cours</a><a href="projets.html">Projets</a><a href="quiz.html">Quiz</a><a href="progression.html">Progression</a>
+</nav>
+</header>
+<main id="mainContent">
+<section class="error-hero">
+<div class="error-code" aria-hidden="true">4<span>0</span>4</div>
+<p class="admin-eyebrow">ERREUR DE NAVIGATION · PAGE INTROUVABLE</p>
+<h1>Cette page s’est perdue dans le réseau.</h1>
+<p class="error-copy">Le lien est peut-être incomplet, la page a été déplacée ou l’adresse contient une faute de frappe. On peut te remettre sur la bonne voie.</p>
+<div class="error-actions">
+<a class="btn" href="index.html">Retour à l’accueil <span aria-hidden="true">↗</span></a>
+<a class="btn ghost" href="parcours.html">Reprendre le parcours</a>
+</div>
+<div class="error-search">
+<label for="errorSearch">Rechercher un cours ou une notion</label>
+<div class="error-search-row"><input id="errorSearch" type="search" autocomplete="off" placeholder="Ex. HTML, Python, réseaux…"><button class="btn" id="errorSearchBtn" type="button">Rechercher</button></div>
+<p id="errorSearchStatus" class="muted" aria-live="polite">Tu seras redirigé vers la recherche du site.</p>
+</div>
+<div class="error-links">
+<a href="cours.html"><span>01</span><strong>Tous les cours</strong><small>HTML, CSS, Python, cybersécurité…</small></a>
+<a href="quiz.html"><span>02</span><strong>S’entraîner</strong><small>Vérifier et consolider tes acquis</small></a>
+<a href="projets.html"><span>03</span><strong>Laboratoire de projets</strong><small>Passer de la théorie à la pratique</small></a>
+</div>
+<p class="error-path">Adresse demandée : <code id="requestedPath">chargement…</code></p>
+</section>
+</main>
+<footer>LE CODE &amp; LA CYBERSÉCURITÉ DE A À Z <span>Formation gratuite · GitHub Pages</span></footer>
+<script>
+(function(){
+ const path=document.getElementById("requestedPath");
+ if(path)path.textContent=location.pathname+location.search;
+ const input=document.getElementById("errorSearch"),button=document.getElementById("errorSearchBtn"),status=document.getElementById("errorSearchStatus");
+ function go(){const q=(input.value||"").trim();if(!q){status.textContent="Saisis un cours ou une notion pour lancer la recherche.";input.focus();return}location.href="recherche.html?q="+encodeURIComponent(q)}
+ button.addEventListener("click",go);input.addEventListener("keydown",function(e){if(e.key==="Enter")go()});
+})();
+</script>
+</body>
+</html>
