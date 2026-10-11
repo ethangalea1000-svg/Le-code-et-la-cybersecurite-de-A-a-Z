@@ -76,3 +76,12 @@ button:disabled{opacity:.65;cursor:not-allowed}
  .home-page .rules{grid-template-columns:1fr}
  .home-page .rules span{min-height:48px}
 }
+
+
+/* ACCUEIL — titre principal à contraste élevé */
+body.home-page .hero h1,
+body.home-page .hero h1 *{color:#ffffff!important;text-shadow:none!important;opacity:1!important}
+body.home-page .hero h1 em{color:#63f5b7!important;font-style:normal!important}
+body.home-page .heroIn>small{color:#7df4bd!important;opacity:1!important}
+body.home-page .hero p{color:#f1f5f9!important;opacity:1!important}
+body.home-page .hero{background-color:#070a0f!important}
