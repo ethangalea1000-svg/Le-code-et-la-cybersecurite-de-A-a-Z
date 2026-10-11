@@ -132,3 +132,16 @@ input::placeholder,textarea::placeholder{color:#596579;opacity:1}
 button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #312e81!important;outline-offset:3px!important}
 @media(prefers-contrast:more){body{background:#fff;color:#000}.card,.box,.hero{border-color:#444}.course-text,.lesson-step p,.crumb,footer{color:#111}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+
+/* AUDIT CONTRASTE — fiches de leçon */
+body{color:#172033;background:#f7f8fc}
+body p,body li,body label,body .crumb,body footer,body .course-text,body .lesson-step p,body .tutorial-intro,body .tutorial-list p,body .feedback{color:#253047}
+body small,body .eyebrow,body .step-label,body .box strong{color:#3427b5}
+body .card,body .box{border-color:#aeb8c9}
+body .box{background:#eef1f7;color:#172033}
+body input,body textarea,body select{color:#172033;background:#fff;border:1px solid #68758a}
+body input::placeholder,body textarea::placeholder{color:#4b566a;opacity:1}
+body button:disabled{color:#3e4859;background:#e5e9f0;opacity:1}
+body a:focus-visible,body button:focus-visible,body input:focus-visible,body textarea:focus-visible,body select:focus-visible{outline:3px solid #211a83!important;outline-offset:3px!important}
+@media(prefers-contrast:more){body,body main{color:#000;background:#fff}body p,body li,body .crumb,body footer{color:#111}.card,.box,.hero{border:2px solid #222}}
