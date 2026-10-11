@@ -241,3 +241,70 @@ body:not(.course-page):not(.lesson-page) .btn{opacity:1!important}
 body:not(.course-page):not(.lesson-page) :focus-visible{outline:3px solid #fff!important;outline-offset:3px!important}
 body:not(.course-page):not(.lesson-page) .hero p,
 body:not(.course-page):not(.lesson-page) .safety p{color:#e0e7ef!important}
+
+
+/* ACCUEIL — correction ciblée des conflits de contraste entre thème clair et sombre */
+body.home-page main .section:not(.dark){
+  background:#f7f9f5!important;
+  color:#202b35!important;
+}
+body.home-page main .section:not(.dark) h2,
+body.home-page main .section:not(.dark) h3,
+body.home-page main .section:not(.dark) h4{
+  color:#202b35!important;
+  opacity:1!important;
+}
+body.home-page main .section:not(.dark)>p,
+body.home-page main .section:not(.dark) p,
+body.home-page main .section:not(.dark) li{
+  color:#374151!important;
+  opacity:1!important;
+}
+body.home-page main .section:not(.dark) .cards article,
+body.home-page main .section:not(.dark) .cards article h3{
+  color:#202b35!important;
+}
+body.home-page main .section:not(.dark) .cards article p{
+  color:#374151!important;
+}
+body.home-page main .section.dark{
+  background:#070a0f!important;
+  color:#f7f9fc!important;
+}
+body.home-page main .section.dark h2,
+body.home-page main .section.dark h3,
+body.home-page main .section.dark strong{
+  color:#ffffff!important;
+  opacity:1!important;
+}
+body.home-page main .section.dark>p,
+body.home-page main .section.dark p,
+body.home-page main .section.dark li{
+  color:#f1f5f9!important;
+  opacity:1!important;
+}
+body.home-page main .section.dark .rules span{
+  background:#111b26!important;
+  color:#ffffff!important;
+  border:1px solid #526170!important;
+  opacity:1!important;
+}
+body.home-page main .section.dark .rules span::first-letter{
+  color:#63f5b7!important;
+}
+body.home-page main .section.safety{
+  background:#f7f9f5!important;
+  color:#202b35!important;
+}
+body.home-page main .section.safety h2{
+  color:#202b35!important;
+}
+body.home-page main .section.safety p{
+  color:#374151!important;
+  opacity:1!important;
+}
+body.home-page main .section>small{
+  color:#176b20!important;
+  font-weight:850!important;
+  opacity:1!important;
+}
