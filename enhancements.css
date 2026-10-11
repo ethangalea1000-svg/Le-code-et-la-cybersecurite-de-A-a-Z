@@ -729,3 +729,51 @@ body:not(.course-page):not(.lesson-page) :focus-visible{
   outline:3px solid #174ea6!important;
   outline-offset:3px!important;
 }
+
+
+/* FIX LISIBILITE CIBLE — sections STRUCTURE et CADRE SÛR (11/10/2026)
+   Couleurs opaques explicites : ne dépend pas des couleurs du thème précédent. */
+body.home-page main section.section.dark{
+  background:#f5f7f3!important;
+  background-image:none!important;
+  color:#17212b!important;
+}
+body.home-page main section.section.dark > small,
+body.home-page main section.section.dark > h2,
+body.home-page main section.section.dark > p,
+body.home-page main section.section.dark .muted{
+  color:#17212b!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+body.home-page main section.section.dark .rules span{
+  background:#ffffff!important;
+  color:#17212b!important;
+  border:2px solid #667085!important;
+  opacity:1!important;
+  text-shadow:none!important;
+  box-shadow:none!important;
+}
+body.home-page main section.section.dark .rules span *{
+  color:#17212b!important;
+  opacity:1!important;
+}
+body.home-page main section.section.safety{
+  background:#f5f7f3!important;
+  background-image:none!important;
+  color:#17212b!important;
+}
+body.home-page main section.section.safety > div,
+body.home-page main section.section.safety h2,
+body.home-page main section.section.safety p{
+  color:#17212b!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+body.home-page main section.section.safety > div > small{
+  color:#175c2c!important;
+  opacity:1!important;
+}
+body.home-page main section.section.safety h2{
+  font-weight:800!important;
+}
