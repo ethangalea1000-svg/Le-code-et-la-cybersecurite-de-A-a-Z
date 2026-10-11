@@ -203,3 +203,41 @@ body:not(.course-page):not(.lesson-page) .progress-track span{background:#55eab0
  body:not(.course-page):not(.lesson-page) main p,body:not(.course-page):not(.lesson-page) main li,body:not(.course-page):not(.lesson-page) main label{color:#fff!important}
  body:not(.course-page):not(.lesson-page) main article,body:not(.course-page):not(.lesson-page) main .card{border:2px solid #fff!important}
 }
+
+
+/* CORRECTION GLOBALE CONTRASTE — priorité aux textes lisibles */
+body:not(.course-page):not(.lesson-page),
+body:not(.course-page):not(.lesson-page) main{color:#f5f7fb!important}
+body:not(.course-page):not(.lesson-page) main p,
+body:not(.course-page):not(.lesson-page) main li,
+body:not(.course-page):not(.lesson-page) main label,
+body:not(.course-page):not(.lesson-page) main .muted,
+body:not(.course-page):not(.lesson-page) main small,
+body:not(.course-page):not(.lesson-page) main summary,
+body:not(.course-page):not(.lesson-page) main figcaption{color:#d5dee8!important;opacity:1!important}
+body:not(.course-page):not(.lesson-page) main h1,
+body:not(.course-page):not(.lesson-page) main h2,
+body:not(.course-page):not(.lesson-page) main h3,
+body:not(.course-page):not(.lesson-page) main h4,
+body:not(.course-page):not(.lesson-page) main strong,
+body:not(.course-page):not(.lesson-page) main b{color:#fff!important;opacity:1!important}
+body:not(.course-page):not(.lesson-page) main article,
+body:not(.course-page):not(.lesson-page) main section,
+body:not(.course-page):not(.lesson-page) main .card,
+body:not(.course-page):not(.lesson-page) main .panel,
+body:not(.course-page):not(.lesson-page) main [class*="card"],
+body:not(.course-page):not(.lesson-page) main [class*="panel"]{color:#f5f7fb}
+body:not(.course-page):not(.lesson-page) main a:not(.btn){color:#8fc5ff!important}
+body:not(.course-page):not(.lesson-page) main .tag,
+body:not(.course-page):not(.lesson-page) main .badge,
+body:not(.course-page):not(.lesson-page) main .pill{color:#172033!important;background:#e8edf4!important;border-color:#aab7c7!important}
+body:not(.course-page):not(.lesson-page) main input,
+body:not(.course-page):not(.lesson-page) main select,
+body:not(.course-page):not(.lesson-page) main textarea{background:#fff!important;color:#172033!important;border:2px solid #8997a8!important}
+body:not(.course-page):not(.lesson-page) main input::placeholder,
+body:not(.course-page):not(.lesson-page) main textarea::placeholder{color:#4b5563!important;opacity:1!important}
+body:not(.course-page):not(.lesson-page) button,
+body:not(.course-page):not(.lesson-page) .btn{opacity:1!important}
+body:not(.course-page):not(.lesson-page) :focus-visible{outline:3px solid #fff!important;outline-offset:3px!important}
+body:not(.course-page):not(.lesson-page) .hero p,
+body:not(.course-page):not(.lesson-page) .safety p{color:#e0e7ef!important}
