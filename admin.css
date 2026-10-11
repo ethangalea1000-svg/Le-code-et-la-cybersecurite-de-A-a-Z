@@ -65,3 +65,25 @@
 .admin-page input,.admin-page select,.admin-page textarea,.error-search input{color:#f7f9fc;background:#080e14;border:1px solid #8292a3}
 .admin-page input::placeholder,.error-search input::placeholder{color:#c3ced8;opacity:1}
 .admin-page a:focus-visible,.admin-page button:focus-visible,.error-page a:focus-visible,.error-page button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+
+
+/* CONTRASTE FINAL — page 404 et administration */
+body.error-page,body.admin-page{background:#070a0f!important;color:#f7f9fc!important}
+body.error-page header,body.admin-page header{background:#070a0f!important;color:#f7f9fc!important}
+body.error-page main,body.admin-page main{color:#f7f9fc!important}
+body.error-page main p,body.error-page main li,body.error-page .error-copy,
+body.error-page .error-path,body.error-page .error-links small,
+body.admin-page main p,body.admin-page main li,body.admin-page .admin-note{color:#d7e0e9!important;opacity:1!important}
+body.error-page h1,body.error-page h2,body.error-page h3,
+body.admin-page h1,body.admin-page h2,body.admin-page h3{color:#fff!important}
+body.error-page .error-search,body.error-page .error-links a,
+body.admin-page .admin-panel,body.admin-page .admin-action{background:#111b26!important;color:#f7f9fc!important;border:1px solid #657487!important}
+body.error-page .error-links a,body.error-page .error-links a:visited,
+body.admin-page a{color:#a8d2ff!important}
+body.error-page .error-links a>span,body.error-page .error-code span{color:#66efb4!important}
+body.error-page .error-search label,body.admin-page label{color:#fff!important}
+body.error-page input,body.admin-page input,body.admin-page select,body.admin-page textarea{background:#fff!important;color:#172033!important;border:2px solid #8997a8!important}
+body.error-page input::placeholder,body.admin-page input::placeholder{color:#4b5563!important;opacity:1!important}
+body.error-page .btn,body.admin-page .btn{background:#087d5b!important;color:#fff!important;border:2px solid #087d5b!important}
+body.error-page .btn.ghost{background:#fff!important;color:#172033!important;border:2px solid #8997a8!important}
+body.error-page :focus-visible,body.admin-page :focus-visible{outline:3px solid #fff!important;outline-offset:3px!important}
