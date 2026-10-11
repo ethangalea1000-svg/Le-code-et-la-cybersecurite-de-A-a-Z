@@ -68,7 +68,7 @@ function initCode(starter){
  const editor=document.querySelector("#lessonCode"),preview=document.querySelector("#lessonPreview"),run=document.querySelector("#runLessonCode"),reset=document.querySelector("#resetLessonCode"),status=document.querySelector("#codeFeedback");
  function execute(notifyMentor=true){
    const code=editor.value;
-   if(id==="01"||id==="02"||id==="11"){preview.srcdoc=code;status.textContent="Aperçu mis à jour.";if(notifyMentor&&window.Mentor&&window.Mentor.onCode)window.Mentor.onCode()}
+   if(id==="02"){preview.srcdoc="<!doctype html><html lang='fr'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><style>"+code+"</style></head><body><h1>Mon aperçu CSS</h1><p>Modifie le CSS pour changer cette page.</p><button>Un bouton de démonstration</button></body></html>";status.textContent="Aperçu CSS mis à jour."}else if(id==="01"||id==="11"){preview.srcdoc=code;status.textContent="Aperçu HTML mis à jour."}else{preview.srcdoc="<pre style='font:15px system-ui;padding:20px;white-space:pre-wrap'>"+esc(code)+"</pre>";status.textContent="Code affiché dans le laboratoire."}if(notifyMentor&&window.Mentor&&window.Mentor.onCode)window.Mentor.onCode()
    else{preview.srcdoc="<pre style='font:15px system-ui;padding:20px;white-space:pre-wrap'>"+esc(code)+"</pre>";status.textContent="Code envoyé au laboratoire.";if(window.Mentor&&window.Mentor.onCode)window.Mentor.onCode()}
    addXP(5);
  }
