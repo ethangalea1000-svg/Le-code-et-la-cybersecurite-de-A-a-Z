@@ -122,3 +122,23 @@ body input::placeholder,body textarea::placeholder{color:#4b566a;opacity:1}
 body button:disabled{color:#3e4859;background:#e5e9f0;opacity:1}
 body a:focus-visible,body button:focus-visible,body input:focus-visible,body select:focus-visible,body textarea:focus-visible{outline:3px solid #211a83!important;outline-offset:3px!important}
 @media(prefers-contrast:more){body,body main{color:#000;background:#fff}body p,body li,body .muted{color:#111}.lesson-card,.exercise,.level-check,.course-content{border:2px solid #222}}
+
+
+/* CONTRASTE FINAL — cours */
+html body{background:#fff!important;color:#111827!important}
+html body p,html body li,html body label,html body .muted,html body small,
+html body .subtitle,html body .description,html body .crumb,
+html body .hero p,html body .level-head p,html body .lesson-body p,
+html body .course-content>p,html body .level-check p,html body .exercise p{color:#374151!important;opacity:1!important}
+html body h1,html body h2,html body h3,html body h4,
+html body strong,html body b{color:#111827!important;opacity:1!important}
+html body .lesson-card,html body .exercise,html body .level-check,
+html body .project-lab,html body .playground,html body .course-content,
+html body .quiz-card,html body .quiz-filter-panel{background:#fff!important;color:#111827!important;border:1px solid #9ca3af!important}
+html body .pill,html body .badge,html body .tag{background:#f3f4f6!important;color:#111827!important;border:1px solid #9ca3af!important}
+html body input,html body select,html body textarea{background:#fff!important;color:#111827!important;border:2px solid #6b7280!important}
+html body input::placeholder,html body textarea::placeholder{color:#4b5563!important;opacity:1!important}
+html body a:not(.btn){color:#1d4ed8!important}
+html body .btn,html body button{color:#fff!important;background:#3730a3!important;border-color:#3730a3!important;opacity:1!important}
+html body button:disabled{color:#374151!important;background:#e5e7eb!important;border-color:#9ca3af!important}
+html body :focus-visible{outline:3px solid #111827!important;outline-offset:3px!important}
