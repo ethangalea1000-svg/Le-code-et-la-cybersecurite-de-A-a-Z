@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Explore 39 ressources open source de la collection GitHub Learn to Code, classées par parcours, projets, algorithmes et outils.">
+<link rel="canonical" href="https://ethangalea1000-svg.github.io/Le-code-et-la-cybersecurite-de-A-a-Z/bibliotheque.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Le Code &amp; la Cybersécurité de A à Z">
+<meta property="og:title" content="Bibliothèque open source pour apprendre à coder">
+<meta property="og:description" content="39 dépôts GitHub utiles, classés et expliqués en français.">
+<meta property="og:url" content="https://ethangalea1000-svg.github.io/Le-code-et-la-cybersecurite-de-A-a-Z/bibliotheque.html">
+<title>Bibliothèque open source | Le Code &amp; la Cybersécurité de A à Z</title>
+<link rel="stylesheet" href="style.css?v=20261015-bibliotheque">
+<link rel="stylesheet" href="enhancements.css?v=20261015-bibliotheque">
+<style>
+.library-hero{padding:48px 0 26px}.library-hero h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.08;max-width:850px}.library-hero p{max-width:780px;color:#d0dae5}.library-meta{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}.library-meta span{padding:7px 11px;border:1px solid #35485b;border-radius:99px;color:#eaf3fb;background:#111c28;font-size:13px}.library-controls{display:grid;grid-template-columns:minmax(220px,1fr) minmax(190px,260px);gap:12px;margin:22px 0}.library-controls input,.library-controls select{width:100%;padding:13px;border-radius:10px;border:1px solid #43566b;background:#0e141c;color:#f2f6fb;font:inherit}.library-count{color:#c4d0dd;font-size:14px;margin-bottom:14px}.library-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.library-card{min-width:0;display:flex;flex-direction:column;gap:10px;padding:18px;border:1px solid #2c3c4e;border-radius:15px;background:#0e151e}.library-card h2{font-size:17px;line-height:1.35;margin:0;color:#f7faff;overflow-wrap:anywhere}.library-card p{margin:0;color:#cad5e0;font-size:14px;line-height:1.6}.library-card .repo{font:12px ui-monospace,monospace;color:#a8d9ff;overflow-wrap:anywhere}.library-card .tags{display:flex;gap:6px;flex-wrap:wrap}.library-card .tags span{font-size:11px;border:1px solid #3a4c5e;border-radius:99px;padding:4px 7px;color:#d5e0ea}.library-card a{margin-top:auto;align-self:flex-start}.library-note{padding:16px 18px;border-left:3px solid #42e8a4;background:#101923;color:#d7e1eb;line-height:1.65;margin:22px 0}.empty-state{padding:24px;border:1px dashed #43566b;border-radius:12px;color:#d2dce7}.library-card[hidden]{display:none!important}@media(max-width:900px){.library-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:620px){.library-grid,.library-controls{grid-template-columns:1fr}.library-hero{padding-top:28px}}
+</style>
+</head>
+<body>
+<header><a class="brand" href="index.html"><span>&lt;/&gt;</span> LE CODE <b>&amp;</b> LA CYBERSÉCURITÉ</a><button id="menuBtn" type="button" aria-label="Ouvrir le menu">☰</button><nav id="nav" aria-label="Navigation principale"><a href="parcours.html">Parcours</a><a href="cours.html">Cours</a><a href="projets.html">Projets</a><a href="quiz.html">Quiz</a><a href="progression.html">Progression</a><a href="atelier.html">Atelier</a><a href="bibliotheque.html" aria-current="page">Bibliothèque</a></nav></header>
+<a class="skip-link" href="#mainContent">Aller directement au contenu</a>
+<main id="mainContent">
+<section class="section library-hero"><small>VEILLE OPEN SOURCE</small><h1>Une bibliothèque pour aller <em>plus loin</em>.</h1><p>La collection GitHub « Learn to Code » réunit des cursus, des exercices, des projets et des références. Ici, les 39 dépôts sont classés et expliqués en français pour trouver rapidement la ressource adaptée à ton niveau.</p><div class="library-meta"><span>39 dépôts indexés</span><span>Recherche instantanée</span><span>Ressources gratuites ou open source selon leurs conditions</span></div><div class="library-note"><strong>Important :</strong> cette bibliothèque référence les projets d’origine ; elle ne copie pas leurs cours ni leur code. Les licences et conditions d’utilisation varient selon les dépôts. Lis celles du projet avant de réutiliser du contenu.</div></section>
+<section class="section"><h2>Explorer les ressources</h2><div class="library-controls"><input id="librarySearch" type="search" placeholder="Rechercher : Python, projets, algorithmes…" aria-label="Rechercher dans la bibliothèque"><select id="libraryCategory" aria-label="Filtrer par catégorie"><option value="all">Toutes les catégories</option><option value="curriculum">Cursus et guides</option><option value="practice">Exercices et algorithmes</option><option value="projects">Projets pratiques</option><option value="roadmap">Roadmaps et méthodes</option><option value="reference">Références et outils</option><option value="community">Listes et communautés</option></select></div><p id="libraryCount" class="library-count" aria-live="polite">39 ressources</p><div id="libraryGrid" class="library-grid"></div><p id="libraryEmpty" class="empty-state" hidden>Aucune ressource ne correspond. Essaie un autre mot ou une autre catégorie.</p></section>
+</main>
+<footer>LE CODE &amp; LA CYBERSÉCURITÉ DE A À Z <span>Bibliothèque de ressources externes • Les projets restent la propriété de leurs auteurs</span></footer>
+<script>
+const resources=[
+["Chalarangelo/30-seconds-of-code","Fiches courtes de code","reference","JavaScript","Des explications rapides et des exemples compacts pour découvrir des méthodes et idiomes de programmation."],
+["railsgirls/guides.railsgirls.com","Guides Rails Girls","curriculum","Ruby · Web","Guides d’initiation et supports d’ateliers pour commencer à développer des applications web."],
+["railsbridge/docs","Supports RailsBridge","curriculum","Ruby · Ateliers","Supports pédagogiques conçus pour accompagner des ateliers d’apprentissage du développement."],
+["freeCodeCamp/freeCodeCamp","Cursus interactif complet","curriculum","HTML · CSS · JS · Python","Cursus structuré avec défis interactifs, ateliers, projets et évaluations. Une référence pour apprendre en pratiquant."],
+["leachim6/hello-world","Hello World dans de nombreux langages","practice","Langages","Compare la toute première instruction de nombreux langages et découvre leur syntaxe."],
+["datasciencemasters/go","Open Source Data Science Masters","curriculum","Data science","Parcours de ressources pour progresser en science des données et découvrir les outils du domaine."],
+["practical-tutorials/project-based-learning","Apprendre par des projets","projects","Multi-langages","Collection de tutoriels qui font construire des projets concrets plutôt que d’enchaîner uniquement la théorie."],
+["zhiwehu/Python-programming-exercises","Exercices Python","practice","Python","Série d’exercices pour s’entraîner à écrire, lire et corriger du code Python."],
+["MunGell/awesome-for-beginners","Projets adaptés aux débutants","community","Open source","Liste de projets open source signalés comme accessibles aux personnes qui commencent à contribuer."],
+["appacademy/welcome-to-open","App Academy Open","curriculum","Web · Full stack","Ressources de formation au développement web organisées pour un apprentissage progressif."],
+["lostdesign/webgems","Sélection de ressources web","reference","Web · Design","Répertoire de ressources utiles aux développeurs et designers web."],
+["nilbuild/developer-roadmap","Roadmaps développeur","roadmap","Carrière · Compétences","Repères pour visualiser les compétences et sujets à étudier selon une spécialité technique."],
+["AMAI-GmbH/AI-Expert-Roadmap","Roadmap IA","roadmap","Intelligence artificielle","Parcours thématique pour cartographier les sujets liés à l’intelligence artificielle."],
+["trekhleb/javascript-algorithms","Algorithmes en JavaScript","practice","JavaScript · Algorithmique","Implémentations commentées d’algorithmes et de structures de données, utiles pour comprendre la logique."],
+["microsoft/Web-Dev-For-Beginners","Cursus web en 24 leçons","curriculum","HTML · CSS · JavaScript","Programme structuré autour de leçons, quiz et projets pratiques pour découvrir le développement web."],
+["karan/Projects","Idées de projets de programmation","projects","Multi-langages","Catalogue d’idées pour transformer une notion en projet personnel à construire."],
+["sindresorhus/awesome","Listes de ressources sélectionnées","community","Multi-domaines","Répertoire de listes thématiques maintenues par la communauté open source."],
+["donnemartin/system-design-primer","Bases du system design","curriculum","Architecture","Explications et supports de révision pour comprendre la conception de systèmes logiciels."],
+["codecrafters-io/build-your-own-x","Recréer des outils pour apprendre","projects","Systèmes · Langages","Idées de projets qui consistent à reconstruire des composants connus pour comprendre leur fonctionnement."],
+["public-apis/public-apis","Catalogue d’API publiques","reference","API · Données","Répertoire d’API qui peuvent servir de données ou de services dans des projets d’apprentissage."],
+["EbookFoundation/free-programming-books","Livres de programmation gratuits","reference","Livres · Multi-langages","Bibliothèque communautaire de livres et ressources d’apprentissage gratuits, selon leurs licences respectives."],
+["amitness/learning","Ressources d’apprentissage","reference","Développement","Sélection de liens et ressources pour approfondir différentes compétences techniques."],
+["mhinz/vim-galore","Apprendre Vim","curriculum","Terminal · Éditeur","Guide pour comprendre l’éditeur Vim, ses commandes et son fonctionnement."],
+["tayllan/awesome-algorithms","Ressources d’algorithmique","reference","Algorithmes","Sélection de ressources pour étudier les algorithmes et les structures de données."],
+["karlhorky/learn-to-program","Apprendre à programmer","curriculum","Débutant","Ressources destinées aux personnes qui souhaitent commencer à programmer."],
+["therebelrobot/awesome-workshopper","Ateliers interactifs","community","Apprentissage pratique","Ressources et projets au format atelier pour apprendre en réalisant des exercices guidés."],
+["jlevy/the-art-of-command-line","Maîtriser la ligne de commande","reference","Terminal · Shell","Guide de commandes et de pratiques utiles pour travailler plus efficacement dans un terminal."],
+["papers-we-love/papers-we-love","Articles de recherche en informatique","reference","Recherche · Informatique","Communauté et collection d’articles pour explorer les idées fondatrices de l’informatique."],
+["awesome-selfhosted/awesome-selfhosted","Logiciels auto-hébergés","reference","Infrastructure","Catalogue de logiciels libres que l’on peut héberger soi-même, à étudier selon son niveau."],
+["ripienaar/free-for-dev","Services gratuits pour développeurs","reference","Outils · Hébergement","Liste de services proposant une offre gratuite ; les conditions peuvent changer, il faut les vérifier."],
+["realworld-apps/realworld","Applications réalistes","projects","Full stack","Référence autour d’applications qui illustrent des modèles courants de développement web."],
+["thedaviddias/Front-End-Checklist","Checklist front-end","reference","Web · Qualité","Liste de vérifications pour améliorer la qualité, la compatibilité et la finition d’un site web."],
+["gustavofreze/kotlin4noobs","Kotlin pour débutants","curriculum","Kotlin","Ressources d’introduction au langage Kotlin."],
+["hexlet-basics/hexlet-basics","Bases de la programmation","curriculum","Programmation","Cursus de notions fondamentales pour apprendre progressivement les concepts de programmation."],
+["hexlet-codebattle/codebattle","Défis de programmation","practice","Logique · Code","Environnement de défis où l’on pratique la résolution de problèmes par le code."],
+["Hexlet/hexletguides.github.io","Guides de développement","curriculum","Développement","Guides pratiques autour des outils et des habitudes de développement."],
+["aykutkardas/regexlearn.com","Apprendre et tester les expressions régulières","practice","Regex","Exercices progressifs, aide-mémoire et bac à sable pour tester des expressions régulières localement."],
+["olexale/flutter_roadmap","Roadmap Flutter","roadmap","Flutter · Mobile","Repères pour découvrir les thèmes importants du développement mobile avec Flutter."],
+["TheOdinProject/curriculum","Cursus web orienté projets","curriculum","Web · Full stack","Parcours organisé en cours et projets, avec de la pratique pour consolider chaque étape."]
+];
+const grid=document.getElementById("libraryGrid"),search=document.getElementById("librarySearch"),category=document.getElementById("libraryCategory"),count=document.getElementById("libraryCount"),empty=document.getElementById("libraryEmpty");
+const labels={curriculum:"Cursus et guides",practice:"Exercices et algorithmes",projects:"Projets pratiques",roadmap:"Roadmaps et méthodes",reference:"Références et outils",community:"Listes et communautés"};
+function render(){const q=search.value.trim().toLowerCase(),cat=category.value;grid.innerHTML="";let shown=0;resources.forEach(([repo,title,type,tags,description])=>{if(cat!=="all"&&cat!==type)return;if(q&&!([repo,title,type,tags,description].join(" ").toLowerCase().includes(q)))return;shown++;const card=document.createElement("article");card.className="library-card";const h=document.createElement("h2");h.textContent=title;const p=document.createElement("p");p.textContent=description;const r=document.createElement("p");r.className="repo";r.textContent=repo;const tagbox=document.createElement("div");tagbox.className="tags";[labels[type],...tags.split(" · ")].forEach(t=>{const s=document.createElement("span");s.textContent=t;tagbox.appendChild(s)});const a=document.createElement("a");a.className="btn";a.href="https://github.com/"+repo;a.target="_blank";a.rel="noopener noreferrer";a.textContent="Voir le dépôt →";card.append(h,r,p,tagbox,a);grid.appendChild(card)});count.textContent=shown+" ressource"+(shown>1?"s":"")+" sur "+resources.length;empty.hidden=shown!==0}
+search.addEventListener("input",render);category.addEventListener("change",render);const menu=document.getElementById("menuBtn"),nav=document.getElementById("nav");if(menu&&nav)menu.addEventListener("click",()=>nav.classList.toggle("open"));render();
+</script>
+</body>
+</html>
