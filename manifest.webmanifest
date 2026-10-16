@@ -1,0 +1,19 @@
+{
+  "name": "Le Code & la Cybersécurité de A à Z",
+  "short_name": "Code & Cyber",
+  "description": "Cours gratuits de programmation et de cybersécurité, exercices et projets.",
+  "lang": "fr-FR",
+  "start_url": "/Le-code-et-la-cybersecurite-de-A-a-Z/index.html",
+  "scope": "/Le-code-et-la-cybersecurite-de-A-a-Z/",
+  "display": "standalone",
+  "background_color": "#070a0f",
+  "theme_color": "#101923",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
