@@ -44,7 +44,7 @@ AZ.initSearch=function(){
 };
 window.AZ=AZ;
 })();
-function syncGlobalNav(){const main=document.querySelector("main");if(main&&!main.id)main.id="mainContent";if(!document.querySelector(".skip-link")&&main){const skip=document.createElement("a");skip.className="skip-link";skip.href="#"+main.id;skip.textContent="Aller directement au contenu";document.body.insertBefore(skip,main)}const base="/Le-code-et-la-cybersecurite-de-A-a-Z/";const links=[["Accueil","index.html"],["Parcours","parcours.html"],["Cours","cours.html"],["Projets","projets.html"],["Quiz","quiz.html"],["Exercices","exercices.html"],["Progression","progression.html"],["Atelier","atelier.html"],["Bibliothèque","bibliotheque.html"],["Recherche","recherche.html"],["Ressources","ressources.html"],["Examens","examens.html"],["Certificats","certificats.html"],["Python & SQL","laboratoire-python-sql.html"],["Donner un avis","retour.html"]];const h=document.querySelector("header");if(!h)return;let n=h.querySelector("nav");if(!n){n=document.createElement("nav");n.setAttribute("aria-label","Navigation principale");h.appendChild(n)}n.setAttribute("aria-label","Navigation principale");n.innerHTML=links.map(x=>'<a href="'+base+x[1]+'">'+x[0]+"</a>").join("");const current=location.pathname.split("/").pop()||"index.html";n.querySelectorAll("a").forEach(a=>{if(a.getAttribute("href").endsWith("/"+current)||a.getAttribute("href")===base+current)a.setAttribute("aria-current","page")});const b=h.querySelector(".brand")||h.querySelector("a");if(b){b.className="brand";b.href=base+"index.html";b.innerHTML="<span>&lt;/&gt;</span> LE CODE <b>&amp;</b> LA CYBERSÉCURITÉ";}}
+function syncGlobalNav(){const main=document.querySelector("main");if(main&&!main.id)main.id="mainContent";if(!document.querySelector(".skip-link")&&main){const skip=document.createElement("a");skip.className="skip-link";skip.href="#"+main.id;skip.textContent="Aller directement au contenu";document.body.insertBefore(skip,main)}const base="/Le-code-et-la-cybersecurite-de-A-a-Z/";const links=[["Accueil","index.html"],["Parcours","parcours.html"],["Cours","cours.html"],["Projets","projets.html"],["Quiz","quiz.html"],["Exercices","exercices.html"],["Challenges","exercices.html#guidedChallengeLab"],["Progression","progression.html"],["Atelier","atelier.html"],["Bibliothèque","bibliotheque.html"],["Recherche","recherche.html"],["Ressources","ressources.html"],["Examens","examens.html"],["Certificats","certificats.html"],["Python & SQL","laboratoire-python-sql.html"],["Donner un avis","retour.html"]];const h=document.querySelector("header");if(!h)return;let n=h.querySelector("nav");if(!n){n=document.createElement("nav");n.setAttribute("aria-label","Navigation principale");h.appendChild(n)}n.setAttribute("aria-label","Navigation principale");n.innerHTML=links.map(x=>'<a href="'+base+x[1]+'">'+x[0]+"</a>").join("");const current=location.pathname.split("/").pop()||"index.html";n.querySelectorAll("a").forEach(a=>{if(a.getAttribute("href").endsWith("/"+current)||a.getAttribute("href")===base+current)a.setAttribute("aria-current","page")});const b=h.querySelector(".brand")||h.querySelector("a");if(b){b.className="brand";b.href=base+"index.html";b.innerHTML="<span>&lt;/&gt;</span> LE CODE <b>&amp;</b> LA CYBERSÉCURITÉ";}}
 syncGlobalNav();
 
 /* Reprise personnalisée : une prochaine étape claire, sans pression ni compte à rebours. */
@@ -96,6 +96,15 @@ syncGlobalNav();
   if (!document.querySelector(".project-directory")) return;
   const script = document.createElement("script");
   script.src = "/Le-code-et-la-cybersecurite-de-A-a-Z/learning-focus.js";
+  script.defer = true;
+  document.head.appendChild(script);
+})();
+
+/* Challenges guidés : chargés uniquement sur la page des exercices. */
+(function(){
+  if (!document.querySelector('#exerciseChoices')) return;
+  const script = document.createElement('script');
+  script.src = '/Le-code-et-la-cybersecurite-de-A-a-Z/guided-challenges.js';
   script.defer = true;
   document.head.appendChild(script);
 })();
