@@ -37,3 +37,21 @@ document.querySelector("#courseTitle").textContent=meta.title;
 const p=document.createElement("script");p.src="project-curriculum.js";p.onload=function(){const s=document.createElement("script");s.src=meta.file;s.onload=function(){render(window.courseData?.[id]||{})};document.body.appendChild(s)};document.body.appendChild(p);
 function syncGlobalNav(){const base="/Le-code-et-la-cybersecurite-de-A-a-Z/";const links=[["Accueil","index.html"],["Parcours","parcours.html"],["Cours","cours.html"],["Projets","projets.html"],["Quiz","quiz.html"],["Exercices","exercices.html"],["Progression","progression.html"],["Atelier","atelier.html"],["Bibliothèque","bibliotheque.html"],["Recherche","recherche.html"],["Ressources","ressources.html"],["Examens","examens.html"],["Certificats","certificats.html"]];const h=document.querySelector("header");if(!h)return;let n=h.querySelector("nav");if(!n){n=document.createElement("nav");n.setAttribute("aria-label","Navigation principale");h.appendChild(n)}n.setAttribute("aria-label","Navigation principale");n.innerHTML=links.map(x=>'<a href="'+base+x[1]+'">'+x[0]+"</a>").join("");const current=location.pathname.split("/").pop()||"index.html";n.querySelectorAll("a").forEach(a=>{if(a.getAttribute("href").endsWith("/"+current)||a.getAttribute("href")===base+current)a.setAttribute("aria-current","page")});const b=h.querySelector(".brand")||h.querySelector("a");if(b){b.className="brand";b.href=base+"index.html";b.innerHTML="<span>&lt;/&gt;</span> LE CODE <b>&amp;</b> LA CYBERSÉCURITÉ";}}
 syncGlobalNav();
+
+/* PWA également disponible lorsqu'un cours est ouvert directement. */
+(function(){
+  const base="/Le-code-et-la-cybersecurite-de-A-a-Z/";
+  if(!document.querySelector('link[rel="manifest"]')){
+    const link=document.createElement("link");
+    link.rel="manifest";
+    link.href="../manifest.webmanifest";
+    document.head.appendChild(link);
+  }
+  if("serviceWorker" in navigator && location.protocol==="https:" && location.pathname.startsWith(base)){
+    window.addEventListener("load",function(){
+      navigator.serviceWorker.register(base+"sw.js",{scope:base}).catch(function(error){
+        console.warn("Le mode hors ligne n’a pas pu être activé.",error);
+      });
+    },{once:true});
+  }
+})();
