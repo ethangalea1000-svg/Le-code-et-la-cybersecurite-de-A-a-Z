@@ -65,3 +65,27 @@ syncGlobalNav();
  copy.append(k,h,p);if(!done)copy.appendChild(bar);card.append(copy,a);section.appendChild(card);
  const hero=document.querySelector(".hero");hero.parentNode.insertBefore(section,hero.nextSibling);
 })();
+
+/* PWA : installation facultative et cache hors ligne limité à ce site. */
+(function(){
+  const base = "/Le-code-et-la-cybersecurite-de-A-a-Z/";
+  if (!document.querySelector('link[rel="manifest"]')) {
+    const manifest = document.createElement("link");
+    manifest.rel = "manifest";
+    manifest.href = base + "manifest.webmanifest";
+    document.head.appendChild(manifest);
+  }
+  if (!document.querySelector('meta[name="theme-color"]')) {
+    const theme = document.createElement("meta");
+    theme.name = "theme-color";
+    theme.content = "#101923";
+    document.head.appendChild(theme);
+  }
+  if ("serviceWorker" in navigator && location.protocol === "https:" && location.pathname.startsWith(base)) {
+    window.addEventListener("load", function(){
+      navigator.serviceWorker.register(base + "sw.js", {scope: base}).catch(function(error){
+        console.warn("Le mode hors ligne n’a pas pu être activé.", error);
+      });
+    }, {once:true});
+  }
+})();
