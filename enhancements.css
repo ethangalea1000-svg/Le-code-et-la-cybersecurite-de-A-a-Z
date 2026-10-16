@@ -779,16 +779,33 @@ body.home-page main section.section.safety h2{
 }
 
 
-/* Fix ciblé : description sous le titre principal de l'accueil */
+/* Accueil : contraste de la proposition de valeur sur le fond sombre du hero */
 body.home-page main .hero .heroIn > p{
-  color:#17212b!important;
+  color:#f1f5f9!important;
   background:transparent!important;
   opacity:1!important;
   text-shadow:none!important;
   filter:none!important;
-  -webkit-text-fill-color:#17212b!important;
+  -webkit-text-fill-color:#f1f5f9!important;
+  font-size:clamp(17px,2vw,20px)!important;
+  line-height:1.65!important;
   font-weight:500!important;
+  max-width:680px!important;
 }
 body.home-page main .hero .heroIn{
   background:transparent!important;
+}
+body.home-page main .hero .path-actions .btn{
+  min-height:48px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+body.home-page main .hero .path-actions .btn.ghost{
+  border-color:#8b9aaa!important;
+  color:#f1f5f9!important;
+}
+body.home-page main .hero .path-actions .btn:focus-visible{
+  outline:3px solid #ffffff!important;
+  outline-offset:4px!important;
 }
