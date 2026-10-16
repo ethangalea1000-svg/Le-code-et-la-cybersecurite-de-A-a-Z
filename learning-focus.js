@@ -100,7 +100,7 @@
     startButton.disabled = running && !paused;
     startButton.textContent = running && paused ? "Reprendre" : running ? "Séance en cours" : "Démarrer";
     pauseButton.disabled = !running || paused;
-    finishButton.disabled = !running;
+    finishButton.disabled = !running && !paused;
     projectSelect.disabled = running;
     durationSelect.disabled = running;
   }
@@ -147,8 +147,8 @@
     });
   }
   function saveSession(completed) {
-    if (!running) return;
-    const elapsed = completed ? durationSeconds : Math.min(durationSeconds, getElapsedSeconds());
+    if (!running && !paused) return;
+    const elapsed = completed ? durationSeconds : Math.min(durationSeconds, running ? getElapsedSeconds() : elapsedBeforePause);
     const minutes = completed ? Math.round(durationSeconds / 60) : Math.floor(elapsed / 60);
     clearInterval(timerId);
     timerId = null;
