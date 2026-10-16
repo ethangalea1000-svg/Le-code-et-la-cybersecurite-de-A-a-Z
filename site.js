@@ -89,3 +89,13 @@ syncGlobalNav();
     }, {once:true});
   }
 })();
+
+
+/* Mode Focus : chargé uniquement sur la page des projets. */
+(function(){
+  if (!document.querySelector(".project-directory")) return;
+  const script = document.createElement("script");
+  script.src = "/Le-code-et-la-cybersecurite-de-A-a-Z/learning-focus.js";
+  script.defer = true;
+  document.head.appendChild(script);
+})();
