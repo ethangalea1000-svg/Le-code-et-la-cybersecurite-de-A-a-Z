@@ -809,3 +809,9 @@ body.home-page main .hero .path-actions .btn:focus-visible{
   outline:3px solid #ffffff!important;
   outline-offset:4px!important;
 }
+
+/* Métadonnées pédagogiques des 50 projets */
+.project-learning-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:12px 0 4px;padding-top:10px;border-top:1px solid #344454}
+.project-level{display:inline-flex;align-items:center;border:1px solid #477a66;border-radius:999px;padding:4px 9px;color:#8cf0c4;background:#10251f;font-size:12px;font-weight:750}
+.project-time{color:#f1f5f9;font-size:12px;font-weight:650}
+.project-meta-detail{font-size:13px;color:#b7c4d0;margin:5px 0 12px}
