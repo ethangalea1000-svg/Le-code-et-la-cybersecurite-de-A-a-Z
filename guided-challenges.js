@@ -1,0 +1,61 @@
+(function(){
+"use strict";
+if(!document.querySelector("#exerciseChoices")||document.querySelector("#guidedChallengeLab"))return;
+const missions=[
+{id:"http-headers",title:"Inspecter une réponse HTTP",domain:"Réseaux / Web",level:"Débutant",scenario:"Tu examines les en-têtes d’une réponse HTTP fictive. Le site transporte une session de connexion. Quel en-tête aide à limiter l’accès JavaScript au cookie de session ?",choices:["Cache-Control: no-store","HttpOnly sur le cookie","Accept-Language: fr","Content-Type: text/html"],answer:1,explain:"HttpOnly empêche l’accès au cookie via JavaScript côté navigateur. Secure et SameSite sont aussi importants selon le contexte ; aucun attribut ne remplace HTTPS.",hint:"Cherche l’attribut qui limite l’accès au cookie depuis les scripts du navigateur."},
+{id:"phishing",title:"Repérer un message suspect",domain:"Défense",level:"Débutant",scenario:"Un message inattendu affirme que ton compte sera bloqué dans 10 minutes et demande de te connecter via un lien raccourci. Quel réflexe est le plus sûr ?",choices:["Cliquer vite pour éviter le blocage","Répondre avec son mot de passe pour vérifier","Ne pas utiliser le lien et vérifier via le site officiel saisi soi-même","Transférer le message à tous ses contacts"],answer:2,explain:"L’urgence et le lien inattendu sont des signaux d’alerte. Passe par un canal officiel connu et signale le message si possible.",hint:"Ne laisse pas un message inattendu choisir le lien par lequel tu te connectes."},
+{id:"sql-defense",title:"Corriger une requête SQL",domain:"Sécurité Web",level:"Intermédiaire",scenario:"Un formulaire de connexion utilise une requête SQL construite en concaténant directement le texte saisi. Quelle amélioration est prioritaire ?",choices:["Désactiver les messages d’erreur uniquement","Utiliser des requêtes préparées avec paramètres","Masquer le bouton de connexion en CSS","Limiter le nom d’utilisateur à 8 caractères"],answer:1,explain:"Les requêtes préparées séparent la structure SQL des valeurs saisies. Il faut aussi gérer les droits, valider les données et éviter d’exposer les erreurs internes.",hint:"La meilleure défense sépare la commande SQL des données fournies par l’utilisateur."},
+{id:"least-privilege",title:"Appliquer le moindre privilège",domain:"Systèmes",level:"Débutant",scenario:"Une application doit lire un dossier précis et écrire dans un dossier de résultats. Quel choix respecte le mieux le moindre privilège ?",choices:["Lancer toute l’application en administrateur","Donner accès en lecture/écriture à tout le disque","Accorder uniquement les droits nécessaires sur ces deux dossiers","Partager le compte administrateur entre toute l’équipe"],answer:2,explain:"Le moindre privilège consiste à n’accorder que les permissions indispensables, sur le périmètre le plus réduit possible.",hint:"Réduis les permissions au strict nécessaire, plutôt que d’accorder des droits globaux."},
+{id:"xss-context",title:"Comprendre le risque XSS",domain:"Sécurité Web",level:"Intermédiaire",scenario:"Une page affiche le commentaire d’un utilisateur en l’insérant directement dans le HTML. Quel principe réduit le risque d’injection de contenu actif ?",choices:["Afficher la donnée avec textContent plutôt que l’interpréter comme HTML","Ajouter une animation CSS","Renommer la variable","Rendre la page plus longue"],answer:0,explain:"Pour du texte brut, textContent évite d’interpréter la chaîne comme du balisage HTML. Les protections dépendent du contexte : encodage adapté, modèles sûrs et politique CSP en défense complémentaire.",hint:"Demande-toi si le navigateur doit afficher la chaîne comme du texte ou l’interpréter comme du HTML."},
+{id:"incident",title:"Réagir à un incident",domain:"Analyse d’incidents",level:"Débutant",scenario:"Un poste affiche un comportement anormal et une alerte de sécurité. Quelle action initiale est la plus professionnelle ?",choices:["Effacer immédiatement tous les journaux","Documenter l’alerte et appliquer la procédure d’escalade/confinement prévue","Publier les captures sur les réseaux sociaux","Désactiver toutes les protections sans prévenir personne"],answer:1,explain:"Suis la procédure de réponse à incident, préserve les éléments utiles et alerte les responsables désignés. Le confinement dépend du contexte et des consignes de l’organisation.",hint:"Préserve les preuves et respecte la procédure de réponse à incident."}
+];
+const style=document.createElement("style");
+style.textContent=`
+#guidedChallengeLab{margin:24px 0 0;padding:clamp(16px,3vw,26px);border:1px solid #344454;border-radius:18px;background:#101923;color:#f4f7fb}
+#guidedChallengeLab *{box-sizing:border-box}
+#guidedChallengeLab .gcl-intro{color:#d0dbe6;max-width:780px}
+#guidedChallengeLab .gcl-grid{display:grid;grid-template-columns:minmax(190px,.75fr) minmax(0,1.5fr);gap:16px;margin-top:18px}
+#guidedChallengeLab .gcl-list,#guidedChallengeLab .gcl-work{min-width:0;border:1px solid #3b4d5f;border-radius:13px;padding:14px;background:#0b121a}
+#guidedChallengeLab .gcl-mission{display:block;width:100%;padding:11px;margin:7px 0;text-align:left;background:#142231;color:#f4f7fb;border:1px solid #465a6e;border-radius:9px;cursor:pointer;font:inherit}
+#guidedChallengeLab .gcl-mission[aria-current=true]{border-color:#42e8a4;background:#15362f}
+#guidedChallengeLab .gcl-mission small{display:block;color:#d0dbe6;margin-top:3px}
+#guidedChallengeLab .gcl-choices{display:grid;gap:9px;margin:16px 0}
+#guidedChallengeLab .gcl-answer{padding:12px;text-align:left;background:#142231;color:#f4f7fb;border:1px solid #465a6e;border-radius:9px;cursor:pointer;font:inherit}
+#guidedChallengeLab .gcl-answer:hover:not(:disabled){border-color:#42e8a4}
+#guidedChallengeLab .gcl-answer:disabled{cursor:default;opacity:1}
+#guidedChallengeLab .gcl-answer.correct{border-color:#42c985;background:#153b2c}
+#guidedChallengeLab .gcl-answer.wrong{border-color:#ff8b9b;background:#45212a}
+#guidedChallengeLab button:focus-visible{outline:3px solid #7df5c2;outline-offset:3px}
+#guidedChallengeLab .gcl-meta{display:flex;gap:8px;flex-wrap:wrap}
+#guidedChallengeLab .gcl-meta span{border:1px solid #465a6e;border-radius:99px;padding:4px 9px;color:#d0dbe6;font-size:12px}
+#guidedChallengeLab .gcl-feedback{min-height:24px;line-height:1.6}
+#guidedChallengeLab .gcl-progress{height:8px;background:#293949;border-radius:99px;overflow:hidden;margin:12px 0}
+#guidedChallengeLab .gcl-progress span{display:block;height:100%;width:0;background:#42e8a4}
+#guidedChallengeLab .gcl-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+#guidedChallengeLab .gcl-tools button{padding:9px 12px;border:1px solid #53677a;border-radius:8px;background:#142231;color:#f4f7fb;font:inherit}
+#guidedChallengeLab .gcl-small{color:#c2cfdb;font-size:13px}
+@media(max-width:720px){#guidedChallengeLab .gcl-grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){#guidedChallengeLab *{scroll-behavior:auto;transition:none!important}}
+`;
+document.head.appendChild(style);
+const root=document.createElement("section");
+root.id="guidedChallengeLab";
+root.setAttribute("aria-labelledby","gclTitle");
+root.innerHTML='<p class="gcl-small">NOUVEAU · MISSIONS GUIDÉES</p><h2 id="gclTitle">Défis de cybersécurité</h2><p class="gcl-intro">Analyse des scénarios fictifs, choisis la bonne décision et découvre pourquoi elle est recommandée. Les réponses et ta progression restent dans ce navigateur.</p><div class="gcl-meta"><span id="gclCount">6 missions</span><span id="gclDone">0 / 6 validées</span><span id="gclXp">0 XP</span></div><div class="gcl-progress" role="progressbar" aria-label="Progression des missions guidées" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="gclProgress"><span id="gclProgressFill"></span></div><div class="gcl-grid"><aside class="gcl-list"><h3>Choisir une mission</h3><div id="gclMissionList"></div></aside><section class="gcl-work" aria-live="polite"><div class="gcl-meta"><span id="gclDomain"></span><span id="gclLevel"></span></div><h3 id="gclMissionTitle"></h3><p id="gclScenario"></p><div id="gclChoices" class="gcl-choices"></div><p id="gclFeedback" class="gcl-feedback" role="status" aria-live="polite"></p><div class="gcl-tools"><button type="button" id="gclHint">Afficher un indice</button><button type="button" id="gclRetry">Réessayer</button><button type="button" id="gclNext">Mission suivante →</button></div><p class="gcl-small" id="gclExplain"></p></section></div><p class="gcl-small">Environnement pédagogique : ces missions expliquent des principes de défense et ne testent aucun système réel.</p>';
+const exerciseSection=document.querySelector("#exerciseChoices").closest(".section");
+if(exerciseSection&&exerciseSection.parentNode)exerciseSection.parentNode.insertBefore(root,exerciseSection.nextSibling);
+const $=id=>root.querySelector("#"+id);
+let index=0,answered=false;
+const STORE="azGuidedChallengesV1";
+function load(){try{const x=JSON.parse(localStorage.getItem(STORE)||"{}");return x&&typeof x==="object"&&!Array.isArray(x)?x:{}}catch(e){return {}}}
+function save(s){try{localStorage.setItem(STORE,JSON.stringify(s));return true}catch(e){return false}}
+function state(){const s=load();s.passed=s.passed&&typeof s.passed==="object"&&!Array.isArray(s.passed)?s.passed:{};s.attempts=s.attempts&&typeof s.attempts==="object"&&!Array.isArray(s.attempts)?s.attempts:{};return s}
+function updateStats(){const s=state(),done=missions.filter(m=>s.passed[m.id]===true).length,pct=Math.round(done/missions.length*100);$("gclDone").textContent=done+" / "+missions.length+" validées";$("gclXp").textContent=(done*20)+" XP";$("gclProgressFill").style.width=pct+"%";$("gclProgress").setAttribute("aria-valuenow",String(pct));$("gclProgress").setAttribute("aria-valuetext",pct+" % des missions validées");missions.forEach((m,i)=>{const b=$("gclMissionList").querySelector('[data-id="'+m.id+'"]');if(b)b.querySelector("small").textContent=(s.passed[m.id]?"✓ Validée · ":"") + m.domain+(i===index?" · En cours":"")});}
+function renderList(){const list=$("gclMissionList");list.replaceChildren();missions.forEach((m,i)=>{const b=document.createElement("button");b.type="button";b.className="gcl-mission";b.dataset.id=m.id;b.setAttribute("aria-current",String(i===index));const title=document.createElement("strong"),small=document.createElement("small");title.textContent=(i+1)+". "+m.title;small.textContent=m.domain;b.append(title,small);b.addEventListener("click",()=>{index=i;renderMission()});list.appendChild(b)})}
+function renderMission(){const m=missions[index],s=state();answered=false;$("gclDomain").textContent=m.domain;$("gclLevel").textContent=m.level;$("gclMissionTitle").textContent=(index+1)+". "+m.title;$("gclScenario").textContent=m.scenario;$("gclFeedback").textContent="Choisis une réponse pour obtenir une correction expliquée.";$("gclExplain").textContent="";$("gclChoices").replaceChildren();m.choices.forEach((label,i)=>{const b=document.createElement("button");b.type="button";b.className="gcl-answer";b.textContent=String.fromCharCode(65+i)+". "+label;b.addEventListener("click",()=>answer(i,b));$("gclChoices").appendChild(b)});$("gclHint").disabled=false;$("gclNext").disabled=false;renderList();updateStats();}
+function answer(choice,button){if(answered)return;answered=true;const m=missions[index],s=state();s.attempts[m.id]=(Number(s.attempts[m.id])||0)+1;const ok=choice===m.answer;if(ok)s.passed[m.id]=true;save(s);Array.from($("gclChoices").children).forEach((b,i)=>{b.disabled=true;if(i===m.answer)b.classList.add("correct");else if(i===choice)b.classList.add("wrong")});$("gclFeedback").textContent=ok?"Bonne réponse. Mission validée : +"+(s.passed[m.id]&&s.attempts[m.id]===1?20:0)+" XP.":"Pas tout à fait. Lis la correction puis réessaie si nécessaire."; $("gclExplain").textContent=m.explain;updateStats();}
+$("gclHint").addEventListener("click",()=>{$("gclFeedback").textContent="Indice : "+missions[index].hint});
+$("gclRetry").addEventListener("click",renderMission);
+$("gclNext").addEventListener("click",()=>{index=(index+1)%missions.length;renderMission()});
+renderList();renderMission();
+})();
