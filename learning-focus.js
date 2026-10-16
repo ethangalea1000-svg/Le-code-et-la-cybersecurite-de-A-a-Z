@@ -97,12 +97,12 @@
     return Math.max(0, elapsedBeforePause + (Date.now() - sessionStartedAt) / 1000);
   }
   function setControls() {
-    startButton.disabled = running && !paused;
-    startButton.textContent = running && paused ? "Reprendre" : running ? "Séance en cours" : "Démarrer";
+    startButton.disabled = running;
+    startButton.textContent = paused ? "Reprendre" : running ? "Séance en cours" : "Démarrer";
     pauseButton.disabled = !running || paused;
     finishButton.disabled = !running && !paused;
-    projectSelect.disabled = running;
-    durationSelect.disabled = running;
+    projectSelect.disabled = running || paused;
+    durationSelect.disabled = running || paused;
   }
   function updateClock() {
     if (running && !paused) {
@@ -181,7 +181,7 @@
     refreshStats();
   }
   startButton.addEventListener("click", () => {
-    if (running && paused) {
+    if (paused) {
       sessionStartedAt = Date.now();
       running = true;
       paused = false;
