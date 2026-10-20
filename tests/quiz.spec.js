@@ -33,3 +33,17 @@ test("une réponse au quiz met à jour le résultat et la progression locale", a
   }).toBe(1);
   await expect(page.locator("#stats")).toContainText("Répondues : 1");
 });
+
+test("le simulateur chmod calcule les permissions et vérifie le mini-défi", async ({ page }) => {
+  await page.goto("/simulateur-chmod.html");
+  await expect(page.locator("#chmodOctal")).toHaveText("644");
+  await expect(page.locator("#chmodSymbolic")).toHaveText("rw-r--r--");
+
+  await page.getByRole("button", { name: /755/ }).click();
+  await expect(page.locator("#chmodOctal")).toHaveText("755");
+  await expect(page.locator("#chmodSymbolic")).toHaveText("rwxr-xr-x");
+
+  await page.locator("#chmodAnswer").selectOption("600");
+  await page.locator("#chmodCheck").click();
+  await expect(page.locator("#chmodFeedback")).toContainText("Correct");
+});
