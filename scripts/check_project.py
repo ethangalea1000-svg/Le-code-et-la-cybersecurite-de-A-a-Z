@@ -165,11 +165,14 @@ def main():
             errors.append("sw.js : périmètre de cache explicite absent.")
         # Les exclusions API dans le fetch handler sont légitimes ; contrôler
         # uniquement le tableau PRECACHE évite les faux positifs.
-        precache_match = re.search(r"const\\s+PRECACHE\\s*=\\s*\\[(.*?)\\];", sw_source, re.S)
-        if precache_match and re.search(r"""["'][^"']*/api/[^"']*["']""", precache_match.group(1)):
-            errors.append("sw.js : ne pas mettre les routes API dans le précache statique.")
-        if not precache_match:
+        precache_start = sw_source.find("const PRECACHE")
+        precache_end = sw_source.find("];", precache_start)
+        if precache_start < 0 or precache_end < 0:
             errors.append("sw.js : tableau PRECACHE introuvable.")
+        else:
+            precache = sw_source[precache_start:precache_end]
+            if "/api/" in precache:
+                errors.append("sw.js : ne pas mettre les routes API dans le précache statique.")
     except (OSError, UnicodeError) as exc:
         errors.append(f"sw.js illisible : {exc}")
 
