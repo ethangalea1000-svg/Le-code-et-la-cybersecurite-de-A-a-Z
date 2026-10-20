@@ -961,3 +961,18 @@ main :where(p,li) a{overflow-wrap:anywhere}
 html[data-theme="light"] .az-back-to-top{background:#fff;color:#14583d;border-color:#729887;box-shadow:0 5px 22px #1d293522}
 @media print{.az-back-to-top{display:none!important}}
 @media(max-width:600px){.az-back-to-top{right:max(12px,env(safe-area-inset-right));bottom:max(12px,env(safe-area-inset-bottom));width:46px;height:46px}}
+
+
+/* Mode de lecture renforcée : activable, persistant et sans ressource externe. */
+.az-readable-toggle{display:inline-flex;align-items:center;justify-content:center;min-height:44px;margin:4px;padding:8px 12px;border:1px solid #648174;border-radius:9px;background:#12251f;color:#e8fff4;font:600 12px/1.35 system-ui,sans-serif;cursor:pointer}
+.az-readable-toggle:hover{border-color:#42e8a4}
+.az-readable-toggle:focus-visible{outline:3px solid #42e8a4;outline-offset:3px}
+html[data-theme="light"] .az-readable-toggle{background:#fff;color:#174b37;border-color:#648174}
+html[data-readable="true"] body{font-family:Arial,Helvetica,sans-serif;letter-spacing:.025em;line-height:1.85;word-spacing:.08em}
+html[data-readable="true"] p,html[data-readable="true"] li,html[data-readable="true"] label,html[data-readable="true"] input,html[data-readable="true"] textarea,html[data-readable="true"] button{line-height:1.85}
+html[data-readable="true"] p,html[data-readable="true"] li{max-width:78ch}
+html[data-readable="true"] a:not(.btn){text-decoration:underline;text-underline-offset:.18em}
+html[data-readable="true"] .muted,html[data-readable="true"] .section>p{color:#c4ced8}
+html[data-theme="light"][data-readable="true"] .muted,html[data-theme="light"][data-readable="true"] .section>p{color:#344454}
+@media(max-width:760px){.az-readable-toggle{max-width:100%;font-size:11px}}
+@media print{.az-readable-toggle{display:none!important}}
