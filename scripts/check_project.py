@@ -4,6 +4,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 import sys
 import re
+from urllib.parse import urlsplit
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -91,9 +92,10 @@ def main():
             errors.append("manifest.webmanifest : lang doit rester fr-FR.")
         if manifest.get("display") not in {"standalone", "minimal-ui", "fullscreen"}:
             errors.append("manifest.webmanifest : mode d'affichage PWA non adapté.")
-        if not str(manifest.get("start_url", "")).startswith(BASE):
+        site_path = urlsplit(BASE).path
+        if not str(manifest.get("start_url", "")).startswith(site_path):
             errors.append("manifest.webmanifest : start_url doit rester dans le sous-chemin GitHub Pages.")
-        if not str(manifest.get("scope", "")).startswith(BASE):
+        if not str(manifest.get("scope", "")).startswith(site_path):
             errors.append("manifest.webmanifest : scope doit rester dans le sous-chemin GitHub Pages.")
         icons = manifest.get("icons")
         if not isinstance(icons, list) or not icons:
