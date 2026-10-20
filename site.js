@@ -85,6 +85,26 @@ syncGlobalNav();
  const hero=document.querySelector(".hero");hero.parentNode.insertBefore(section,hero.nextSibling);
 })();
 
+/* Accueil : montrer d'abord les destinations essentielles, puis les outils facultatifs. */
+(function(){
+ const home=document.body.classList.contains("home-page");
+ if(!home)return;
+ const grid=document.querySelector(".home-page .section .cards");
+ if(!grid||grid.dataset.simplified==="true")return;
+ const cards=Array.from(grid.children);
+ if(cards.length<=4)return;
+ const extra=document.createElement("details");
+ extra.className="extra-tools-disclosure";
+ const summary=document.createElement("summary");
+ summary.textContent="Autres outils et ressources ("+(cards.length-4)+")";
+ const extras=document.createElement("div");
+ extras.className="cards";
+ cards.slice(4).forEach(card=>extras.appendChild(card));
+ extra.append(summary,extras);
+ grid.dataset.simplified="true";
+ grid.after(extra);
+})();
+
 /* PWA : installation facultative et cache hors ligne limité à ce site. */
 (function(){
   const base = "/Le-code-et-la-cybersecurite-de-A-a-Z/";
