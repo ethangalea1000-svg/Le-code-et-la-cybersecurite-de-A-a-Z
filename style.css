@@ -85,3 +85,70 @@ body.home-page .hero h1 em{color:#63f5b7!important;font-style:normal!important}
 body.home-page .heroIn>small{color:#7df4bd!important;opacity:1!important}
 body.home-page .hero p{color:#f1f5f9!important;opacity:1!important}
 body.home-page .hero{background-color:#070a0f!important}
+
+/* Audit OverlayQA 2026-10-20 : en-tête sans chevauchement et texte de premier plan lisible */
+.home-page header{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  justify-content:stretch;
+  align-items:center;
+  gap:8px 20px;
+  padding-top:12px;
+  padding-bottom:12px;
+}
+.home-page header .brand{
+  display:inline-flex;
+  align-items:center;
+  width:max-content;
+  max-width:100%;
+  min-height:38px;
+}
+.home-page header nav{
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  justify-content:flex-start;
+  flex-wrap:nowrap;
+  overflow-x:auto;
+  overflow-y:hidden;
+  white-space:nowrap;
+  gap:6px;
+  padding:2px 0 6px;
+  scrollbar-width:thin;
+  scrollbar-color:#526879 #101923;
+}
+.home-page header nav a{
+  flex:0 0 auto;
+  min-height:36px;
+  padding:7px 9px;
+  color:#cbd5df;
+}
+.home-page header nav a:hover,
+.home-page header nav a:focus-visible,
+.home-page header nav a[aria-current="page"]{
+  color:#8bffcb;
+  background:#10251f;
+  border-color:#426b5c;
+}
+.home-page .heroIn>small,
+.home-page .section>small,
+.home-page .safety small{
+  color:#79f2bd;
+}
+.home-page .hero p,
+.home-page .section .muted,
+.home-page .quick-start-card p,
+.home-page footer,
+.home-page footer a{
+  color:#c3ced8;
+}
+.home-page .hero h1{color:#f7f9fc}
+.home-page .hero h1 em{color:#6cf0b6}
+.home-page .quick-start-card .quick-kicker{color:#8bffcb}
+.home-page footer a{text-decoration:underline;text-underline-offset:3px}
+@media(max-width:560px){
+  .home-page header{padding-left:14px;padding-right:14px}
+  .home-page header .brand{font-size:10px;letter-spacing:.06em}
+  .home-page header nav{gap:5px}
+  .home-page header nav a{font-size:12px;padding:6px 8px}
+}
