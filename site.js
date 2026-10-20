@@ -44,7 +44,26 @@ AZ.initSearch=function(){
 };
 window.AZ=AZ;
 })();
-function syncGlobalNav(){const main=document.querySelector("main");if(main&&!main.id)main.id="mainContent";if(!document.querySelector(".skip-link")&&main){const skip=document.createElement("a");skip.className="skip-link";skip.href="#"+main.id;skip.textContent="Aller directement au contenu";document.body.insertBefore(skip,main)}const base="/Le-code-et-la-cybersecurite-de-A-a-Z/";const links=[["Accueil","index.html"],["Parcours","parcours.html"],["Cours","cours.html"],["Projets","projets.html"],["Quiz","quiz.html"],["Exercices","exercices.html"],["Challenges","exercices.html#guidedChallengeLab"],["Progression","progression.html"],["Atelier","atelier.html"],["Bibliothèque","bibliotheque.html"],["Recherche","recherche.html"],["Ressources","ressources.html"],["Examens","examens.html"],["Certificats","certificats.html"],["Python & SQL","laboratoire-python-sql.html"],["Donner un avis","retour.html"]];const h=document.querySelector("header");if(!h)return;let n=h.querySelector("nav");if(!n){n=document.createElement("nav");n.setAttribute("aria-label","Navigation principale");h.appendChild(n)}n.setAttribute("aria-label","Navigation principale");n.innerHTML=links.map(x=>'<a href="'+base+x[1]+'">'+x[0]+"</a>").join("");const current=location.pathname.split("/").pop()||"index.html";n.querySelectorAll("a").forEach(a=>{if(a.getAttribute("href").endsWith("/"+current)||a.getAttribute("href")===base+current)a.setAttribute("aria-current","page")});const b=h.querySelector(".brand")||h.querySelector("a");if(b){b.className="brand";b.href=base+"index.html";b.innerHTML="<span>&lt;/&gt;</span> LE CODE <b>&amp;</b> LA CYBERSÉCURITÉ";}}
+function syncGlobalNav(){
+ const main=document.querySelector("main");
+ if(main&&!main.id)main.id="mainContent";
+ if(!document.querySelector(".skip-link")&&main){const skip=document.createElement("a");skip.className="skip-link";skip.href="#"+main.id;skip.textContent="Aller directement au contenu";document.body.insertBefore(skip,main)}
+ const base="/Le-code-et-la-cybersecurite-de-A-a-Z/";
+ const primary=[["Accueil","index.html"],["Parcours","parcours.html"],["Cours","cours.html"],["Projets","projets.html"],["Quiz","quiz.html"],["Progression","progression.html"]];
+ const more=[["Exercices","exercices.html"],["Challenges","exercices.html#guidedChallengeLab"],["Atelier de code","atelier.html"],["Python & SQL","laboratoire-python-sql.html"],["Recherche","recherche.html"],["Examens","examens.html"],["Certificats","certificats.html"],["Bibliothèque","bibliotheque.html"],["Ressources","ressources.html"],["Donner un avis","retour.html"]];
+ const h=document.querySelector("header");if(!h)return;
+ let n=h.querySelector("nav");if(!n){n=document.createElement("nav");h.appendChild(n)}
+ n.id="nav";n.setAttribute("aria-label","Navigation principale");
+ n.innerHTML=primary.map(x=>'<a href="'+base+x[1]+'">'+x[0]+'</a>').join("")+
+ '<details class="nav-more"><summary>Plus <span aria-hidden="true">⌄</span></summary><div class="nav-more-menu">'+more.map(x=>'<a href="'+base+x[1]+'">'+x[0]+'</a>').join("")+'</div></details>';
+ const current=location.pathname.split("/").pop()||"index.html";
+ n.querySelectorAll("a").forEach(a=>{if(a.getAttribute("href")===base+current||a.getAttribute("href")===base+current+location.hash)a.setAttribute("aria-current","page")});
+ const b=h.querySelector(".brand")||h.querySelector("a");if(b){b.className="brand";b.href=base+"index.html";b.innerHTML="<span>&lt;/&gt;</span> LE CODE <b>&amp;</b> LA CYBERSÉCURITÉ"}
+ let menu=h.querySelector("#menuBtn");if(!menu){menu=document.createElement("button");menu.id="menuBtn";menu.type="button";menu.textContent="☰";h.appendChild(menu)}
+ menu.setAttribute("aria-label","Afficher ou masquer le menu");menu.setAttribute("aria-expanded","false");
+ menu.onclick=function(){const open=n.classList.toggle("open");menu.setAttribute("aria-expanded",String(open));menu.setAttribute("aria-label",open?"Fermer le menu":"Afficher ou masquer le menu")};
+ n.addEventListener("click",function(e){if(e.target.closest("a")&&window.matchMedia("(max-width: 900px)").matches){n.classList.remove("open");menu.setAttribute("aria-expanded","false")}});
+}
 syncGlobalNav();
 
 /* Reprise personnalisée : une prochaine étape claire, sans pression ni compte à rebours. */
