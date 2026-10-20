@@ -986,3 +986,12 @@ html[data-theme="light"][data-readable="true"] .muted,html[data-theme="light"][d
 .home-page .quick-kicker{color:#176b20;font-size:12px;font-weight:850;letter-spacing:.1em;}
 .home-page .quick-start-card .btn{flex:0 0 auto;margin:0;}
 @media(max-width:600px){.home-page .progress-starter{padding:16px 14px 0}.home-page .quick-start-card{min-height:0;align-items:stretch;flex-direction:column;padding:20px;gap:16px}.home-page .quick-start-card .btn{width:100%;text-align:center}}
+
+
+/* Audit PageSpeed 2026-10-20 : renforcer le contraste sur l'accueil. */
+body.home-page .heroIn>small,body.home-page main .section>small,body.home-page main .section.safety>div>small{color:#14532d!important;}
+body.home-page .hero p,body.home-page main .section>p,body.home-page main .section .muted{color:#374151!important;}
+body.home-page .path-actions .btn.ghost,body.home-page main .btn.ghost{color:#263746!important;border-color:#aab8a3!important;border-bottom-color:#aab8a3!important;background:#fff!important;}
+body.home-page .hero .stats small{color:#374151!important;}
+/* Les composants d'accueil restent en place pendant l'initialisation. */
+.home-page .hero{contain:layout style;}
