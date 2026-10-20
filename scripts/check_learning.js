@@ -57,4 +57,17 @@ for (const [index, seed] of seeds.entries()) {
 const quizHtml = fs.readFileSync(path.join(root, "quiz.html"), "utf8");
 assert.ok(quizHtml.includes("explanation:s.body"), "Les quiz doivent associer les explications au contenu des cours.");
 assert.ok(quizHtml.includes("function shuffle(a)"), "La fonction de mélange des réponses doit être présente.");
+assert.ok(quizHtml.includes('role="status" aria-live="polite"'), "Le retour du quiz doit être annoncé aux technologies d'assistance.");
+
+const coursePage = fs.readFileSync(path.join(root, "cours", "course-page.js"), "utf8");
+for (const asset of ["project-curriculum.js", "course-reference.js", "course-reference-extra.js", "course-practice.js"]) {
+  assert.ok(fs.existsSync(path.join(root, "cours", asset)), "Ressource dynamique de cours absente : " + asset);
+  assert.ok(coursePage.includes(asset), "Ressource de cours non chargée : " + asset);
+}
+const serviceWorker = fs.readFileSync(path.join(root, "sw.js"), "utf8");
+for (const asset of ["cours/project-curriculum.js", "cours/course-reference.js", "cours/course-reference-extra.js", "cours/course-practice.js", "data/quiz-bank.js"]) {
+  assert.ok(serviceWorker.includes('"' + asset + '"'), "Ressource pédagogique absente du cache hors ligne : " + asset);
+}
+assert.ok(serviceWorker.includes('const CACHE_NAME = "code-cyber-static-v4"'), "La version du cache hors ligne doit être mise à jour.");
+assert.ok(serviceWorker.includes('if (url.pathname.includes("/api/")) return;'), "Le service worker ne doit pas intercepter les API.");
 console.log("OK — 14 cours, " + Object.values(sandbox.window.courseData).reduce((n, c) => n + c.sections.length, 0) + " leçons, " + missionCount + " missions et " + seeds.length + " notions de quiz validés.");
