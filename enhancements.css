@@ -1122,7 +1122,30 @@ body.home-page #mainContent > .hero .heroIn>small{
 }
 
 
-/* Correctif contraste PageSpeed : le hero conserve son fond sombre, donc ses textes doivent rester clairs. */
+/* Correctif contraste WCAG : le hero utilise un fond clair, avec du texte sombre. */
+body.home-page #mainContent > .hero{
+  background:radial-gradient(ellipse at 85% 10%,#e5f7d7 0,transparent 35%),linear-gradient(180deg,#f7f9f5,#eef6e9)!important;
+  color:#202b35!important;
+}
+body.home-page #mainContent > .hero .heroIn,
+body.home-page #mainContent > .hero h1,
+body.home-page #mainContent > .hero .stats,
+body.home-page #mainContent > .hero .stats b{
+  color:#202b35!important;
+}
+body.home-page #mainContent > .hero p,
+body.home-page #mainContent > .hero .stats small{
+  color:#374151!important;
+  opacity:1!important;
+}
+body.home-page #mainContent > .hero .heroIn > small{
+  color:#14532d!important;
+  opacity:1!important;
+}
+body.home-page #mainContent > .hero h1 em{
+  color:#267a16!important;
+}
+
 body.home-page #mainContent > .hero,
 body.home-page #mainContent > .hero .heroIn,
 body.home-page #mainContent > .hero h1,
