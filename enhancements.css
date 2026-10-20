@@ -815,3 +815,16 @@ body.home-page main .hero .path-actions .btn:focus-visible{
 .project-level{display:inline-flex;align-items:center;border:1px solid #477a66;border-radius:999px;padding:4px 9px;color:#8cf0c4;background:#10251f;font-size:12px;font-weight:750}
 .project-time{color:#f1f5f9;font-size:12px;font-weight:650}
 .project-meta-detail{font-size:13px;color:#b7c4d0;margin:5px 0 12px}
+
+/* Outils des annuaires : recherche, filtres et favoris accessibles */
+.directory-tools{margin:24px 0 30px;padding:20px;border:1px solid var(--line,#22303f);border-radius:14px;background:var(--panel,#0e141c)}
+.directory-search-label{display:block;margin-bottom:8px;color:var(--text,#eef3f8);font-size:14px;font-weight:750}
+.directory-tools .search-box{margin:0 0 12px;max-width:760px}
+.directory-tools .filter-row{display:flex;flex-wrap:wrap;gap:8px}
+.directory-tools .filter-row .btn{margin:0;min-height:40px;font-size:13px}
+.directory-tools .filter-row .btn[aria-pressed="true"]{border-color:var(--green,#42e8a4);background:#123126;color:#f1fff8}
+.directory-result-count{margin:12px 0 0;color:var(--muted,#91a0af);font-size:13px}
+.favorite-toggle{width:100%;min-height:42px;margin:12px 0 0!important;font-size:13px!important}
+[hidden]{display:none!important}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #8cf0c4;outline-offset:3px}
+::selection{background:#42e8a4;color:#07110c}
