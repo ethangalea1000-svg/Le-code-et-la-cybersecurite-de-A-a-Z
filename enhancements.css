@@ -779,14 +779,12 @@ body.home-page main section.section.safety h2{
 }
 
 
-/* Accueil : contraste de la proposition de valeur sur le fond sombre du hero */
+/* Accueil : conserver la géométrie du paragraphe sans forcer une couleur claire */
 body.home-page main .hero .heroIn > p{
-  color:#f1f5f9!important;
   background:transparent!important;
   opacity:1!important;
   text-shadow:none!important;
   filter:none!important;
-  -webkit-text-fill-color:#f1f5f9!important;
   font-size:clamp(17px,2vw,20px)!important;
   line-height:1.65!important;
   font-weight:500!important;
