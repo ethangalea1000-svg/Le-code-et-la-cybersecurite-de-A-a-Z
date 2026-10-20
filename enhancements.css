@@ -828,3 +828,33 @@ body.home-page main .hero .path-actions .btn:focus-visible{
 [hidden]{display:none!important}
 button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #8cf0c4;outline-offset:3px}
 ::selection{background:#42e8a4;color:#07110c}
+
+
+/* Navigation simplifiée : six destinations principales, le reste dans « Plus ». */
+header nav .nav-more{position:relative;display:block;color:var(--muted);font-size:13px}
+header nav .nav-more>summary{display:flex;align-items:center;gap:7px;min-height:38px;padding:7px 11px;border:1px solid var(--line);border-radius:8px;cursor:pointer;list-style:none;color:var(--text);font-weight:700}
+header nav .nav-more>summary::-webkit-details-marker{display:none}
+header nav .nav-more>summary:hover,header nav .nav-more[open]>summary{border-color:var(--green);color:var(--green);background:#102019}
+header nav .nav-more-menu{position:absolute;right:0;top:calc(100% + 8px);z-index:30;display:grid;grid-template-columns:repeat(2,minmax(150px,1fr));gap:4px;width:min(390px,90vw);padding:10px;border:1px solid var(--line);border-radius:12px;background:#0b1119;box-shadow:0 16px 45px #0009}
+header nav .nav-more-menu a{display:flex;align-items:center;min-height:40px;padding:9px 11px;border-radius:7px;color:var(--text);font-size:13px}
+header nav .nav-more-menu a:hover,header nav .nav-more-menu a[aria-current="page"]{background:#13271f;color:var(--green)}
+header #menuBtn{display:none}
+@media(max-width:900px){
+ header{height:auto;min-height:68px;flex-direction:row!important;align-items:center!important;flex-wrap:wrap;gap:8px}
+ header #menuBtn{display:inline-flex;align-items:center;justify-content:center;min-width:42px;min-height:42px;margin-left:auto;border:1px solid var(--line);border-radius:9px;background:#0e141c;color:var(--text);cursor:pointer}
+ header nav{display:none;order:3;width:100%;max-width:100%;padding:10px 0 12px;flex-direction:column;align-items:stretch;gap:5px;overflow:visible;white-space:normal}
+ header nav.open{display:flex}
+ header nav>a{width:100%;padding:9px 12px;min-height:42px}
+ header nav .nav-more{width:100%}
+ header nav .nav-more>summary{width:100%;justify-content:space-between}
+ header nav .nav-more-menu{position:static;width:100%;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:6px;box-shadow:none}
+ header nav .nav-more-menu a{white-space:normal}
+}
+@media(max-width:420px){header nav .nav-more-menu{grid-template-columns:1fr}.brand{letter-spacing:.03em}}
+/* Accueil plus lisible : les quatre destinations de base restent visibles. */
+.home-page .extra-tools-disclosure{margin:28px auto 0;max-width:900px;text-align:left;border:1px solid var(--line);border-radius:14px;background:#0b1119}
+.home-page .extra-tools-disclosure>summary{padding:17px 20px;cursor:pointer;font-weight:750;color:var(--text);list-style:none}
+.home-page .extra-tools-disclosure>summary::-webkit-details-marker{display:none}
+.home-page .extra-tools-disclosure>summary:after{content:"＋";float:right;color:var(--green)}
+.home-page .extra-tools-disclosure[open]>summary:after{content:"−"}
+.home-page .extra-tools-disclosure>.cards{padding:0 18px 18px;margin-top:0}
