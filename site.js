@@ -208,9 +208,11 @@ syncGlobalNav();
       window.addEventListener("scroll",()=>{if(!scheduled){scheduled=true;window.requestAnimationFrame(update)}},{passive:true});
       window.addEventListener("resize",update,{passive:true});update();
     }
-    /* Les images de contenu ne bloquent pas le premier affichage. */
+    /* Chargement différé sans retarder les images visibles dès l'arrivée. */
     document.querySelectorAll("img:not([loading])").forEach(img=>{
-      if(!img.hasAttribute("fetchpriority"))img.loading="lazy";
+      const rect=img.getBoundingClientRect();
+      const initiallyVisible=rect.top < window.innerHeight && rect.bottom > 0;
+      if(!img.hasAttribute("fetchpriority"))img.loading=initiallyVisible?"eager":"lazy";
       if(!img.hasAttribute("decoding"))img.decoding="async";
     });
     /* Nettoyage prudent : seules les clés de cache explicitement temporaires sont supprimées. */
@@ -226,4 +228,36 @@ syncGlobalNav();
   }
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",setup,{once:true});
   else setup();
+})();
+
+
+/* Préchargement léger des pages internes au survol ou au focus clavier. */
+(function(){
+  "use strict";
+  const base="/Le-code-et-la-cybersecurite-de-A-a-Z/";
+  const prefetched=new Set();
+  const connection=navigator.connection||navigator.mozConnection||navigator.webkitConnection;
+  if(connection&&connection.saveData)return;
+  if(window.matchMedia&&window.matchMedia("(prefers-reduced-data: reduce)").matches)return;
+  function prefetchFrom(event){
+    const link=event.target&&event.target.closest?event.target.closest("a[href]"):null;
+    if(!link||link.hasAttribute("download")||link.target&&link.target!=="_self")return;
+    if(event.type==="pointerover"&&event.relatedTarget&&link.contains(event.relatedTarget))return;
+    let url;
+    try{url=new URL(link.href,location.href)}catch(_){return}
+    if(url.origin!==location.origin||!url.pathname.startsWith(base))return;
+    if(url.pathname===location.pathname&&url.search===location.search)return;
+    if(!(/\.html$/.test(url.pathname)||url.pathname.endsWith("/")))return;
+    url.hash="";
+    const href=url.href;
+    if(prefetched.has(href))return;
+    prefetched.add(href);
+    const hint=document.createElement("link");
+    hint.rel="prefetch";
+    hint.href=href;
+    hint.as="document";
+    document.head.appendChild(hint);
+  }
+  document.addEventListener("pointerover",prefetchFrom,{passive:true});
+  document.addEventListener("focusin",prefetchFrom);
 })();
