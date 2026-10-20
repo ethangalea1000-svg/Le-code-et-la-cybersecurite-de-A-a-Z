@@ -68,6 +68,13 @@ const serviceWorker = fs.readFileSync(path.join(root, "sw.js"), "utf8");
 for (const asset of ["cours/project-curriculum.js", "cours/course-reference.js", "cours/course-reference-extra.js", "cours/course-practice.js", "data/quiz-bank.js"]) {
   assert.ok(serviceWorker.includes('"' + asset + '"'), "Ressource pédagogique absente du cache hors ligne : " + asset);
 }
-assert.ok(serviceWorker.includes('const CACHE_NAME = "code-cyber-static-v4"'), "La version du cache hors ligne doit être mise à jour.");
+assert.ok(serviceWorker.includes('const CACHE_NAME = "code-cyber-static-v5"'), "La version du cache hors ligne doit être mise à jour.");
 assert.ok(serviceWorker.includes('if (url.pathname.includes("/api/")) return;'), "Le service worker ne doit pas intercepter les API.");
+const sharedUx = fs.readFileSync(path.join(root, "site.js"), "utf8");
+assert.ok(sharedUx.includes("azThemePreference"), "Le choix du thème doit être mémorisé.");
+assert.ok(sharedUx.includes("prefers-color-scheme: dark"), "Le thème système doit être détecté.");
+assert.ok(sharedUx.includes("azReadingProgress"), "La progression de lecture doit être présente.");
+assert.ok(sharedUx.includes("AZ.exportProgress"), "L'export de progression doit être disponible.");
+assert.ok(sharedUx.includes("AZ.importProgress"), "L'import de progression doit être disponible.");
+
 console.log("OK — 14 cours, " + Object.values(sandbox.window.courseData).reduce((n, c) => n + c.sections.length, 0) + " leçons, " + missionCount + " missions et " + seeds.length + " notions de quiz validés.");
