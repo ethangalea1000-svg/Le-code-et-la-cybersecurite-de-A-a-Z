@@ -225,22 +225,28 @@ syncGlobalNav();
       const bar=document.createElement("div");bar.id="azReadingProgress";bar.setAttribute("role","progressbar");
       bar.setAttribute("aria-label","Progression de lecture");bar.setAttribute("aria-valuemin","0");bar.setAttribute("aria-valuemax","100");bar.setAttribute("aria-valuenow","0");
       document.body.prepend(bar);
-      let scheduled=false;
+      let scheduled=false,scrollRange=0;
+      function measure(){scrollRange=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);}
       function update(){
         scheduled=false;
-        const root=document.documentElement,range=root.scrollHeight-window.innerHeight;
-        const value=range>0?Math.round(Math.max(0,Math.min(1,window.scrollY/range))*100):0;
+        const value=scrollRange>0?Math.round(Math.max(0,Math.min(1,window.scrollY/scrollRange))*100):0;
         bar.style.setProperty("--reading-progress",value+"%");
         bar.setAttribute("aria-valuenow",String(value));
       }
-      window.addEventListener("scroll",()=>{if(!scheduled){scheduled=true;window.requestAnimationFrame(update)}},{passive:true});
-      window.addEventListener("resize",update,{passive:true});update();
+      function scheduleUpdate(){if(!scheduled){scheduled=true;window.requestAnimationFrame(update);}}
+      measure();
+      window.addEventListener("scroll",scheduleUpdate,{passive:true});
+      window.addEventListener("resize",function(){measure();scheduleUpdate();},{passive:true});
+      if("ResizeObserver" in window){
+        const observer=new ResizeObserver(function(){measure();scheduleUpdate();});
+        observer.observe(document.body);
+      }
+      update();
     }
     /* Chargement différé sans retarder les images visibles dès l'arrivée. */
     document.querySelectorAll("img:not([loading])").forEach(img=>{
-      const rect=img.getBoundingClientRect();
-      const initiallyVisible=rect.top < window.innerHeight && rect.bottom > 0;
-      if(!img.hasAttribute("fetchpriority"))img.loading=initiallyVisible?"eager":"lazy";
+      /* Évite les lectures géométriques synchrones pour chaque image au démarrage. */
+      if(!img.hasAttribute("fetchpriority"))img.loading="lazy";
       if(!img.hasAttribute("decoding"))img.decoding="async";
     });
     /* Nettoyage prudent : seules les clés de cache explicitement temporaires sont supprimées. */
@@ -396,8 +402,7 @@ syncGlobalNav();
       button.addEventListener("click",function(){saveConsent(button.dataset.cookieChoice);});
     });
     panel.querySelector("[data-cookie-close]").addEventListener("click",closePanel);
-    const first=panel.querySelector("button");
-    if(first) first.focus();
+    /* Ne pas forcer le focus pendant le chargement initial : le panneau n'est pas modal. */
   }
   function addStyles(){
     if(document.getElementById("azCookieStyles")) return;
