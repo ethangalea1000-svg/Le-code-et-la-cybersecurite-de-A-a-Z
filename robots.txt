@@ -1,4 +1,23 @@
+# Accès public aux pages éducatives
 User-agent: *
+Allow: /
+
+# Les assistants de recherche et robots IA peuvent consulter le contenu public.
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: GPTBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: Applebot-Extended
 Allow: /
 
 Sitemap: https://ethangalea1000-svg.github.io/Le-code-et-la-cybersecurite-de-A-a-Z/sitemap.xml
