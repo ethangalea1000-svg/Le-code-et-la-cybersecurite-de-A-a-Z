@@ -15,17 +15,13 @@ test("le thème suit le système puis mémorise le choix manuel", async ({ page 
   await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
 });
 
-test("une réponse au quiz met à jour le résultat et la progression locale", async ({ page }) => {
-  // Provide a deterministic fixture so this interaction test isolates the quiz UI/state
-  // from static-file hosting behavior; the separate static-quality job validates the real bank.
-  await page.addInitScript(() => {
-    window.quizSeeds = [{
-      course: "01",
-      title: "Test HTML",
-      body: "HTML structure le document.",
-    }];
-  });
+test("la vraie banque de questions charge et une réponse met à jour la progression", async ({ page }) => {
   await page.goto("/quiz.html");
+
+  // Vérifie la banque réelle servie depuis data/quiz-bank.js, sans fixture artificielle.
+  await expect.poll(() => page.evaluate(() => window.quizSeeds?.length || 0)).toBeGreaterThanOrEqual(100);
+  await expect(page.locator("#question")).not.toBeEmpty();
+
   const answers = page.locator("#answers button.answer");
   await expect(answers).toHaveCount(4);
   await expect(page.locator("#next")).toBeDisabled();
@@ -42,7 +38,6 @@ test("une réponse au quiz met à jour le résultat et la progression locale", a
   }).toBe(1);
   await expect(page.locator("#stats")).toContainText("Répondues : 1");
 });
-
 test("le simulateur chmod calcule les permissions et vérifie le mini-défi", async ({ page }) => {
   await page.goto("/simulateur-chmod.html");
   await expect(page.locator("#chmodOctal")).toHaveText("644");
