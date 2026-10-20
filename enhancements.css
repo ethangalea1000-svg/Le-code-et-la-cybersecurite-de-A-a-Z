@@ -1234,3 +1234,41 @@ footer{
 .quiz-page .quiz-key-hint{
   color:#52616b!important;
 }
+
+
+/* Correctifs ciblés pour les 7 alertes de l'audit d'accessibilité du 20/10/2026. */
+/* Les états de navigation restent contrastés en thème clair comme en thème sombre. */
+header nav a[aria-current="page"]{
+  color:#14532d!important;
+  background:#dcfce7!important;
+  border-color:#86b99a!important;
+  font-weight:800;
+}
+html[data-theme="dark"] header nav a[aria-current="page"]{
+  color:#b7f7d8!important;
+  background:#123126!important;
+  border-color:#39765d!important;
+}
+/* Les cartes contiennent des liens dédiés : ne pas laisser croire que l'article entier est un bouton. */
+article.path-card,
+article.course-card,
+.cards article.path-card,
+.cards article.course-card{
+  cursor:default!important;
+}
+article.path-card:focus,
+article.course-card:focus{
+  outline:none!important;
+}
+/* Texte réservé aux technologies d'assistance, notamment le statut de progression. */
+.az-sr-only{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  padding:0!important;
+  margin:-1px!important;
+  overflow:hidden!important;
+  clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;
+  border:0!important;
+}
