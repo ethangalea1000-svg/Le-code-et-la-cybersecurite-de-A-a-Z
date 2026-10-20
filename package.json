@@ -1,0 +1,12 @@
+{
+  "name": "le-code-et-la-cybersecurite-de-a-a-z",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Tests de navigateur pour la plateforme pédagogique statique",
+  "scripts": {
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.56.1"
+  }
+}
