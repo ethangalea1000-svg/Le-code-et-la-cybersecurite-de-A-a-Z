@@ -889,3 +889,31 @@ html[data-theme="light"] .quiz-controls select{background:#fff;color:#1d2935;bor
 html[data-theme="light"] .nav-more-menu{background:#fff!important}
 @media(max-width:900px){.az-theme-toggle{margin:0 0 0 auto}header:has(#menuBtn) .az-theme-toggle{order:2}}
 @media(prefers-reduced-motion:reduce){#azReadingProgress::after{transition:none}.az-theme-toggle:active{transform:none}}
+
+
+/* UX polish : états cohérents, polices système et respect des préférences d'animation. */
+:where(button,.btn,a[role="button"],input[type="button"],input[type="submit"],.mini-btn,.code-tab){
+  -webkit-tap-highlight-color:transparent;
+}
+:where(button,.btn,a[role="button"],input[type="button"],input[type="submit"],.mini-btn,.code-tab):focus-visible{
+  outline:3px solid #42e8a4!important;outline-offset:3px!important;
+}
+:where(button,.btn,a[role="button"],input[type="button"],input[type="submit"],.mini-btn,.code-tab):active:not(:disabled){
+  transform:translateY(1px);
+}
+:where(button,.btn,input[type="button"],input[type="submit"]):disabled{
+  cursor:not-allowed;opacity:.6;filter:grayscale(.2);
+}
+html{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:where(pre,code,kbd,samp,.code-editor,.code-output){font-family:ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto!important}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+.az-hint-dialog{width:min(560px,calc(100% - 32px));max-height:min(80vh,640px);overflow:auto;border:1px solid #536273;border-radius:16px;padding:24px;background:#101923;color:#eef3f8;box-shadow:0 24px 80px #0009}
+.az-hint-dialog::backdrop{background:#05080dc9;backdrop-filter:blur(3px)}
+.az-hint-dialog h2{margin-top:0;font-size:1.25rem}
+.az-hint-dialog .az-hint-close{display:block;margin:20px 0 0 auto;padding:9px 14px;border:1px solid #64748b;border-radius:8px;background:#1c2936;color:#fff;font:inherit;cursor:pointer}
+.az-hint-dialog .az-hint-close:focus-visible{outline:3px solid #42e8a4;outline-offset:3px}
+html[data-theme="light"] .az-hint-dialog{background:#fff;color:#1d2935;border-color:#b8c5d2}
+html[data-theme="light"] .az-hint-dialog .az-hint-close{background:#f1f5f9;color:#1d2935}
