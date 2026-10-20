@@ -1,5 +1,5 @@
 /* Service worker GitHub Pages — cache borné au site, sans intercepter les API. */
-const CACHE_NAME = "code-cyber-static-v5";
+const CACHE_NAME = "code-cyber-static-v6";
 const BASE = "/Le-code-et-la-cybersecurite-de-A-a-Z/";
 const PRECACHE = [
   "index.html", "offline.html", "style.css", "enhancements.css", "site.js", "learning-focus.js", "guided-challenges.js",
