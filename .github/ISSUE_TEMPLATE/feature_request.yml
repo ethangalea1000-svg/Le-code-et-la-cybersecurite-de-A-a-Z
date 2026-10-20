@@ -1,0 +1,35 @@
+name: Proposer une amélioration
+description: Suggérer une amélioration pédagogique, d'accessibilité ou d'ergonomie
+title: "[Idée] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: "Décris l'idée sans ajouter de données personnelles."
+  - type: textarea
+    id: problem
+    attributes:
+      label: Quel problème veux-tu résoudre ?
+      placeholder: "Ce qui est difficile aujourd'hui"
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Quelle amélioration proposes-tu ?
+      placeholder: "Comment cela pourrait fonctionner"
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Catégorie
+      options:
+        - Ergonomie et navigation
+        - Cours et exercices
+        - Accessibilité
+        - Performance
+        - Cybersécurité
+        - Autre
+    validations:
+      required: true
