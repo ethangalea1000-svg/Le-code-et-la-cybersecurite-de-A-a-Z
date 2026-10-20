@@ -346,10 +346,16 @@ syncGlobalNav();
   function saveConsent(value){
     try { localStorage.setItem(CONSENT_KEY, value); } catch (_) {}
     closePanel();
-    if (value === "accepted") loadClarity();
-    announce(value === "accepted"
-      ? "Cookies facultatifs acceptés. Microsoft Clarity est activé."
-      : "Cookies facultatifs refusés. Seuls les éléments nécessaires restent actifs.");
+    if (value === "accepted") {
+      loadClarity();
+      announce("Cookies facultatifs acceptés. Microsoft Clarity est activé.");
+    } else {
+      announce("Cookies facultatifs refusés. Seuls les éléments nécessaires restent actifs.");
+      /* Recharger ferme la session Clarity déjà ouverte si le choix est modifié après acceptation. */
+      if (window.clarity || document.querySelector('script[data-clarity-consented="true"]')) {
+        window.setTimeout(function(){ window.location.reload(); }, 250);
+      }
+    }
   }
   let panel, status;
   function announce(message){
