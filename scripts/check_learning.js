@@ -82,7 +82,8 @@ assert.ok(sharedUx.includes("AZ.exportProgress"), "L'export de progression doit 
 assert.ok(sharedUx.includes("AZ.importProgress"), "L'import de progression doit être disponible.");
 assert.ok(sharedUx.includes("AZ.resetProgress"), "La réinitialisation locale de progression doit être disponible.");
 assert.ok(sharedUx.includes("schemaVersion:1"), "La structure de progression doit être versionnée.");
-assert.ok(sharedUx.includes('key!=="azThemePreference"'), "La réinitialisation ne doit pas effacer la préférence de thème.");
+assert.ok(sharedUx.includes('["azProgressV1","quizAZProgressV3","azExercisesV1","azGuidedChallengesV1","quizAnswered","quizCorrect"].includes(key)'), "La réinitialisation doit viser uniquement les clés de données du site explicitement reconnues.");
+assert.ok(!sharedUx.includes('key!=="azThemePreference"'), "La réinitialisation ne doit pas effacer les préférences d’affichage.");
 const progressionHtml = fs.readFileSync(path.join(root, "progression.html"), "utf8");
 assert.ok(progressionHtml.includes('id="resetProgressButton"'), "Le bouton de réinitialisation doit être présent dans le tableau de bord.");
 assert.ok(progressionHtml.includes("window.confirm("), "La réinitialisation doit demander confirmation.");
