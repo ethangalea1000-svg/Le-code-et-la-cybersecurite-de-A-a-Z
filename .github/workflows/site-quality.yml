@@ -27,5 +27,7 @@ jobs:
             echo "Checking $file"
             node --check "$file"
           done < <(find . -type f -name '*.js' -not -path './.git/*' -print0)
+      - name: Check learning content and quiz bank
+        run: node scripts/check_learning.js
       - name: Check local HTML assets and links
         run: python3 scripts/check_site.py
