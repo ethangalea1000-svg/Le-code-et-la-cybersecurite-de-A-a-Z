@@ -194,6 +194,33 @@ syncGlobalNav();
         header.appendChild(button);applyTheme();
       }
     }
+    /* Mode de lecture renforcée : réglage local, sans police ni requête externe. */
+    const readableKey="azReadableMode";
+    let readable=false;
+    try{readable=localStorage.getItem(readableKey)==="on"}catch(_){}
+    function applyReadable(){
+      document.documentElement.dataset.readable=readable?"true":"false";
+      const button=document.getElementById("azReadableToggle");
+      if(button){
+        button.setAttribute("aria-pressed",String(readable));
+        button.setAttribute("aria-label",readable?"Désactiver la lisibilité renforcée":"Activer la lisibilité renforcée");
+        button.textContent=readable?"Lisibilité renforcée : activée":"Lisibilité renforcée";
+      }
+    }
+    if(!document.getElementById("azReadableToggle")){
+      const header=document.querySelector("body > header");
+      if(header){
+        const button=document.createElement("button");
+        button.id="azReadableToggle";button.type="button";button.className="az-readable-toggle";
+        button.addEventListener("click",function(){
+          readable=!readable;
+          try{localStorage.setItem(readableKey,readable?"on":"off")}catch(_){}
+          applyReadable();
+        });
+        header.appendChild(button);
+      }
+    }
+    applyReadable();
     if(!document.getElementById("azReadingProgress")){
       const bar=document.createElement("div");bar.id="azReadingProgress";bar.setAttribute("role","progressbar");
       bar.setAttribute("aria-label","Progression de lecture");bar.setAttribute("aria-valuemin","0");bar.setAttribute("aria-valuemax","100");bar.setAttribute("aria-valuenow","0");
