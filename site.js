@@ -169,7 +169,7 @@ syncGlobalNav();
       button.setAttribute("aria-pressed",String(preference!=="system"));
       button.textContent=resolved==="dark"?"☀ Mode clair":"☾ Mode sombre";
       /* Le nom accessible contient le libellé visible (WCAG 2.5.3). */
-      button.setAttribute("aria-label",button.textContent.replace(/^[☀☾]\s*/,""));
+      button.setAttribute("aria-label",button.textContent.trim());
       button.title=preference==="system"?"Thème automatique":resolved==="dark"?"Mode clair":"Mode sombre";
     }
   }
@@ -223,9 +223,9 @@ syncGlobalNav();
     }
     applyReadable();
     if(!document.getElementById("azReadingProgress")){
-      const bar=document.createElement("div");bar.id="azReadingProgress";bar.setAttribute("role","progressbar");
-      bar.setAttribute("aria-label","Progression de lecture");bar.setAttribute("aria-valuemin","0");bar.setAttribute("aria-valuemax","100");bar.setAttribute("aria-valuenow","0");
-      bar.setAttribute("aria-live","off");
+      const bar=document.createElement("div");bar.id="azReadingProgress";
+      /* Barre purement visuelle : les jalons sont annoncés séparément par #azReadingProgressStatus. */
+      bar.setAttribute("aria-hidden","true");
       const progressStatus=document.createElement("span");
       progressStatus.className="az-sr-only";
       progressStatus.setAttribute("role","status");
