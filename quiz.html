@@ -38,7 +38,7 @@ const params=new URLSearchParams(location.search),examType=params.get("exam"),re
 const examSizes={web:20,code:30,infra:40,cyber:40,final:100};
 document.querySelector("#modeLabel").textContent=examType?"Examen chronométré":revisionMode?"Révision ciblée":"Entraînement libre";
 if(examType&&examSizes[examType]){exam={size:examSizes[examType],seconds:examSizes[examType]===100?5400:examSizes[examType]*60};document.querySelector("#examInfo").textContent="MODE EXAMEN • "+exam.size+" questions • "+Math.round(exam.seconds/60)+" min";examQuestions=shuffle([...questionsPool]).slice(0,exam.size);startExamTimer();}
-function shuffle(a){return a.sort(()=>Math.random()-.5)}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function filtered(){let pool=questionsPool.filter(x=>(domain.value==="all"||x.domain===domain.value)&&(level.value==="all"||x.level===level.value));if(revisionMode){const scores={};pool.forEach(x=>{const d=state.byDomain[x.domain]||{a:0,c:0};scores[x.domain]=d.a?d.c/d.a:0});pool.sort((a,b)=>(scores[a.domain]||0)-(scores[b.domain]||0));}return pool;}
 function distractors(answer){return shuffle([...new Set(questionsPool.filter(x=>x.a!==answer).map(x=>x.a))]).slice(0,3)}
 function save(){localStorage.setItem(KEY,JSON.stringify(state));localStorage.setItem("quizAnswered",state.answered);localStorage.setItem("quizCorrect",state.correct);}
