@@ -31,3 +31,5 @@ jobs:
         run: node scripts/check_learning.js
       - name: Check local HTML assets and links
         run: python3 scripts/check_site.py
+      - name: Check sitemap, sandbox and contribution templates
+        run: python3 scripts/check_project.py
