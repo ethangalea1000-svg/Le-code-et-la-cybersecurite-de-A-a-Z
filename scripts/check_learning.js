@@ -68,7 +68,7 @@ const serviceWorker = fs.readFileSync(path.join(root, "sw.js"), "utf8");
 for (const asset of ["cours/project-curriculum.js", "cours/course-reference.js", "cours/course-reference-extra.js", "cours/course-practice.js", "data/quiz-bank.js"]) {
   assert.ok(serviceWorker.includes('"' + asset + '"'), "Ressource pédagogique absente du cache hors ligne : " + asset);
 }
-assert.ok(serviceWorker.includes('const CACHE_NAME = "code-cyber-static-v8"'), "La version du cache hors ligne doit être mise à jour.");
+assert.ok(serviceWorker.includes('const CACHE_NAME = "code-cyber-static-v9"'), "La version du cache hors ligne doit être mise à jour.");
 assert.ok(serviceWorker.includes('if (url.pathname.includes("/api/")) return;'), "Le service worker ne doit pas intercepter les API.");
 const sharedUx = fs.readFileSync(path.join(root, "site.js"), "utf8");
 assert.ok(sharedUx.includes("azThemePreference"), "Le choix du thème doit être mémorisé.");
@@ -78,5 +78,18 @@ assert.ok(sharedUx.includes('hint.rel="prefetch"'), "Le préchargement des pages
 assert.ok(sharedUx.includes('initiallyVisible?"eager":"lazy"'), "Les images visibles au premier affichage ne doivent pas être différées.");
 assert.ok(sharedUx.includes("AZ.exportProgress"), "L'export de progression doit être disponible.");
 assert.ok(sharedUx.includes("AZ.importProgress"), "L'import de progression doit être disponible.");
+
+
+const a11yCss = fs.readFileSync(path.join(root, "enhancements.css"), "utf8");
+for (const rule of [
+  "prefers-reduced-motion:reduce", "forced-colors:active", "@media print",
+  "scroll-padding-top", "scroll-margin-top", "::selection", "touch-action:manipulation",
+  "button:disabled", "text-underline-offset", "textarea{resize:vertical}",
+  "overflow-wrap:anywhere", "text-wrap:pretty", "min-height:44px",
+  "@media(max-width:600px)", "@media(min-width:601px) and (max-width:900px)",
+  "@media(hover:none)", "[hidden]{display:none!important}"
+]) {
+  assert.ok(a11yCss.includes(rule), "Amélioration accessibilité / responsive / impression absente : " + rule);
+}
 
 console.log("OK — 14 cours, " + Object.values(sandbox.window.courseData).reduce((n, c) => n + c.sections.length, 0) + " leçons, " + missionCount + " missions et " + seeds.length + " notions de quiz validés.");
