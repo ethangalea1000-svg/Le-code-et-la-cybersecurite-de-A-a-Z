@@ -142,3 +142,18 @@ html body a:not(.btn){color:#1d4ed8!important}
 html body .btn,html body button{color:#fff!important;background:#3730a3!important;border-color:#3730a3!important;opacity:1!important}
 html body button:disabled{color:#374151!important;background:#e5e7eb!important;border-color:#9ca3af!important}
 html body :focus-visible{outline:3px solid #111827!important;outline-offset:3px!important}
+
+
+/* Référence technique interactive */
+.reference-section{margin:2rem 0;padding:clamp(1rem,3vw,2rem);border:1px solid #9ca3af;border-radius:1rem;background:#f9fafb;color:#111827}
+.reference-section>p{max-width:75ch}
+.reference-section label{display:block;font-weight:700;margin:.8rem 0 .4rem}
+.reference-section input[type=search]{width:100%;max-width:48rem;min-height:2.8rem;padding:.7rem .85rem;border:2px solid #6b7280;border-radius:.6rem;font:inherit}
+.reference-entries{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:1rem;margin-top:1rem}
+.reference-card{min-width:0;padding:1rem;border:1px solid #9ca3af;border-radius:.8rem;background:#fff;color:#111827}
+.reference-card h3{margin-top:0}
+.reference-syntax code,.reference-card pre{white-space:pre-wrap;overflow-wrap:anywhere}
+.reference-card pre{padding:.8rem;border-radius:.5rem;background:#f3f4f6;color:#111827;overflow:auto}
+.reference-card summary{cursor:pointer;font-weight:700;margin-top:.75rem}
+.reference-card details p{line-height:1.6}
+#referenceCount{font-weight:600}
