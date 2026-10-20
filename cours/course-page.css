@@ -157,3 +157,8 @@ html body :focus-visible{outline:3px solid #111827!important;outline-offset:3px!
 .reference-card summary{cursor:pointer;font-weight:700;margin-top:.75rem}
 .reference-card details p{line-height:1.6}
 #referenceCount{font-weight:600}
+
+.reference-note{padding:.8rem 1rem;border-left:4px solid #4338ca;background:#eef2ff;color:#1f2937;border-radius:.25rem .5rem .5rem .25rem}
+.reference-sources{margin-top:1.5rem;padding-top:1rem;border-top:1px solid #9ca3af}
+.reference-sources ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:.5rem 1.5rem;padding-left:1.25rem}
+.reference-sources a{overflow-wrap:anywhere}
