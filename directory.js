@@ -49,12 +49,15 @@ function addFavorites(){
  cards().forEach((card,index)=>{
   if(card.querySelector(".favorite-toggle"))return;
   const key=keyFor(card,index),button=document.createElement("button");
+  const itemName=(card.querySelector("h3")?.textContent||"cet élément").trim();
+  const courseLink=card.querySelector("a.btn[href]");
+  if(courseLink){courseLink.setAttribute("aria-label",(courseLink.textContent.trim()||"Ouvrir")+" "+itemName);}
   button.type="button";button.className="favorite-toggle btn ghost";
   function paint(){
    const on=(progress().favorites||[]).includes(key);
    button.textContent=on?"★ Retirer des favoris":"☆ Ajouter aux favoris";
    button.setAttribute("aria-pressed",String(on));
-   button.setAttribute("aria-label",(on?"Retirer ":"Ajouter ")+(card.querySelector("h3")?.textContent||"cet élément")+" "+(on?"des favoris":"aux favoris"));
+   button.setAttribute("aria-label",(on?"★ Retirer des favoris : ":"☆ Ajouter aux favoris : ")+itemName);
   }
   button.addEventListener("click",()=>{
    if(typeof P.favorite==="function")P.favorite(key);
