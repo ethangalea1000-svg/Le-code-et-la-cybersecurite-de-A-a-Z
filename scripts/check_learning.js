@@ -68,7 +68,7 @@ const serviceWorker = fs.readFileSync(path.join(root, "sw.js"), "utf8");
 for (const asset of ["cours/project-curriculum.js", "cours/course-reference.js", "cours/course-reference-extra.js", "cours/course-practice.js", "data/quiz-bank.js"]) {
   assert.ok(serviceWorker.includes('"' + asset + '"'), "Ressource pédagogique absente du cache hors ligne : " + asset);
 }
-assert.ok(serviceWorker.includes('const CACHE_NAME = "code-cyber-static-v13"'), "La version du cache hors ligne doit être mise à jour.");
+assert.ok(serviceWorker.includes('const CACHE_NAME = "code-cyber-static-v14"'), "La version du cache hors ligne doit être mise à jour.");
 assert.ok(serviceWorker.includes('if (url.pathname.includes("/api/")) return;'), "Le service worker ne doit pas intercepter les API.");
 const sharedUx = fs.readFileSync(path.join(root, "site.js"), "utf8");
 assert.ok(sharedUx.includes("azThemePreference"), "Le choix du thème doit être mémorisé.");
@@ -108,4 +108,12 @@ assert.ok(sharedUx.includes("Revenir en haut de la page"), "Le bouton de retour 
 assert.ok(sharedUx.includes("window.scrollTo({top:0,behavior:"), "Le retour en haut doit respecter la préférence de mouvement.");
 assert.ok(a11yCss.includes(".az-back-to-top[hidden]{display:none!important}"), "Le bouton de retour en haut doit respecter l'attribut hidden.");
 
+const chmodPage = fs.readFileSync(path.join(root, "simulateur-chmod.html"), "utf8");
+assert.ok(chmodPage.includes('id="chmodOctal"') && chmodPage.includes('id="chmodSymbolic"'), "Le simulateur chmod doit afficher les notations octale et symbolique.");
+assert.ok(chmodPage.includes('data-mode="755"') && chmodPage.includes('data-mode="600"'), "Le simulateur chmod doit proposer des exemples prédéfinis.");
+assert.ok(chmodPage.includes('id="chmodCheck"') && chmodPage.includes('answer==="600"'), "Le mini-défi chmod doit valider la réponse 600.");
+assert.ok(serviceWorker.includes('"simulateur-chmod.html"'), "Le simulateur chmod doit être mis en cache hors ligne.");
+const cyberAcademy = fs.readFileSync(path.join(root, "cyberacademy.js"), "utf8");
+assert.ok(cyberAcademy.includes('new Date().toISOString().slice(0,10)'), "La série quotidienne doit utiliser une clé de date UTC.");
+assert.ok(cyberAcademy.includes("setUTCHours(0,0,0,0)") && cyberAcademy.includes("setUTCDate(d.getUTCDate()-1)"), "Le calcul de série doit avancer en UTC.");
 console.log("OK — 14 cours, " + Object.values(sandbox.window.courseData).reduce((n, c) => n + c.sections.length, 0) + " leçons, " + missionCount + " missions et " + seeds.length + " notions de quiz validés.");
