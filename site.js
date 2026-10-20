@@ -244,9 +244,14 @@ syncGlobalNav();
       update();
     }
     /* Chargement différé sans retarder les images visibles dès l'arrivée. */
-    document.querySelectorAll("img:not([loading])").forEach(img=>{
-      /* Évite les lectures géométriques synchrones pour chaque image au démarrage. */
-      if(!img.hasAttribute("fetchpriority"))img.loading="lazy";
+    const pendingImages=Array.from(document.querySelectorAll("img:not([loading])"));
+    /* Lire toutes les géométries avant toute écriture DOM évite les recalculs synchrones répétés. */
+    const imageVisibility=pendingImages.map(img=>{
+      const rect=img.getBoundingClientRect();
+      return rect.top < window.innerHeight && rect.bottom > 0;
+    });
+    pendingImages.forEach((img,index)=>{
+      if(!img.hasAttribute("fetchpriority"))img.loading=imageVisibility[index]?"eager":"lazy";
       if(!img.hasAttribute("decoding"))img.decoding="async";
     });
     /* Nettoyage prudent : seules les clés de cache explicitement temporaires sont supprimées. */
