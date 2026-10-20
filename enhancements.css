@@ -951,3 +951,13 @@ main :where(p,li) a{overflow-wrap:anywhere}
 @media(min-width:601px) and (max-width:900px){.quiz-layout{grid-template-columns:220px minmax(0,1fr);gap:12px}.quiz-filter-panel{padding:18px 14px}.quiz-card{padding:22px 20px}}
 @media(hover:none){.quiz-answers .answer:not(:disabled):hover{transform:none}}
 @media print{header,footer,.az-theme-toggle,#azReadingProgress,.skip-link,nav,.btn,.quiz-controls,.quiz-reset,.quiz-mode-row{display:none!important}body,.quiz-page,.quiz-hero,.quiz-workspace{background:#fff!important;color:#000!important}main,.quiz-shell,.quiz-card,.quiz-filter-panel{width:100%!important;max-width:100%!important;padding:0!important;margin:0!important;border:0!important;box-shadow:none!important;color:#000!important}a{color:#000!important;text-decoration:underline}p,li,h1,h2,h3{color:#000!important;break-inside:avoid}.quiz-layout{display:block}.quiz-filter-panel{display:none!important}}
+
+
+/* Bouton de retour en haut : visible uniquement après un défilement utile. */
+.az-back-to-top{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:1500;display:grid;place-items:center;width:48px;height:48px;border:1px solid #547568;border-radius:50%;background:#10251f;color:#a2ffd5;font-size:25px;font-weight:800;line-height:1;box-shadow:0 5px 22px #0005}
+.az-back-to-top:hover{background:#1b4033;border-color:#82e9bd}
+.az-back-to-top:focus-visible{outline:3px solid #42e8a4;outline-offset:4px}
+.az-back-to-top[hidden]{display:none!important}
+html[data-theme="light"] .az-back-to-top{background:#fff;color:#14583d;border-color:#729887;box-shadow:0 5px 22px #1d293522}
+@media print{.az-back-to-top{display:none!important}}
+@media(max-width:600px){.az-back-to-top{right:max(12px,env(safe-area-inset-right));bottom:max(12px,env(safe-area-inset-bottom));width:46px;height:46px}}
