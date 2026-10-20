@@ -3,6 +3,7 @@
 from html.parser import HTMLParser
 from pathlib import Path
 import sys
+import re
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -162,8 +163,13 @@ def main():
             errors.append("sw.js : version de cache nommée absente.")
         if "const BASE = " not in sw_source:
             errors.append("sw.js : périmètre de cache explicite absent.")
-        if '"/api/' in sw_source or "'/api/" in sw_source:
+        # Les exclusions API dans le fetch handler sont légitimes ; contrôler
+        # uniquement le tableau PRECACHE évite les faux positifs.
+        precache_match = re.search(r"const\\s+PRECACHE\\s*=\\s*\\[(.*?)\\];", sw_source, re.S)
+        if precache_match and re.search(r"""["'][^"']*/api/[^"']*["']""", precache_match.group(1)):
             errors.append("sw.js : ne pas mettre les routes API dans le précache statique.")
+        if not precache_match:
+            errors.append("sw.js : tableau PRECACHE introuvable.")
     except (OSError, UnicodeError) as exc:
         errors.append(f"sw.js illisible : {exc}")
 
