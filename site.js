@@ -261,3 +261,33 @@ syncGlobalNav();
   document.addEventListener("pointerover",prefetchFrom,{passive:true});
   document.addEventListener("focusin",prefetchFrom);
 })();
+
+
+/* Navigation longue : bouton de retour en haut, discret et accessible au clavier. */
+(function(){
+  "use strict";
+  function setup(){
+    if(document.getElementById("azBackToTop"))return;
+    const button=document.createElement("button");
+    button.id="azBackToTop";button.type="button";button.className="az-back-to-top";
+    button.textContent="↑";button.setAttribute("aria-label","Revenir en haut de la page");
+    button.title="Revenir en haut";
+    button.hidden=true;
+    button.addEventListener("click",function(){
+      window.scrollTo({top:0,behavior:window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+    });
+    document.body.appendChild(button);
+    let scheduled=false;
+    function update(){
+      scheduled=false;
+      button.hidden=window.scrollY<480;
+    }
+    window.addEventListener("scroll",function(){
+      if(!scheduled){scheduled=true;window.requestAnimationFrame(update)}
+    },{passive:true});
+    window.addEventListener("resize",update,{passive:true});
+    update();
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",setup,{once:true});
+  else setup();
+})();
