@@ -1029,3 +1029,34 @@ body.home-page .hero p{color:#374151!important}
 body.home-page .heroIn>small{color:#14532d!important}
 body.home-page .hero .stats small{color:#374151!important}
 body.home-page .path-actions .btn.ghost{color:#263746!important;background:#fff!important;border:1px solid #aab8a3!important}
+
+
+/* Correctifs Lighthouse du 20/10/2026 : éviter le CLS du bouton injecté et
+   donner priorité aux contrastes de l'accueil sur les anciennes règles globales. */
+body.home-page:not(.course-page):not(.lesson-page) .hero p,
+body.home-page:not(.course-page):not(.lesson-page) .hero .stats small{
+  color:#374151!important;
+  opacity:1!important;
+}
+body.home-page:not(.course-page):not(.lesson-page) .heroIn>small{
+  color:#14532d!important;
+  opacity:1!important;
+}
+body.home-page:not(.course-page):not(.lesson-page) .path-actions .btn.ghost{
+  color:#263746!important;
+  background:#fff!important;
+  border:1px solid #aab8a3!important;
+}
+/* Le contrôle ajouté par site.js ne doit pas agrandir l'en-tête après le premier rendu. */
+header > .az-readable-toggle{
+  position:fixed;
+  right:16px;
+  bottom:16px;
+  z-index:1001;
+  margin:0;
+  max-width:min(240px,calc(100vw - 32px));
+  box-shadow:0 4px 18px #0002;
+}
+@media(max-width:760px){
+  header > .az-readable-toggle{right:12px;bottom:12px;max-width:calc(100vw - 24px);}
+}
