@@ -1021,3 +1021,11 @@ body.home-page .quick-start-card p{color:#374151!important}
 /* Le bandeau de lecture est fixed : il ne doit jamais participer au flux ni au CLS. */
 #azReadingProgress{position:fixed;inset:0 0 auto 0;width:100%;height:3px;pointer-events:none;z-index:1000}
 @media(prefers-reduced-motion:reduce){#azReadingProgress::after{transition:none!important}}
+
+
+/* Contraste WCAG pour les éléments explicitement signalés par Lighthouse sur l'accueil. */
+body.home-page .hero{color:#202b35!important}
+body.home-page .hero p{color:#374151!important}
+body.home-page .heroIn>small{color:#14532d!important}
+body.home-page .hero .stats small{color:#374151!important}
+body.home-page .path-actions .btn.ghost{color:#263746!important;background:#fff!important;border:1px solid #aab8a3!important}
