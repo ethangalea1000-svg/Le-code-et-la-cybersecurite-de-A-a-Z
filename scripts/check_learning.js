@@ -68,7 +68,7 @@ const serviceWorker = fs.readFileSync(path.join(root, "sw.js"), "utf8");
 for (const asset of ["cours/project-curriculum.js", "cours/course-reference.js", "cours/course-reference-extra.js", "cours/course-practice.js", "data/quiz-bank.js"]) {
   assert.ok(serviceWorker.includes('"' + asset + '"'), "Ressource pédagogique absente du cache hors ligne : " + asset);
 }
-assert.ok(serviceWorker.includes('const CACHE_NAME = "code-cyber-static-v9"'), "La version du cache hors ligne doit être mise à jour.");
+assert.ok(serviceWorker.includes('const CACHE_NAME = "code-cyber-static-v10"'), "La version du cache hors ligne doit être mise à jour.");
 assert.ok(serviceWorker.includes('if (url.pathname.includes("/api/")) return;'), "Le service worker ne doit pas intercepter les API.");
 const sharedUx = fs.readFileSync(path.join(root, "site.js"), "utf8");
 assert.ok(sharedUx.includes("azThemePreference"), "Le choix du thème doit être mémorisé.");
@@ -91,5 +91,10 @@ for (const rule of [
 ]) {
   assert.ok(a11yCss.includes(rule), "Amélioration accessibilité / responsive / impression absente : " + rule);
 }
+
+assert.ok(sharedUx.includes("azBackToTop"), "Le bouton de retour en haut doit être disponible.");
+assert.ok(sharedUx.includes("Revenir en haut de la page"), "Le bouton de retour en haut doit avoir un nom accessible.");
+assert.ok(sharedUx.includes("window.scrollTo({top:0,behavior:"), "Le retour en haut doit respecter la préférence de mouvement.");
+assert.ok(a11yCss.includes(".az-back-to-top[hidden]{display:none!important}"), "Le bouton de retour en haut doit respecter l'attribut hidden.");
 
 console.log("OK — 14 cours, " + Object.values(sandbox.window.courseData).reduce((n, c) => n + c.sections.length, 0) + " leçons, " + missionCount + " missions et " + seeds.length + " notions de quiz validés.");
