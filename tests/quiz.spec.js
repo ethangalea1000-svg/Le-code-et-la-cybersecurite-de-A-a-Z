@@ -16,7 +16,10 @@ test("le thème suit le système puis mémorise le choix manuel", async ({ page 
 });
 
 test("une réponse au quiz met à jour le résultat et la progression locale", async ({ page }) => {
+  page.on("pageerror", error => console.error("QUIZ_PAGE_ERROR:", error.message));
+  page.on("console", message => { if (message.type() === "error") console.error("QUIZ_CONSOLE_ERROR:", message.text()); });
   await page.goto("/quiz.html");
+  await expect.poll(() => page.evaluate(() => Array.isArray(window.quizSeeds) ? window.quizSeeds.length : -1)).toBeGreaterThan(0);
   const answers = page.locator("#answers button.answer");
   await expect(answers).toHaveCount(4);
   await expect(page.locator("#next")).toBeDisabled();
