@@ -251,7 +251,8 @@ syncGlobalNav();
       return rect.top < window.innerHeight && rect.bottom > 0;
     });
     pendingImages.forEach((img,index)=>{
-      if(!img.hasAttribute("fetchpriority"))img.loading=imageVisibility[index]?"eager":"lazy";
+      const initiallyVisible=imageVisibility[index];
+      if(!img.hasAttribute("fetchpriority"))img.loading=initiallyVisible?"eager":"lazy";
       if(!img.hasAttribute("decoding"))img.decoding="async";
     });
     /* Nettoyage prudent : seules les clés de cache explicitement temporaires sont supprimées. */
