@@ -993,5 +993,31 @@ body.home-page .heroIn>small,body.home-page main .section>small,body.home-page m
 body.home-page .hero p,body.home-page main .section>p,body.home-page main .section .muted{color:#374151!important;}
 body.home-page .path-actions .btn.ghost,body.home-page main .btn.ghost{color:#263746!important;border-color:#aab8a3!important;border-bottom-color:#aab8a3!important;background:#fff!important;}
 body.home-page .hero .stats small{color:#374151!important;}
-/* Les composants d'accueil restent en place pendant l'initialisation. */
-.home-page .hero{contain:layout style;}
+
+
+/* Correctifs d'accessibilité ciblés — audit du 20 octobre 2026. */
+/* Les sections sombres doivent conserver du texte clair ; les sections claires un texte sombre. */
+body.home-page .heroIn>small{color:#176b20!important}
+body.home-page .hero p{color:#374151!important}
+body.home-page .hero .stats small{color:#374151!important}
+body.home-page main .section:not(.dark)>small,
+body.home-page main .section:not(.dark)>div>small{color:#14532d!important}
+body.home-page main .section:not(.dark)>p,
+body.home-page main .section:not(.dark) .muted,
+body.home-page main .section:not(.dark) article p{color:#374151!important}
+body.home-page main .section.dark,
+body.home-page main .section.dark h2,
+body.home-page main .section.dark>small,
+body.home-page main .section.dark>p,
+body.home-page main .section.dark .muted,
+body.home-page main .section.dark .rules span{color:#f3f6f8!important}
+body.home-page main .section.dark>small{color:#9af5c9!important}
+body.home-page main .section.dark>p,
+body.home-page main .section.dark .muted{color:#d5dee6!important}
+body.home-page .path-actions .btn.ghost,
+body.home-page main .btn.ghost{color:#263746!important;border:1px solid #aab8a3!important;background:#fff!important}
+body.home-page .quick-start-card .quick-kicker{color:#14532d!important}
+body.home-page .quick-start-card p{color:#374151!important}
+/* Le bandeau de lecture est fixed : il ne doit jamais participer au flux ni au CLS. */
+#azReadingProgress{position:fixed;inset:0 0 auto 0;width:100%;height:3px;pointer-events:none;z-index:1000}
+@media(prefers-reduced-motion:reduce){#azReadingProgress::after{transition:none!important}}
