@@ -47,6 +47,10 @@ def main():
             errors.append("index.html : métadonnée Open Graph og:title absente.")
         if not any(m.get("property") == "og:description" for m in parser.meta):
             errors.append("index.html : métadonnée Open Graph og:description absente.")
+        if not any(m.get("property") == "og:image" for m in parser.meta):
+            errors.append("index.html : métadonnée Open Graph og:image absente.")
+        if not any(m.get("name") == "twitter:image" for m in parser.meta):
+            errors.append("index.html : métadonnée twitter:image absente.")
     atelier = ROOT / "atelier.html"
     if atelier.exists():
         parser = Tags()
