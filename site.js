@@ -147,3 +147,83 @@ syncGlobalNav();
   script.defer = true;
   document.head.appendChild(script);
 })();
+
+
+/* UX globale : thème système + choix mémorisé, progression de lecture et contrôles clavier. */
+(function(){
+  "use strict";
+  const KEY="azThemePreference";
+  let preference="system";
+  try {
+    const saved=localStorage.getItem(KEY);
+    if(saved==="light"||saved==="dark"||saved==="system") preference=saved;
+  } catch (_) {}
+  const media=window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+  function applyTheme(){
+    const resolved=preference==="system"?(media&&media.matches?"dark":"light"):preference;
+    document.documentElement.dataset.theme=resolved;
+    document.documentElement.style.colorScheme=resolved;
+    const button=document.getElementById("azThemeToggle");
+    if(button){
+      button.setAttribute("aria-pressed",String(preference!=="system"));
+      button.setAttribute("aria-label",preference==="system"?"Thème automatique (cliquer pour changer)":resolved==="dark"?"Passer au thème clair":"Passer au thème sombre");
+      button.title=preference==="system"?"Thème automatique":resolved==="dark"?"Thème sombre":"Thème clair";
+      button.textContent=resolved==="dark"?"☀ Mode clair":"☾ Mode sombre";
+    }
+  }
+  function toggleTheme(){
+    const current=document.documentElement.dataset.theme || (media&&media.matches?"dark":"light");
+    preference=current==="dark"?"light":"dark";
+    try{localStorage.setItem(KEY,preference)}catch(_){}
+    applyTheme();
+  }
+  function setup(){
+    applyTheme();
+    if(media){
+      const changed=()=>{if(preference==="system")applyTheme()};
+      if(media.addEventListener)media.addEventListener("change",changed);
+      else if(media.addListener)media.addListener(changed);
+    }
+    if(!document.getElementById("azThemeToggle")){
+      const header=document.querySelector("body > header");
+      if(header){
+        const button=document.createElement("button");
+        button.id="azThemeToggle";button.type="button";button.className="az-theme-toggle";
+        button.addEventListener("click",toggleTheme);
+        header.appendChild(button);applyTheme();
+      }
+    }
+    if(!document.getElementById("azReadingProgress")){
+      const bar=document.createElement("div");bar.id="azReadingProgress";bar.setAttribute("role","progressbar");
+      bar.setAttribute("aria-label","Progression de lecture");bar.setAttribute("aria-valuemin","0");bar.setAttribute("aria-valuemax","100");bar.setAttribute("aria-valuenow","0");
+      document.body.prepend(bar);
+      let scheduled=false;
+      function update(){
+        scheduled=false;
+        const root=document.documentElement,range=root.scrollHeight-window.innerHeight;
+        const value=range>0?Math.round(Math.max(0,Math.min(1,window.scrollY/range))*100):0;
+        bar.style.setProperty("--reading-progress",value+"%");
+        bar.setAttribute("aria-valuenow",String(value));
+      }
+      window.addEventListener("scroll",()=>{if(!scheduled){scheduled=true;window.requestAnimationFrame(update)}},{passive:true});
+      window.addEventListener("resize",update,{passive:true});update();
+    }
+    /* Les images de contenu ne bloquent pas le premier affichage. */
+    document.querySelectorAll("img:not([loading])").forEach(img=>{
+      if(!img.hasAttribute("fetchpriority"))img.loading="lazy";
+      if(!img.hasAttribute("decoding"))img.decoding="async";
+    });
+    /* Nettoyage prudent : seules les clés de cache explicitement temporaires sont supprimées. */
+    try{
+      for(let i=localStorage.length-1;i>=0;i--){
+        const key=localStorage.key(i);
+        if(key&&/^azTempCache:/i.test(key)){
+          const item=localStorage.getItem(key);
+          try{const record=JSON.parse(item);if(record&&record.expiresAt&&record.expiresAt<Date.now())localStorage.removeItem(key)}catch(_){}
+        }
+      }
+    }catch(_){}
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",setup,{once:true});
+  else setup();
+})();
