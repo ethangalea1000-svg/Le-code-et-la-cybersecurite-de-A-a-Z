@@ -109,3 +109,32 @@ syncGlobalNav();
     },{once:true});
   }
 })();
+
+
+/* Fenêtre d'indice accessible : déclenchée par tout bouton portant data-hint. */
+(function(){
+ "use strict";
+ function openHint(trigger){
+   const raw=trigger.getAttribute("data-hint");
+   if(!raw)return;
+   let dialog=document.getElementById("azHintDialog");
+   if(!dialog){
+     dialog=document.createElement("dialog");dialog.id="azHintDialog";dialog.className="az-hint-dialog";
+     dialog.innerHTML='<h2 id="azHintTitle">Indice</h2><div id="azHintContent"></div><button class="az-hint-close" type="button">Fermer</button>';
+     document.body.appendChild(dialog);
+     dialog.querySelector("button").addEventListener("click",()=>dialog.close());
+     dialog.addEventListener("click",event=>{if(event.target===dialog)dialog.close()});
+     dialog.addEventListener("close",()=>{if(dialog.__trigger&&dialog.__trigger.isConnected)dialog.__trigger.focus()});
+     dialog.addEventListener("cancel",()=>{if(dialog.__trigger&&dialog.__trigger.isConnected)dialog.__trigger.focus()});
+   }
+   dialog.__trigger=trigger;
+   dialog.querySelector("#azHintContent").textContent=raw;
+   if(typeof dialog.showModal==="function")dialog.showModal();
+   else {dialog.setAttribute("open","");dialog.querySelector("button").onclick=()=>{dialog.removeAttribute("open");trigger.focus()}}
+   dialog.querySelector("button").focus();
+ }
+ document.addEventListener("click",event=>{
+   const trigger=event.target.closest("[data-hint]");
+   if(trigger){event.preventDefault();openHint(trigger)}
+ });
+})();
