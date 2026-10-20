@@ -1,5 +1,5 @@
 /* Service worker GitHub Pages — cache borné au site, sans intercepter les API. */
-const CACHE_NAME = "code-cyber-static-v3";
+const CACHE_NAME = "code-cyber-static-v4";
 const BASE = "/Le-code-et-la-cybersecurite-de-A-a-Z/";
 const PRECACHE = [
   "index.html", "offline.html", "style.css", "enhancements.css", "site.js", "learning-focus.js", "guided-challenges.js",
@@ -11,7 +11,7 @@ const PRECACHE = [
   "cours/git-github.html", "cours/sql.html", "cours/reseaux.html", "cours/linux.html",
   "cours/cybersecurite.html", "cours/cryptographie.html", "cours/securite-web.html",
   "cours/osint.html", "cours/analyse-incidents.html", "cours/projet-final.html",
-  "cours/course-page.js", "cours/course-page.css", "cours/mentor.css", "cours/mentor.js",
+  "cours/course-page.js", "cours/course-page.css", "cours/mentor.css", "cours/mentor.js",\n  "cours/project-curriculum.js", "cours/course-reference.js", "cours/course-reference-extra.js", "cours/course-practice.js",\n  "data/quiz-bank.js", "directory.js", "project-metadata.js",
   "courses-01.js", "courses-02.js", "courses-03.js", "courses-04.js", "courses-05.js",
   "courses-06.js", "courses-07.js", "courses-08.js", "courses-09.js", "courses-10.js",
   "courses-11.js", "courses-12.js", "courses-13.js", "courses-14.js",
