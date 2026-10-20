@@ -1,0 +1,41 @@
+name: Signaler un bug
+description: Signaler un problème sur un cours, un quiz ou une fonctionnalité
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: "Ne partage aucune donnée personnelle, mot de passe ou capture contenant des informations privées."
+  - type: input
+    id: page
+    attributes:
+      label: Page concernée
+      description: URL ou nom de la page
+      placeholder: "cours/python.html"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportement attendu
+      placeholder: "Ce qui aurait dû se passer"
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Comportement observé
+      placeholder: "Ce qui s'est passé"
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Navigateur et appareil
+      placeholder: "Chrome sur Windows"
+  - type: textarea
+    id: steps
+    attributes:
+      label: Étapes pour reproduire
+    validations:
+      required: false
