@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Simulateur pédagogique interactif des permissions Linux chmod : calcule les droits en octal et en symbolique, sans exécuter de commande.">
+<meta name="author" content="Le Code &amp; la Cybersécurité de A à Z">
+<link rel="canonical" href="https://ethangalea1000-svg.github.io/Le-code-et-la-cybersecurite-de-A-a-Z/simulateur-chmod.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Simulateur chmod — Permissions Linux">
+<meta property="og:description" content="Comprends les droits Linux avec un simulateur visuel sans exécution de commande.">
+<meta property="og:url" content="https://ethangalea1000-svg.github.io/Le-code-et-la-cybersecurite-de-A-a-Z/simulateur-chmod.html">
+<meta name="twitter:card" content="summary">
+<title>Simulateur chmod — Permissions Linux | Le Code &amp; la Cybersécurité</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="enhancements.css">
+<style>
+.chmod-page{max-width:1000px;margin:auto;padding:clamp(20px,5vw,52px) 20px 70px}
+.chmod-page h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.08;margin:.35em 0}
+.chmod-intro{max-width:72ch;color:var(--muted)}
+.chmod-panel{margin:22px 0;padding:clamp(16px,3vw,26px);border:1px solid var(--line);border-radius:16px;background:var(--panel)}
+.chmod-groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.chmod-group{border:1px solid var(--line);border-radius:12px;padding:14px}
+.chmod-group h3{margin:0 0 12px;font-size:1rem}
+.chmod-check{display:flex;align-items:center;gap:10px;min-height:42px;color:var(--text)}
+.chmod-check input{width:20px;height:20px;accent-color:var(--green)}
+.chmod-result{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.chmod-value{padding:16px;border:1px solid var(--line);border-radius:12px;min-width:0}
+.chmod-value span{display:block;color:var(--muted);font-size:.82rem}
+.chmod-value output{display:block;font:700 clamp(1.5rem,4vw,2.4rem)/1.4 ui-monospace,monospace;overflow-wrap:anywhere}
+.chmod-presets{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.chmod-presets button,.chmod-actions button{padding:10px 13px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--text);font:inherit;cursor:pointer}
+.chmod-presets button:hover,.chmod-actions button:hover{border-color:var(--green)}
+.chmod-command{padding:12px;border-radius:8px;background:var(--bg);font:600 1rem ui-monospace,monospace;overflow-wrap:anywhere}
+.chmod-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.chmod-note{color:var(--muted);font-size:.92rem}
+.chmod-question{display:grid;gap:10px}
+.chmod-question label{font-weight:650}
+.chmod-question select{max-width:320px;padding:10px;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:8px;font:inherit}
+#chmodFeedback{min-height:1.5em}
+@media(max-width:650px){.chmod-groups,.chmod-result{grid-template-columns:1fr}.chmod-group{padding:12px}}
+html[data-theme="light"] .chmod-group,html[data-theme="light"] .chmod-value{background:#fff}
+</style>
+</head>
+<body>
+<header>
+<a class="brand" href="index.html"><span>&lt;/&gt;</span> LE CODE <b>&amp;</b;> LA CYBERSÉCURITÉ</a>
+<nav aria-label="Navigation principale">
+<a href="index.html">Accueil</a><a href="parcours.html">Parcours</a><a href="cours.html">Cours</a><a href="projets.html">Projets</a><a href="exercices.html">Exercices</a><a href="quiz.html">Quiz</a><a href="progression.html">Progression</a>
+</nav>
+</header>
+<a class="skip-link" href="#mainContent">Aller directement au contenu</a>
+<main id="mainContent" class="chmod-page">
+<p class="tag">LABORATOIRE LINUX · EXERCICE INTERACTIF</p>
+<h1>Simulateur de permissions <code>chmod</code></h1>
+<p class="chmod-intro">Active ou désactive les droits pour le propriétaire, le groupe et les autres. Le calcul se met à jour immédiatement. Cet outil est une simulation pédagogique : il ne modifie aucun fichier et n’exécute aucune commande sur ton appareil.</p>
+<section class="chmod-panel" aria-labelledby="editorTitle">
+<h2 id="editorTitle">1. Compose les permissions</h2>
+<div class="chmod-presets" aria-label="Exemples prédéfinis">
+<button type="button" data-mode="644">644 — fichier courant</button>
+<button type="button" data-mode="755">755 — exécution publique</button>
+<button type="button" data-mode="600">600 — propriétaire uniquement</button>
+<button type="button" data-mode="700">700 — dossier privé exécutable</button>
+</div>
+<div class="chmod-groups">
+<fieldset class="chmod-group" data-group="u"><legend>Propriétaire (u)</legend>
+<label class="chmod-check"><input type="checkbox" data-bit="4" checked> Lecture (r) · 4</label>
+<label class="chmod-check"><input type="checkbox" data-bit="2" checked> Écriture (w) · 2</label>
+<label class="chmod-check"><input type="checkbox" data-bit="1"> Exécution (x) · 1</label>
+</fieldset>
+<fieldset class="chmod-group" data-group="g"><legend>Groupe (g)</legend>
+<label class="chmod-check"><input type="checkbox" data-bit="4" checked> Lecture (r) · 4</label>
+<label class="chmod-check"><input type="checkbox" data-bit="2"> Écriture (w) · 2</label>
+<label class="chmod-check"><input type="checkbox" data-bit="1"> Exécution (x) · 1</label>
+</fieldset>
+<fieldset class="chmod-group" data-group="o"><legend>Autres (o)</legend>
+<label class="chmod-check"><input type="checkbox" data-bit="4" checked> Lecture (r) · 4</label>
+<label class="chmod-check"><input type="checkbox" data-bit="2"> Écriture (w) · 2</label>
+<label class="chmod-check"><input type="checkbox" data-bit="1"> Exécution (x) · 1</label>
+</fieldset>
+</div>
+</section>
+<section class="chmod-panel" aria-labelledby="resultTitle">
+<h2 id="resultTitle">2. Résultat</h2>
+<div class="chmod-result">
+<div class="chmod-value"><span>Notation octale</span><output id="chmodOctal" aria-live="polite">644</output></div>
+<div class="chmod-value"><span>Notation symbolique</span><output id="chmodSymbolic">rw-r--r--</output></div>
+<div class="chmod-value"><span>Commande simulée</span><output id="chmodCommand">chmod 644 exemple.txt</output></div>
+</div>
+<p id="chmodExplanation" class="chmod-note">Le propriétaire peut lire et écrire. Le groupe et les autres peuvent lire.</p>
+<div class="chmod-actions"><button type="button" id="chmodCopy">Copier la commande</button><button type="button" id="chmodReset">Réinitialiser à 644</button></div>
+<p id="chmodStatus" role="status" aria-live="polite" class="chmod-note"></p>
+</section>
+<section class="chmod-panel chmod-question" aria-labelledby="challengeTitle">
+<h2 id="challengeTitle">3. Mini-défi</h2>
+<p>Tu veux que seul le propriétaire puisse lire et écrire un fichier, sans exécution. Quelle valeur octale correspond à ce besoin ?</p>
+<label for="chmodAnswer">Choisis une réponse</label>
+<select id="chmodAnswer"><option value="">— Choisir —</option><option value="400">400</option><option value="600">600</option><option value="644">644</option><option value="700">700</option></select>
+<button type="button" class="btn" id="chmodCheck">Vérifier ma réponse</button>
+<p id="chmodFeedback" role="status" aria-live="polite"></p>
+</section>
+<section class="chmod-panel">
+<h2>À retenir</h2>
+<ul>
+<li><code>r</code> (lecture) vaut 4, <code>w</code> (écriture) vaut 2 et <code>x</code> (exécution) vaut 1.</li>
+<li>On additionne les valeurs pour chaque catégorie : <code>rwx = 4 + 2 + 1 = 7</code>.</li>
+<li>Les trois chiffres correspondent au propriétaire, au groupe, puis aux autres.</li>
+</ul>
+<p class="chmod-note">Le simulateur couvre les permissions ordinaires à trois chiffres. Les bits spéciaux (setuid, setgid et sticky bit) ne sont pas inclus dans cet exercice.</p>
+<p><a href="cours/linux.html">Revoir le cours Linux →</a> · <a href="exercices.html">Retour aux exercices →</a></p>
+</section>
+</main>
+<footer>LE CODE &amp; LA CYBERSÉCURITÉ DE A À Z <span>Simulation locale • Aucun fichier modifié</span></footer>
+<script src="site.js"></script>
+<script>
+(function(){
+"use strict";
+const groups=[...document.querySelectorAll(".chmod-group")];
+const octal=document.getElementById("chmodOctal"),symbolic=document.getElementById("chmodSymbolic"),command=document.getElementById("chmodCommand"),explanation=document.getElementById("chmodExplanation"),status=document.getElementById("chmodStatus");
+const descriptions={u:"Le propriétaire",g:"Le groupe",o:"Les autres"};
+function calculate(){
+ const digits=groups.map(group=>[...group.querySelectorAll("input")].reduce((sum,input)=>sum+(input.checked?Number(input.dataset.bit):0),0));
+ const marks=groups.map(group=>[...group.querySelectorAll("input")].map(input=>input.checked?({4:"r",2:"w",1:"x"})[input.dataset.bit]:"-").join(""));
+ const mode=digits.join("");
+ octal.value=mode;symbolic.value=marks.join("");command.value="chmod "+mode+" exemple.txt";
+ explanation.textContent=digits.map((digit,i)=>{const active=[];if(digit&4)active.push("lire");if(digit&2)active.push("écrire");if(digit&1)active.push("exécuter");return descriptions[["u","g","o"][i]]+" peut "+(active.length?active.join(", "):"n’a aucun droit")}).join(". ")+".";
+}
+function setMode(mode){
+ if(!/^[0-7]{3}$/.test(mode))return;
+ groups.forEach((group,index)=>{const value=Number(mode[index]);group.querySelectorAll("input").forEach(input=>{input.checked=Boolean(value&Number(input.dataset.bit))})});
+ calculate();status.textContent="Exemple "+mode+" chargé.";
+}
+groups.forEach(group=>group.addEventListener("change",calculate));
+document.querySelectorAll("[data-mode]").forEach(button=>button.addEventListener("click",()=>setMode(button.dataset.mode)));
+document.getElementById("chmodReset").addEventListener("click",()=>setMode("644"));
+document.getElementById("chmodCopy").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(command.value);status.textContent="Commande copiée. Elle n’a pas été exécutée."}catch(_){status.textContent="Copie indisponible dans ce navigateur. Sélectionne le texte affiché pour le copier."}});
+document.getElementById("chmodCheck").addEventListener("click",()=>{const answer=document.getElementById("chmodAnswer").value;const feedback=document.getElementById("chmodFeedback");if(!answer){feedback.textContent="Choisis une réponse avant de vérifier.";return}feedback.textContent=answer==="600"?"Correct : 600 = rw-------. Le propriétaire lit et écrit, sans exécution.":"Pas encore. Le premier chiffre concerne le propriétaire ; le second et le troisième doivent être à zéro. Réessaie.";});
+calculate();
+})();
+</script>
+</body>
+</html>
