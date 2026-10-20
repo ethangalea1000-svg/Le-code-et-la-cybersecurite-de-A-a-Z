@@ -167,9 +167,10 @@ syncGlobalNav();
     const button=document.getElementById("azThemeToggle");
     if(button){
       button.setAttribute("aria-pressed",String(preference!=="system"));
-      button.setAttribute("aria-label",preference==="system"?"Thème automatique (cliquer pour changer)":resolved==="dark"?"Passer au thème clair":"Passer au thème sombre");
-      button.title=preference==="system"?"Thème automatique":resolved==="dark"?"Thème sombre":"Thème clair";
       button.textContent=resolved==="dark"?"☀ Mode clair":"☾ Mode sombre";
+      /* Le nom accessible contient le libellé visible (WCAG 2.5.3). */
+      button.setAttribute("aria-label",button.textContent.replace(/^[☀☾]\s*/,""));
+      button.title=preference==="system"?"Thème automatique":resolved==="dark"?"Mode clair":"Mode sombre";
     }
   }
   function toggleTheme(){
@@ -224,14 +225,28 @@ syncGlobalNav();
     if(!document.getElementById("azReadingProgress")){
       const bar=document.createElement("div");bar.id="azReadingProgress";bar.setAttribute("role","progressbar");
       bar.setAttribute("aria-label","Progression de lecture");bar.setAttribute("aria-valuemin","0");bar.setAttribute("aria-valuemax","100");bar.setAttribute("aria-valuenow","0");
+      bar.setAttribute("aria-live","off");
+      const progressStatus=document.createElement("span");
+      progressStatus.className="az-sr-only";
+      progressStatus.setAttribute("role","status");
+      progressStatus.setAttribute("aria-live","polite");
+      progressStatus.setAttribute("aria-atomic","true");
+      progressStatus.textContent="Progression de lecture : 0 %";
+      document.body.prepend(progressStatus);
       document.body.prepend(bar);
-      let scheduled=false,scrollRange=0;
+      let scheduled=false,scrollRange=0,lastAnnounced=-1;
       function measure(){scrollRange=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);}
       function update(){
         scheduled=false;
         const value=scrollRange>0?Math.round(Math.max(0,Math.min(1,window.scrollY/scrollRange))*100):0;
         bar.style.setProperty("--reading-progress",value+"%");
         bar.setAttribute("aria-valuenow",String(value));
+        /* Annonce uniquement aux jalons de 25 % pour éviter le bavardage au défilement. */
+        const milestone=Math.min(100,Math.floor(value/25)*25);
+        if(milestone!==lastAnnounced){
+          lastAnnounced=milestone;
+          progressStatus.textContent="Progression de lecture : "+milestone+" %";
+        }
       }
       function scheduleUpdate(){if(!scheduled){scheduled=true;window.requestAnimationFrame(update);}}
       measure();
