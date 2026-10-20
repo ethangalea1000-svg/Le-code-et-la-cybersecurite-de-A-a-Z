@@ -1142,3 +1142,12 @@ body.home-page #mainContent > .hero .heroIn > small{
 body.home-page #mainContent > .hero h1 em{
   color:#42e8a4!important;
 }
+
+
+/* Optimisation mobile : éviter le flou coûteux du header pendant le rendu et le défilement. */
+@media (max-width: 760px) {
+  body.home-page > header {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}
