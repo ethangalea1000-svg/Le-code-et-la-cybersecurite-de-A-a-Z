@@ -1174,3 +1174,63 @@ body.home-page #mainContent > .hero h1 em{
     backdrop-filter: none !important;
   }
 }
+
+/* Correctifs WCAG 2.1 AA — rapport de contraste du 20 octobre 2026.
+   Ces règles sont volontairement placées en fin de fichier pour neutraliser
+   les anciennes couleurs trop pâles sans modifier la structure des pages. */
+.project-time{
+  color:#475569!important;
+  background:transparent!important;
+}
+.az-focus label,
+.az-focus .az-focus-status,
+.az-focus .az-focus-empty{
+  color:#d1dbe5!important;
+}
+#azFocusStatsTitle,
+#azFocusStatsTitle + *,
+.az-focus h3{
+  color:#f1f5f9!important;
+}
+.feedback-form label,
+.feedback-form .feedback-note,
+#detailsCount{
+  color:#e2e8f0!important;
+}
+.library-card .tags span{
+  color:#334155!important;
+  background:#f1f5f9!important;
+  border-color:#64748b!important;
+}
+.library-note strong{
+  color:#f8fafc!important;
+}
+.eyebrow,
+.section>small,
+.overline,
+#courseTitle.eyebrow{
+  color:#267a16!important;
+}
+#runStatus{
+  color:#475569!important;
+}
+footer{
+  color:#526170!important;
+}
+.num,.tag,.quiz-filter-tip span{
+  color:#245b08!important;
+}
+.quiz-kicker,
+.quiz-side-index,
+.quiz-panel-index,
+.quiz-mode-label,
+.quiz-question-label{
+  color:#52616b!important;
+}
+.quiz-page .quiz-intro,
+.quiz-page .quiz-side-note p,
+.quiz-page .quiz-workspace-desc,
+.quiz-page .quiz-stats,
+.quiz-page .quiz-key-hint{
+  color:#52616b!important;
+}
