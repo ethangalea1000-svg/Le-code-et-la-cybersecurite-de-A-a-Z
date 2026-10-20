@@ -1146,25 +1146,7 @@ body.home-page #mainContent > .hero h1 em{
   color:#267a16!important;
 }
 
-body.home-page #mainContent > .hero,
-body.home-page #mainContent > .hero .heroIn,
-body.home-page #mainContent > .hero h1,
-body.home-page #mainContent > .hero .stats,
-body.home-page #mainContent > .hero .stats b{
-  color:#eef3f8!important;
-}
-body.home-page #mainContent > .hero p,
-body.home-page #mainContent > .hero .stats small{
-  color:#f1f5f9!important;
-  opacity:1!important;
-}
-body.home-page #mainContent > .hero .heroIn > small{
-  color:#7df4bd!important;
-  opacity:1!important;
-}
-body.home-page #mainContent > .hero h1 em{
-  color:#42e8a4!important;
-}
+/* Supprimé : ancienne palette de texte clair incompatible avec le fond clair du hero. */
 
 
 /* Optimisation mobile : éviter le flou coûteux du header pendant le rendu et le défilement. */
@@ -1271,4 +1253,15 @@ article.course-card:focus{
   clip:rect(0,0,0,0)!important;
   white-space:nowrap!important;
   border:0!important;
+}
+
+
+/* Éviter le chevauchement du bouton de lecture avec le bouton retour en haut. */
+body.home-page > header > #azReadableToggle{
+  bottom:76px!important;
+}
+@media(max-width:760px){
+  body.home-page > header > #azReadableToggle{
+    bottom:72px!important;
+  }
 }
