@@ -74,6 +74,8 @@ const sharedUx = fs.readFileSync(path.join(root, "site.js"), "utf8");
 assert.ok(sharedUx.includes("azThemePreference"), "Le choix du thème doit être mémorisé.");
 assert.ok(sharedUx.includes("prefers-color-scheme: dark"), "Le thème système doit être détecté.");
 assert.ok(sharedUx.includes("azReadingProgress"), "La progression de lecture doit être présente.");
+assert.ok(sharedUx.includes("azReadableToggle"), "Le bouton de lisibilité renforcée doit être disponible.");
+assert.ok(sharedUx.includes("azReadableMode"), "Le choix de lisibilité renforcée doit être mémorisé.");
 assert.ok(sharedUx.includes('hint.rel="prefetch"'), "Le préchargement des pages internes doit être présent.");
 assert.ok(sharedUx.includes('initiallyVisible?"eager":"lazy"'), "Les images visibles au premier affichage ne doivent pas être différées.");
 assert.ok(sharedUx.includes("AZ.exportProgress"), "L'export de progression doit être disponible.");
@@ -87,6 +89,7 @@ assert.ok(progressionHtml.includes('role="status" aria-live="polite"'), "Le rés
 
 
 const a11yCss = fs.readFileSync(path.join(root, "enhancements.css"), "utf8");
+assert.ok(a11yCss.includes('html[data-readable="true"]'), "Les styles de lisibilité renforcée doivent être présents.");
 for (const rule of [
   "prefers-reduced-motion:reduce", "forced-colors:active", "@media print",
   "scroll-padding-top", "scroll-margin-top", "::selection", "touch-action:manipulation",
