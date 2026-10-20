@@ -1263,3 +1263,17 @@ body.home-page > header > #azReadableToggle{
     bottom:72px!important;
   }
 }
+
+/* Correctif de contraste WCAG : lien de navigation actif sur l’en-tête clair. */
+body header nav a[aria-current="page"]{
+  color:#245b00!important;
+  background:#e8f4df!important;
+  border-color:#b8d5a6!important;
+  text-decoration:underline;
+  text-decoration-thickness:2px;
+  text-underline-offset:4px;
+}
+/* Les cartes d’accueil contiennent des liens : la carte elle-même n’est pas un contrôle. */
+.home-page .cards > article.path-card{cursor:default!important;}
+.home-page .cards > article.path-card:hover{transform:none!important;border-color:var(--line)!important;}
+.home-page .cards > article.path-card a{cursor:pointer;}
