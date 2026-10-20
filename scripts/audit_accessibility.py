@@ -20,6 +20,7 @@ class PageAudit(HTMLParser):
         self.images_without_alt = 0
         self.inputs_without_label = []
         self.labels_for = set()
+        self.aria_labeled_ids = set()
         self.input_ids = set()
         self.ids = set()
         self.duplicate_ids = set()
@@ -44,6 +45,8 @@ class PageAudit(HTMLParser):
             self.labels_for.add(a["for"])
         elif tag in {"input", "select", "textarea"} and a.get("id"):
             self.input_ids.add(a["id"])
+            if a.get("aria-label", "").strip() or a.get("aria-labelledby", "").strip():
+                self.aria_labeled_ids.add(a["id"])
         if a.get("id"):
             if a["id"] in self.ids:
                 self.duplicate_ids.add(a["id"])
@@ -89,7 +92,7 @@ def main():
             totals["ID dupliqués"] += len(audit.duplicate_ids)
             if len(examples) < 80:
                 examples.append(f"{rel}: ID dupliqués: {', '.join(sorted(audit.duplicate_ids))}")
-        unlabeled = audit.input_ids - audit.labels_for
+        unlabeled = audit.input_ids - audit.labels_for - audit.aria_labeled_ids
         if unlabeled:
             totals["champs potentiellement sans label"] += len(unlabeled)
             if len(examples) < 80:
