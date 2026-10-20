@@ -319,3 +319,103 @@ syncGlobalNav();
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",setup,{once:true});
   else setup();
 })();
+
+/* Consentement aux cookies facultatifs et Microsoft Clarity.
+   Clarity ne se charge jamais avant un accord explicite. */
+(function(){
+  "use strict";
+  const CONSENT_KEY = "azCookieConsentV1";
+  const CLARITY_ID = "z0obb8vx9w";
+  function readConsent(){
+    try {
+      const value = localStorage.getItem(CONSENT_KEY);
+      return value === "accepted" || value === "rejected" ? value : null;
+    } catch (_) { return null; }
+  }
+  function loadClarity(){
+    if (window.clarity || document.querySelector('script[data-clarity-consented="true"]')) return;
+    window.clarity = window.clarity || function(){(window.clarity.q=window.clarity.q||[]).push(arguments);};
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = "https://www.clarity.ms/tag/" + CLARITY_ID;
+    script.dataset.clarityConsented = "true";
+    const first = document.getElementsByTagName("script")[0];
+    if (first && first.parentNode) first.parentNode.insertBefore(script, first);
+    else document.head.appendChild(script);
+  }
+  function saveConsent(value){
+    try { localStorage.setItem(CONSENT_KEY, value); } catch (_) {}
+    closePanel();
+    if (value === "accepted") loadClarity();
+    announce(value === "accepted"
+      ? "Cookies facultatifs acceptés. Microsoft Clarity est activé."
+      : "Cookies facultatifs refusés. Seuls les éléments nécessaires restent actifs.");
+  }
+  let panel, status;
+  function announce(message){
+    if (!status) {
+      status = document.getElementById("azCookieStatus");
+      if (!status) {
+        status = document.createElement("p");
+        status.id = "azCookieStatus";
+        status.className = "az-cookie-status";
+        status.setAttribute("role","status");
+        status.setAttribute("aria-live","polite");
+        document.body.appendChild(status);
+      }
+    }
+    status.textContent = message;
+    status.hidden = false;
+    window.setTimeout(function(){ if(status) status.hidden=true; }, 5000);
+  }
+  function closePanel(){
+    if(panel){ panel.remove(); panel=null; }
+  }
+  function openPanel(){
+    closePanel();
+    panel=document.createElement("section");
+    panel.className="az-cookie-panel";
+    panel.setAttribute("role","dialog");
+    panel.setAttribute("aria-modal","false");
+    panel.setAttribute("aria-labelledby","azCookieTitle");
+    panel.innerHTML =
+      '<div class="az-cookie-copy"><h2 id="azCookieTitle">Tes choix de confidentialité</h2>' +
+      '<p>Les cookies nécessaires assurent le fonctionnement du site. Avec ton accord, Microsoft Clarity nous aide à comprendre l’utilisation du site grâce à des mesures d’audience et des analyses de navigation. Clarity masque par défaut certains contenus sensibles, mais ce service reste facultatif.</p>' +
+      '<p>Tu peux modifier ton choix à tout moment depuis « Gérer les cookies ». Consulte aussi la <a href="confidentialite.html">déclaration de confidentialité</a>.</p></div>' +
+      '<div class="az-cookie-actions"><button type="button" data-cookie-choice="accepted">Accepter les cookies facultatifs</button>' +
+      '<button type="button" data-cookie-choice="rejected">Refuser les cookies facultatifs</button>' +
+      '<button type="button" data-cookie-close="true" class="az-cookie-secondary">Fermer</button></div>';
+    document.body.appendChild(panel);
+    panel.querySelectorAll("[data-cookie-choice]").forEach(function(button){
+      button.addEventListener("click",function(){saveConsent(button.dataset.cookieChoice);});
+    });
+    panel.querySelector("[data-cookie-close]").addEventListener("click",closePanel);
+    const first=panel.querySelector("button");
+    if(first) first.focus();
+  }
+  function addStyles(){
+    if(document.getElementById("azCookieStyles")) return;
+    const style=document.createElement("style");
+    style.id="azCookieStyles";
+    style.textContent=
+      '.az-cookie-panel{position:fixed;z-index:10000;inset:auto 16px 16px;display:flex;gap:24px;align-items:center;justify-content:space-between;max-width:1100px;margin-inline:auto;padding:22px;border:1px solid #b9c9bd;border-radius:16px;background:#fff;color:#202b35;box-shadow:0 12px 40px #0003;font:15px/1.55 system-ui,sans-serif}' +
+      '.az-cookie-copy{max-width:690px}.az-cookie-copy h2{margin:0 0 8px;font-size:20px;color:#202b35}.az-cookie-copy p{margin:7px 0;color:#394651}.az-cookie-copy a{color:#155e3d;text-decoration:underline}' +
+      '.az-cookie-actions{display:flex;flex-direction:column;gap:8px;min-width:230px}.az-cookie-actions button,.az-cookie-manage{min-height:42px;padding:10px 14px;border:1px solid #286447;border-radius:8px;background:#17633f;color:#fff;font:600 14px/1.3 system-ui,sans-serif;cursor:pointer}.az-cookie-actions button[data-cookie-choice="rejected"],.az-cookie-secondary{background:#fff!important;color:#202b35!important;border-color:#7b8992!important}.az-cookie-manage{position:fixed;z-index:9998;right:12px;bottom:12px;box-shadow:0 3px 12px #0002}.az-cookie-status{position:fixed;z-index:10001;left:12px;bottom:12px;max-width:calc(100% - 24px);padding:10px 14px;background:#14251c;color:#fff;border-radius:8px}.az-cookie-status[hidden]{display:none}' +
+      '.az-cookie-panel button:focus-visible,.az-cookie-manage:focus-visible{outline:3px solid #1669c7;outline-offset:3px}@media(max-width:760px){.az-cookie-panel{inset:auto 8px 8px;display:block;max-height:85vh;overflow:auto;padding:17px}.az-cookie-actions{margin-top:12px;min-width:0}.az-cookie-manage{right:8px;bottom:8px}}';
+    document.head.appendChild(style);
+  }
+  function setup(){
+    addStyles();
+    const manage=document.createElement("button");
+    manage.type="button";manage.className="az-cookie-manage";manage.textContent="Gérer les cookies";
+    manage.setAttribute("aria-haspopup","dialog");
+    manage.addEventListener("click",openPanel);
+    document.body.appendChild(manage);
+    const choice=readConsent();
+    if(choice==="accepted") loadClarity();
+    else if(!choice) openPanel();
+  }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",setup,{once:true});
+  else setup();
+})();
+
