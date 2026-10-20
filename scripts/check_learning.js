@@ -68,7 +68,7 @@ const serviceWorker = fs.readFileSync(path.join(root, "sw.js"), "utf8");
 for (const asset of ["cours/project-curriculum.js", "cours/course-reference.js", "cours/course-reference-extra.js", "cours/course-practice.js", "data/quiz-bank.js"]) {
   assert.ok(serviceWorker.includes('"' + asset + '"'), "Ressource pédagogique absente du cache hors ligne : " + asset);
 }
-assert.ok(serviceWorker.includes('const CACHE_NAME = "code-cyber-static-v11"'), "La version du cache hors ligne doit être mise à jour.");
+assert.ok(serviceWorker.includes('const CACHE_NAME = "code-cyber-static-v12"'), "La version du cache hors ligne doit être mise à jour.");
 assert.ok(serviceWorker.includes('if (url.pathname.includes("/api/")) return;'), "Le service worker ne doit pas intercepter les API.");
 const sharedUx = fs.readFileSync(path.join(root, "site.js"), "utf8");
 assert.ok(sharedUx.includes("azThemePreference"), "Le choix du thème doit être mémorisé.");
@@ -81,6 +81,7 @@ assert.ok(sharedUx.includes('initiallyVisible?"eager":"lazy"'), "Les images visi
 assert.ok(sharedUx.includes("AZ.exportProgress"), "L'export de progression doit être disponible.");
 assert.ok(sharedUx.includes("AZ.importProgress"), "L'import de progression doit être disponible.");
 assert.ok(sharedUx.includes("AZ.resetProgress"), "La réinitialisation locale de progression doit être disponible.");
+assert.ok(sharedUx.includes("schemaVersion:1"), "La structure de progression doit être versionnée.");
 assert.ok(sharedUx.includes('key!=="azThemePreference"'), "La réinitialisation ne doit pas effacer la préférence de thème.");
 const progressionHtml = fs.readFileSync(path.join(root, "progression.html"), "utf8");
 assert.ok(progressionHtml.includes('id="resetProgressButton"'), "Le bouton de réinitialisation doit être présent dans le tableau de bord.");
