@@ -44,9 +44,11 @@ assert.ok(missionCount >= 42, "La banque doit proposer au moins 42 missions.");
 
 const quizPath = path.join(root, "data", "quiz-bank.js");
 const quizSource = fs.readFileSync(quizPath, "utf8");
-const seedMatch = quizSource.match(/window\.quizSeeds\s*=\s*(\[[\s\S]*\]);?\s*$/);
-assert.ok(seedMatch, "La banque de quiz doit exposer un tableau de notions.");
-const seeds = JSON.parse(seedMatch[1]);
+const seedStart = quizSource.indexOf("window.quizSeeds=");
+const seedArrayStart = quizSource.indexOf("[", seedStart);
+const seedArrayEnd = quizSource.lastIndexOf("];");
+assert.ok(seedStart >= 0 && seedArrayStart > seedStart && seedArrayEnd > seedArrayStart, "La banque de quiz doit exposer un tableau de notions.");
+const seeds = JSON.parse(quizSource.slice(seedArrayStart, seedArrayEnd + 1));
 assert.ok(Array.isArray(seeds) && seeds.length >= 100, "La banque de quiz doit contenir au moins 100 notions.");
 for (const [index, seed] of seeds.entries()) {
   assert.ok(seed.title && seed.body, "Notion de quiz incomplète : " + index);
