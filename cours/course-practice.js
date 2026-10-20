@@ -55,6 +55,6 @@ window.coursePractice = {
 "14":{title:"Projet final — livrer avec qualité",missions:[
 {q:"Quel critère rend un test utile ?",options:["Il est reproductible avec un résultat attendu","Il est exécuté une seule fois sans notes","Il ne vérifie que le cas idéal","Il dépend d'un secret partagé"],answer:0,why:"Un test reproductible indique les prérequis, les étapes et le résultat attendu."},
 {q:"Que doit contenir une bonne documentation de projet ?",options:["Seulement un logo","Installation, usage, prérequis, limites et tests","Des identifiants privés","Des fonctionnalités inventées"],answer:1,why:"La documentation doit permettre de comprendre et reproduire le projet."},
-{q:"Que signifie annoncer qu'un test a réussi ?",options:["Tous les défauts sont impossibles","Le scénario testé a réussi dans les conditions indiquées","Le projet est invulnérable","Aucun autre test n'est nécessaire"],answer:1,why:"Un test réussi valide un scénario précis, pas l'absence de tout défaut."]
+{q:"Que signifie annoncer qu'un test a réussi ?",options:["Tous les défauts sont impossibles","Le scénario testé a réussi dans les conditions indiquées","Le projet est invulnérable","Aucun autre test n'est nécessaire"],answer:1,why:"Un test réussi valide un scénario précis, pas l'absence de tout défaut."}
 ]}
 };
