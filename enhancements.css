@@ -1120,3 +1120,25 @@ body.home-page #mainContent > .hero .heroIn>small{
   color:#14532d!important;
   opacity:1!important;
 }
+
+
+/* Correctif contraste PageSpeed : le hero conserve son fond sombre, donc ses textes doivent rester clairs. */
+body.home-page #mainContent > .hero,
+body.home-page #mainContent > .hero .heroIn,
+body.home-page #mainContent > .hero h1,
+body.home-page #mainContent > .hero .stats,
+body.home-page #mainContent > .hero .stats b{
+  color:#eef3f8!important;
+}
+body.home-page #mainContent > .hero p,
+body.home-page #mainContent > .hero .stats small{
+  color:#f1f5f9!important;
+  opacity:1!important;
+}
+body.home-page #mainContent > .hero .heroIn > small{
+  color:#7df4bd!important;
+  opacity:1!important;
+}
+body.home-page #mainContent > .hero h1 em{
+  color:#42e8a4!important;
+}
