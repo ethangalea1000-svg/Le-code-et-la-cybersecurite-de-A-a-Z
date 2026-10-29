@@ -45,6 +45,9 @@
  ["Tests unitaires","assert, unittest","Vérifie automatiquement les comportements attendus.","assert 2 * 3 == 6","Les tests doivent inclure les limites et les cas d'erreur."]
  ]);
  add("05",[
+ ["Initialiser un dépôt","git init","Crée un dépôt Git local dans le dossier courant.","git init","Vérifier le dossier courant avant l’initialisation ; un dépôt existant n’a généralement pas besoin d’être réinitialisé."],
+ ["Configurer l’identité","git config --global user.name; git config --global user.email","Définit le nom et l’adresse associés aux nouveaux commits sur cette machine.","git config --global user.name \"Ton nom\"\ngit config --global user.email \"toi@example.com\"","Ces valeurs identifient les commits ; elles ne configurent pas la connexion à GitHub."],
+ ["Configurer un dépôt distant","git remote add origin URL; git remote -v","Associe le dépôt local à une adresse distante et permet de vérifier les remotes configurés.","git remote add origin https://github.com/UTILISATEUR/DEPOT.git\ngit remote -v","Remplacer l’URL d’exemple par celle du dépôt autorisé et vérifier la destination avant git push."],
  ["Cloner un dépôt","git clone URL","Crée une copie locale d'un dépôt distant.","git clone https://github.com/octocat/Hello-World.git","Ne cloner que des dépôts que tu es autorisé à consulter ; vérifier les scripts avant de les exécuter."],
  ["Index et répertoire de travail","git add, git diff --staged","L'index prépare précisément le contenu du prochain commit.","git add fichier.txt\ngit diff --staged","Un fichier ajouté à l'index peut encore contenir des secrets : inspecter avant commit."],
  ["Fusionner","git merge branche","Intègre les changements d'une branche dans la branche courante.","git switch main\ngit merge feature","S'assurer de la bonne branche cible et résoudre chaque conflit consciemment."],
