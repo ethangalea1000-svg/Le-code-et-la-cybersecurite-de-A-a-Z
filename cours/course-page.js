@@ -37,7 +37,7 @@ function renderPractice(){
  return '<section class="practice-lab" id="mission-pratique"><div class="eyebrow">MISSION PRATIQUE · VALIDATION</div><h2>'+esc(pack.title)+'</h2><p>Réponds sans regarder la correction. Chaque réponse affiche une explication et tu peux réessayer.</p><div class="practice-progress" id="practiceProgress" aria-live="polite"></div><div id="practiceMissions">'+pack.missions.map(function(m,i){return practiceCard(m,i)}).join("")+'</div><p class="practice-note">Ces missions vérifient des notions précises. Pour les commandes système, utilise un environnement de test et consulte la documentation avant toute exécution.</p></section>';
 }
 function practiceCard(m,i){
- return '<article class="practice-card" data-practice="'+i+'"><div class="practice-card-head"><span>MISSION '+String(i+1).padStart(2,"0")+'</span><span>'+ (i+1)+' / 3</span></div><h3>'+esc(m.q)+'</h3><div class="practice-options">'+m.options.map(function(o,j){return '<button type="button" class="practice-option" data-choice="'+j+'">'+esc(o)+'</button>'}).join("")+'</div><p class="practice-feedback" hidden aria-live="polite"></p><button type="button" class="practice-retry" hidden>Réessayer</button></article>';
+ return '<article class="practice-card" data-practice="'+i+'"><div class="practice-card-head"><span>MISSION '+String(i+1).padStart(2,"0")+'</span><span>'+ (i+1)+' / 3</span></div><h3>'+esc(m.q)+'</h3><div class="practice-options">'+m.options.map(function(o,j){return '<button type="button" class="practice-option" data-choice="'+j+'">'+esc(o)+'</button>'}).join("")+'</div>'+(m.hint?'<button type="button" class="practice-hint-toggle" aria-expanded="false">Afficher une piste</button><p class="practice-hint" hidden>'+esc(m.hint)+'</p>':"")+'<p class="practice-feedback" hidden aria-live="polite"></p><button type="button" class="practice-retry" hidden>Réessayer</button></article>';
 }
 function initPractice(){
  const pack=window.coursePractice?.[id],wrap=document.querySelector("#practiceMissions"),progress=document.querySelector("#practiceProgress");
@@ -48,6 +48,8 @@ function initPractice(){
  function update(){const done=pack.missions.filter((_,i)=>saved[id].includes(i)).length;progress.textContent=done+" / "+pack.missions.length+" missions réussies";progress.setAttribute("aria-label",progress.textContent)}
  wrap.querySelectorAll(".practice-card").forEach(function(card){
   const i=Number(card.dataset.practice),mission=pack.missions[i],feedback=card.querySelector(".practice-feedback"),retry=card.querySelector(".practice-retry");
+  const hintToggle=card.querySelector(".practice-hint-toggle"),hint=card.querySelector(".practice-hint");
+  if(hintToggle&&hint){hintToggle.addEventListener("click",function(){hint.hidden=!hint.hidden;hintToggle.setAttribute("aria-expanded",String(!hint.hidden));hintToggle.textContent=hint.hidden?"Afficher une piste":"Masquer la piste"})}
   if(saved[id].includes(i)){feedback.hidden=false;feedback.textContent="Mission déjà réussie. "+mission.why;feedback.classList.add("is-correct");card.classList.add("is-complete")}
   card.querySelectorAll("[data-choice]").forEach(function(button){
    button.addEventListener("click",function(){
