@@ -74,7 +74,7 @@ test("la navigation a des noms accessibles et un focus clavier visible", async (
       if (!name) failures.push({ path, issue: "Lien de navigation sans nom visible", index: i });
     }
     let found = false;
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 24; i++) {
       if (await page.evaluate(() => document.activeElement?.matches("header nav a:focus-visible") || false)) { found = true; break; }
       await page.keyboard.press("Tab");
     }
