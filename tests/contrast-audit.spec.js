@@ -18,7 +18,7 @@ test("le texte visible des composants principaux respecte le contraste WCAG", as
         if (!node.getClientRects().length) return null;
         const fg = getComputedStyle(node).color;
         const parse = value => {
-          const m = value.match(/[\\d.]+/g);
+          const m = value.match(/[0-9.]+/g);
           if (!m || m.length < 3) return null;
           return [Number(m[0]), Number(m[1]), Number(m[2]), m.length > 3 ? Number(m[3]) : 1];
         };
