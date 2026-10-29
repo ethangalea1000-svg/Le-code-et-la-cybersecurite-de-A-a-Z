@@ -1277,3 +1277,8 @@ body header nav a[aria-current="page"]{
 .home-page .cards > article.path-card{cursor:default!important;}
 .home-page .cards > article.path-card:hover{transform:none!important;border-color:var(--line)!important;}
 .home-page .cards > article.path-card a{cursor:pointer;}
+
+/* Contrast corrections found by the rendered browser audit. */
+.exercise-list h2{color:#f4f7fb!important}
+.exercise-note{color:#d3deea!important}
+.lesson-main .load-error button.btn{color:#fff!important}
