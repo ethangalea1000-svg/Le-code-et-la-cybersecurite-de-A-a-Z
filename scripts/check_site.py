@@ -70,8 +70,8 @@ def main():
             source = js_file.read_text(encoding="utf-8")
         except (OSError, UnicodeError):
             continue
-        dynamic_ids.update(re.findall(r"""\\.id\\s*=\\s*["']([^"']+)["']""", source))
-        dynamic_ids.update(re.findall(r"""\\bid=["']([^"']+)["']""", source))
+        dynamic_ids.update(re.findall(r"""[.]id[ ]*=[ ]*["']([^"']+)["']""", source))
+        dynamic_ids.update(re.findall(r"""id=["']([^"']+)["']""", source))
     for html_file in html_files:
         entry = parsed_pages.get(html_file.resolve())
         if not entry:
