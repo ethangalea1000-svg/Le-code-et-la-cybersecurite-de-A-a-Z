@@ -61,6 +61,17 @@ def main():
                 continue
             if not target.exists():
                 errors.append(f"{html_file.relative_to(ROOT)}: {attr} local introuvable: {raw}")
+    # IDs injected by client-side scripts count as valid only when an explicit
+    # id assignment or HTML id attribute is present in a local JavaScript file.
+    import re
+    dynamic_ids = set()
+    for js_file in ROOT.rglob("*.js"):
+        try:
+            source = js_file.read_text(encoding="utf-8")
+        except (OSError, UnicodeError):
+            continue
+        dynamic_ids.update(re.findall(r"""\\.id\\s*=\\s*["']([^"']+)["']""", source))
+        dynamic_ids.update(re.findall(r"""\\bid=["']([^"']+)["']""", source))
     for html_file in html_files:
         entry = parsed_pages.get(html_file.resolve())
         if not entry:
@@ -71,7 +82,7 @@ def main():
             if not target.exists() or target.suffix.lower() != ".html":
                 continue
             target_entry = parsed_pages.get(target)
-            if target_entry and fragment not in target_entry[0]:
+            if target_entry and fragment not in target_entry[0] and fragment not in dynamic_ids:
                 errors.append(f"{html_file.relative_to(ROOT)}: ancre locale introuvable: {raw}")
     if errors:
         print("ÉCHEC — références locales invalides :")
