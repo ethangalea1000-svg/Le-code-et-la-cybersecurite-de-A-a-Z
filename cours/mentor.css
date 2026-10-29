@@ -20,3 +20,13 @@
 .mentor-field input,.mentor-field select{background:#fff!important;color:#111827!important;border:2px solid #6b7280!important}
 .mentor-field input::placeholder{color:#4b5563!important;opacity:1!important}
 .mentor-option:focus-visible,.mentor-btn:focus-visible,.mentor-save:focus-visible,.mentor-avatar:focus-visible{outline:3px solid #111827!important;outline-offset:3px!important}
+
+
+/* Accessibilité et réduction du mentor flottant */
+.mentor{max-width:min(390px,calc(100vw - 24px));}
+.mentor-panel{min-width:0;max-width:calc(100vw - 110px);}
+.mentor-panel[hidden]{display:none!important;}
+.mentor-panel-top{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.mentor-minimize{border:1px solid #68758a;border-radius:8px;padding:5px 8px;background:#eef1f7;color:#172033;font:inherit;font-size:12px;font-weight:700;cursor:pointer;}
+.mentor-minimize:focus-visible,.mentor-avatar:focus-visible{outline:3px solid #172033;outline-offset:3px;}
+@media(max-width:420px){.mentor{right:8px;bottom:8px;left:8px;gap:8px;max-width:none}.mentor-avatar{width:48px;height:48px;border-radius:15px;font-size:25px}.mentor-panel{flex:1;padding:10px 12px;max-width:none}.mentor-actions{gap:6px}.mentor-btn{padding:7px 9px;font-size:12px}}
