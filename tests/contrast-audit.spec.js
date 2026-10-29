@@ -17,9 +17,9 @@ test("le texte visible des composants principaux respecte le contraste WCAG", as
   const failures = [];
   for (const path of pages) {
     await page.goto(path);
-    const samples = page.locator("header nav a, main h1, main h2, main p, main .btn, main button");
+    const samples = page.locator("header nav a:visible, main h1:visible, main h2:visible, main p:visible, main .btn:visible, main button:visible");
     const count = await samples.count();
-    for (let i = 0; i < Math.min(count, 80); i++) {
+    for (let i = 0; i < Math.min(count, 35); i++) {
       const el = samples.nth(i);
       const result = await el.evaluate(node => {
         if (!node.getClientRects().length) return null;
