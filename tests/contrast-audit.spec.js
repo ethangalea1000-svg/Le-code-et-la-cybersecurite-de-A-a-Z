@@ -3,7 +3,14 @@ const { test, expect } = require("@playwright/test");
 const pages = [
   "/index.html", "/cours.html", "/parcours.html", "/projets.html",
   "/quiz.html", "/progression.html", "/cours/html.html",
-  "/cours/css.html", "/cours/cybersecurite.html"
+  "/cours/css.html", "/cours/cybersecurite.html",
+  "/exercices.html", "/atelier.html", "/bibliotheque.html", "/recherche.html",
+  "/ressources.html", "/examens.html", "/certificats.html",
+  "/cours/javascript.html", "/cours/python.html", "/cours/git-github.html",
+  "/cours/sql.html", "/cours/reseaux.html", "/cours/linux.html",
+  "/cours/cryptographie.html", "/cours/securite-web.html", "/cours/osint.html",
+  "/cours/analyse-incidents.html", "/cours/lecon.html", "/simulateur-chmod.html",
+  "/laboratoire-python-sql.html"
 ];
 
 test("le texte visible des composants principaux respecte le contraste WCAG", async ({ page }) => {
@@ -53,4 +60,35 @@ test("le texte visible des composants principaux respecte le contraste WCAG", as
     }
   }
   expect(failures, "Contrastes calculés depuis les styles rendus : " + JSON.stringify(failures, null, 2)).toEqual([]);
+});
+
+
+test("la navigation a des noms accessibles et un focus clavier visible", async ({ page }) => {
+  const failures = [];
+  for (const path of pages) {
+    await page.goto(path);
+    const links = page.locator("header nav a:visible");
+    const count = await links.count();
+    for (let i = 0; i < count; i++) {
+      const name = (await links.nth(i).innerText()).trim();
+      if (!name) failures.push({ path, issue: "Lien de navigation sans nom visible", index: i });
+    }
+    let found = false;
+    for (let i = 0; i < 50; i++) {
+      if (await page.evaluate(() => document.activeElement?.matches("header nav a:focus-visible") || false)) { found = true; break; }
+      await page.keyboard.press("Tab");
+    }
+    if (!found) {
+      failures.push({ path, issue: "Aucun lien de navigation atteignable avec un focus clavier visible" });
+      continue;
+    }
+    const focus = await page.evaluate(() => {
+      const s = getComputedStyle(document.activeElement);
+      return { outlineStyle: s.outlineStyle, outlineWidth: s.outlineWidth, outlineColor: s.outlineColor, boxShadow: s.boxShadow };
+    });
+    const visibleOutline = focus.outlineStyle !== "none" && parseFloat(focus.outlineWidth) >= 2;
+    const visibleShadow = focus.boxShadow !== "none";
+    if (!visibleOutline && !visibleShadow) failures.push({ path, issue: "Indicateur de focus absent ou trop discret", focus });
+  }
+  expect(failures, JSON.stringify(failures, null, 2)).toEqual([]);
 });
