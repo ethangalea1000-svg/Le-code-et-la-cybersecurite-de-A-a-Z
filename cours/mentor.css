@@ -30,3 +30,10 @@
 .mentor-minimize{border:1px solid #68758a;border-radius:8px;padding:5px 8px;background:#eef1f7;color:#172033;font:inherit;font-size:12px;font-weight:700;cursor:pointer;}
 .mentor-minimize:focus-visible,.mentor-avatar:focus-visible{outline:3px solid #172033;outline-offset:3px;}
 @media(max-width:420px){.mentor{right:8px;bottom:8px;left:8px;gap:8px;max-width:none}.mentor-avatar{width:48px;height:48px;border-radius:15px;font-size:25px}.mentor-panel{flex:1;padding:10px 12px;max-width:none}.mentor-actions{gap:6px}.mentor-btn{padding:7px 9px;font-size:12px}}
+
+
+/* Sur les leçons, libérer la zone basse pour la navigation et la gestion des cookies. */
+.lesson-page-body .mentor{bottom:88px}
+@media(max-width:420px){
+  .lesson-page-body .mentor{bottom:82px}
+}

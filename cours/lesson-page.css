@@ -168,3 +168,56 @@ html body :focus-visible{outline:3px solid #111827!important;outline-offset:3px!
 
 /* Keep the retry label readable on the purple load-error button. */
 #retryLesson{color:#fff!important}
+
+
+/* CORRECTIF VISUEL — bouton de progression lisible dans tous ses états */
+html body .lesson-step .btn.next-step,
+html body .lesson-step .btn.next-step:visited{
+  background:#3730a3!important;
+  color:#fff!important;
+  border:2px solid #3730a3!important;
+  border-bottom:4px solid #211a83!important;
+}
+html body .lesson-step .btn.next-step:hover:not(:disabled){
+  background:#211a83!important;
+  color:#fff!important;
+  border-color:#211a83!important;
+  filter:none!important;
+}
+html body .lesson-step .btn.next-step:active:not(:disabled){
+  background:#1e1b4b!important;
+  color:#fff!important;
+  border-color:#1e1b4b!important;
+}
+html body .lesson-step .btn.next-step:focus-visible{
+  outline:3px solid #111827!important;
+  outline-offset:3px!important;
+}
+html body .lesson-step .btn.next-step:disabled{
+  background:#e5e7eb!important;
+  color:#374151!important;
+  border:2px solid #6b7280!important;
+  border-bottom:4px solid #6b7280!important;
+  opacity:1!important;
+  cursor:not-allowed!important;
+}
+
+/* La navigation de fin de leçon reste au-dessus des widgets flottants. */
+.lesson-page-body .lesson-main{padding-bottom:190px}
+.lesson-page-body .pager{
+  position:relative;
+  z-index:10000;
+  isolation:isolate;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:24px;
+}
+.lesson-page-body .pager .btn{
+  position:relative;
+  z-index:10000;
+}
+@media(max-width:600px){
+  .lesson-page-body .pager{display:grid;grid-template-columns:1fr}
+  .lesson-page-body .pager .btn{width:100%;min-width:0}
+  .lesson-page-body .lesson-main{padding-bottom:220px}
+}
