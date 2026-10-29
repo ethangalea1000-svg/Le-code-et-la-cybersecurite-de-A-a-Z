@@ -165,3 +165,6 @@ html body .challenge{background:#111827!important;color:#fff!important}
 html body .challenge p,html body .challenge li,html body .challenge strong{color:#fff!important}
 html body button:disabled{color:#374151!important;background:#e5e7eb!important}
 html body :focus-visible{outline:3px solid #111827!important;outline-offset:3px!important}
+
+/* Keep the retry label readable on the purple load-error button. */
+#retryLesson{color:#fff!important}
