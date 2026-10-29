@@ -12,18 +12,27 @@ class AssetParser(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
         self.assets = []
+        self.ids = set()
+        self.fragments = []
     def handle_starttag(self, tag, attrs):
         values = dict(attrs)
+        if values.get("id"):
+            self.ids.add(values["id"])
         for attr in ("href", "src", "poster"):
             value = values.get(attr)
             if value:
                 self.assets.append((tag, attr, value.strip()))
+                if attr == "href" and tag == "a":
+                    parsed = urlsplit(value.strip())
+                    if parsed.fragment and parsed.scheme.lower() not in IGNORED_SCHEMES and not parsed.netloc:
+                        self.fragments.append((value.strip(), parsed.path, parsed.fragment))
 
 def main():
     errors = []
     html_files = sorted(ROOT.rglob("*.html"))
     if not html_files:
         errors.append("Aucun fichier HTML trouvé.")
+    parsed_pages = {}
     for html_file in html_files:
         parser = AssetParser()
         try:
@@ -31,6 +40,7 @@ def main():
         except (OSError, UnicodeError) as exc:
             errors.append(f"{html_file.relative_to(ROOT)}: lecture impossible ({exc})")
             continue
+        parsed_pages[html_file.resolve()] = (parser.ids, parser.fragments)
         for tag, attr, raw in parser.assets:
             if not raw or raw.startswith("#") or raw.startswith("//"):
                 continue
@@ -51,6 +61,18 @@ def main():
                 continue
             if not target.exists():
                 errors.append(f"{html_file.relative_to(ROOT)}: {attr} local introuvable: {raw}")
+    for html_file in html_files:
+        entry = parsed_pages.get(html_file.resolve())
+        if not entry:
+            continue
+        _, fragments = entry
+        for raw, path, fragment in fragments:
+            target = (html_file.parent / path).resolve() if path else html_file.resolve()
+            if not target.exists() or target.suffix.lower() != ".html":
+                continue
+            target_entry = parsed_pages.get(target)
+            if target_entry and fragment not in target_entry[0]:
+                errors.append(f"{html_file.relative_to(ROOT)}: ancre locale introuvable: {raw}")
     if errors:
         print("ÉCHEC — références locales invalides :")
         for error in errors:
