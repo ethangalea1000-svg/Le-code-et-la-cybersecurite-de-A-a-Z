@@ -37,3 +37,46 @@
 @media(max-width:420px){
   .lesson-page-body .mentor{bottom:82px}
 }
+
+
+/* UX mentor — le widget fait partie du flux avant la leçon, jamais en surimpression. */
+.lesson-page-body .mentor{
+  position:relative;
+  inset:auto;
+  z-index:2;
+  display:flex;
+  align-items:flex-start;
+  justify-content:flex-end;
+  width:min(920px,calc(100% - 40px));
+  max-width:none;
+  margin:14px auto 0;
+  pointer-events:auto;
+}
+.lesson-page-body .mentor-panel{
+  flex:0 1 390px;
+  width:min(390px,100%);
+  max-width:none;
+}
+.lesson-page-body .mentor-avatar{flex:0 0 64px}
+@media(max-width:700px){
+  .lesson-page-body .mentor{
+    position:relative;
+    inset:auto;
+    width:calc(100% - 30px);
+    margin:12px auto 0;
+    gap:8px;
+    align-items:flex-start;
+  }
+  .lesson-page-body .mentor-panel{
+    flex:1 1 auto;
+    width:auto;
+    min-width:0;
+    max-width:none;
+    padding:10px 12px;
+  }
+  .lesson-page-body .mentor-avatar{
+    flex:0 0 48px;
+    width:48px;
+    height:48px;
+  }
+}
