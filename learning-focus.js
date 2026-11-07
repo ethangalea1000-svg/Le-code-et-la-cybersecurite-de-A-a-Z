@@ -48,8 +48,8 @@
     /* contraste : enhancements.css force un texte sombre en !important sur h1-h4, p, li, strong ; on garde le panneau sombre lisible */
 body:not(.course-page):not(.lesson-page) main .az-focus-panel .az-focus-stat strong{color:#8ff0bb!important}
 body:not(.course-page):not(.lesson-page) main .az-focus-panel .az-focus-stat span{color:#c0d0ca!important}
-body:not(.course-page):not(.lesson-page) main .az-focus-panel .az-focus-summary h3,body:not(.course-page):not(.lesson-page) main .az-focus-panel .az-focus-head h2{color:#f5fbf8!important}
-body:not(.course-page):not(.lesson-page) main .az-focus-panel .az-focus-head p,body:not(.course-page):not(.lesson-page) main .az-focus-panel .az-focus-status,body:not(.course-page):not(.lesson-page) main .az-focus-panel .az-focus-empty,body:not(.course-page):not(.lesson-page) main .az-focus-panel .az-focus-recent li{color:#c4d2cc!important}
+body:not(.course-page):not(.lesson-page) main .az-focus-panel .az-focus-summary h3{color:#f5fbf8!important}
+body:not(.course-page):not(.lesson-page) main .az-focus-panel .az-focus-status,body:not(.course-page):not(.lesson-page) main .az-focus-panel .az-focus-empty,body:not(.course-page):not(.lesson-page) main .az-focus-panel .az-focus-recent li{color:#c4d2cc!important}
 body:not(.course-page):not(.lesson-page) main .az-focus-panel .az-focus-recent li span:last-child{color:#8ff0bb!important}
     @media(max-width:760px){.az-focus-layout{grid-template-columns:1fr}.az-focus-clock{font-size:48px}}@media(prefers-reduced-motion:reduce){.az-focus-panel *{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
   `;
