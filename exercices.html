@@ -52,5 +52,5 @@ function runTests(){const e=exercises[active];if(e.kind==="choice")return;const 
 $("runTests").addEventListener("click",runTests);$("showHint").addEventListener("click",()=>{$("exerciseFeedback").textContent=exercises[active].hint||""});$("resetExercise").addEventListener("click",()=>{$("exerciseCode").value=exercises[active].starter;$("exerciseFeedback").textContent="Code de départ restauré. La validation précédente est conservée."});$("nextExercise").addEventListener("click",()=>load(active+1));$("clearProgress").addEventListener("click",()=>{if(confirm("Effacer la progression des exercices uniquement ?")){state={};save();load(active);$("exerciseFeedback").textContent="Progression des exercices effacée."}});$("menuBtn")?.addEventListener("click",()=> $("nav")?.classList.toggle("open"));
 load(0);renderProgress();
 })();
-</script>
+</script><script src="site.js"></script>
 </body></html>
