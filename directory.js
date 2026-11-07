@@ -20,8 +20,8 @@ function addTools(){
   const q=input.value.toLocaleLowerCase("fr").trim(),filter=box.dataset.filter||"all",onlyFavorites=box.dataset.favorites==="true",saved=progress().favorites||[];
   let visible=0;
   cards().forEach((card,index)=>{
-   const text=card.textContent.toLocaleLowerCase("fr"),level=(card.querySelector(".tag")?.textContent||"").trim(),fav=saved.includes(keyFor(card,index));
-   const show=(!q||text.includes(q))&&(filter==="all"||level===filter)&&(!onlyFavorites||fav);
+   const text=card.textContent.toLocaleLowerCase("fr"),level=(card.querySelector(".tag,.project-level")?.textContent||"").trim(),fav=saved.includes(keyFor(card,index));
+   const show=(!q||text.includes(q))&&(filter==="all"||level===filter||level.startsWith(filter+" "))&&(!onlyFavorites||fav);
    card.hidden=!show;if(show)visible++;
   });
   count.textContent=visible+" résultat"+(visible>1?"s":"")+" sur "+cards().length;
