@@ -1282,3 +1282,6 @@ body header nav a[aria-current="page"]{
 .exercise-list h2{color:#f4f7fb!important}
 .exercise-note{color:#d3deea!important}
 .lesson-main .load-error button.btn{color:#fff!important}
+
+/* Correctif contraste badges Exercices en theme clair */
+html[data-theme="light"] .exercise-meta span{color:#1d2935;border-color:#94a8bb;background:#eef3f8}
