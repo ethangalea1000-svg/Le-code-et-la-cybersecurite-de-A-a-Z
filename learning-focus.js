@@ -45,6 +45,12 @@
     .az-focus-summary h3{margin:0 0 13px;color:#f5fbf8;font-size:16px}.az-focus-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     .az-focus-stat{padding:12px;border:1px solid #293b35;border-radius:9px;background:#101b1c}.az-focus-stat strong{display:block;color:#8ff0bb;font-size:24px;line-height:1.2;font-variant-numeric:tabular-nums}.az-focus-stat span{display:block;margin-top:5px;color:#c0d0ca;font-size:11px;line-height:1.4}
     .az-focus-recent{margin:16px 0 0;padding:0;list-style:none}.az-focus-recent li{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px solid #24352f;color:#c4d2cc;font-size:12px;line-height:1.45}.az-focus-recent li span:last-child{flex-shrink:0;color:#8ff0bb;font-variant-numeric:tabular-nums}.az-focus-empty{color:#b3c5bd;font-size:12px;line-height:1.6}
+    /* contraste : enhancements.css force un texte sombre en !important sur h1-h4, p, li, strong ; on garde le panneau sombre lisible */
+body:not(.course-page):not(.lesson-page) main .az-focus-panel .az-focus-stat strong{color:#8ff0bb!important}
+body:not(.course-page):not(.lesson-page) main .az-focus-panel .az-focus-stat span{color:#c0d0ca!important}
+body:not(.course-page):not(.lesson-page) main .az-focus-panel .az-focus-summary h3,body:not(.course-page):not(.lesson-page) main .az-focus-panel .az-focus-head h2{color:#f5fbf8!important}
+body:not(.course-page):not(.lesson-page) main .az-focus-panel .az-focus-head p,body:not(.course-page):not(.lesson-page) main .az-focus-panel .az-focus-status,body:not(.course-page):not(.lesson-page) main .az-focus-panel .az-focus-empty,body:not(.course-page):not(.lesson-page) main .az-focus-panel .az-focus-recent li{color:#c4d2cc!important}
+body:not(.course-page):not(.lesson-page) main .az-focus-panel .az-focus-recent li span:last-child{color:#8ff0bb!important}
     @media(max-width:760px){.az-focus-layout{grid-template-columns:1fr}.az-focus-clock{font-size:48px}}@media(prefers-reduced-motion:reduce){.az-focus-panel *{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
   `;
   document.head.appendChild(style);
