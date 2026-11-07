@@ -1285,3 +1285,6 @@ body header nav a[aria-current="page"]{
 
 /* Correctif contraste badges Exercices en theme clair */
 html[data-theme="light"] .exercise-meta span{color:#1d2935;border-color:#94a8bb;background:#eef3f8}
+
+/* Correctif contraste : en theme sombre --text devient clair mais l en-tete reste blanc (hors pages de cours) ; le bouton Plus etait invisible (1,05:1) */
+html[data-theme="dark"] body:not(.course-page):not(.lesson-page) header nav .nav-more > summary{color:rgb(32,43,53)}
