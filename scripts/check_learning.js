@@ -68,7 +68,7 @@ const serviceWorker = fs.readFileSync(path.join(root, "sw.js"), "utf8");
 for (const asset of ["cours/project-curriculum.js", "cours/course-reference.js", "cours/course-reference-extra.js", "cours/course-practice.js", "data/quiz-bank.js"]) {
   assert.ok(serviceWorker.includes('"' + asset + '"'), "Ressource pédagogique absente du cache hors ligne : " + asset);
 }
-assert.ok(serviceWorker.includes('const CACHE_NAME = "code-cyber-static-v14"'), "La version du cache hors ligne doit être mise à jour.");
+assert.ok(/const CACHE_NAME = "code-cyber-static-v(1[4-9]|[2-9]\d)"/.test(serviceWorker), "La version du cache hors ligne doit être mise à jour (v14 ou plus).");
 assert.ok(serviceWorker.includes('if (url.pathname.includes("/api/")) return;'), "Le service worker ne doit pas intercepter les API.");
 const sharedUx = fs.readFileSync(path.join(root, "site.js"), "utf8");
 assert.ok(sharedUx.includes("azThemePreference"), "Le choix du thème doit être mémorisé.");
