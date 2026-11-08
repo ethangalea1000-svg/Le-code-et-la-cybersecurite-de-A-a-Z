@@ -1288,3 +1288,6 @@ html[data-theme="light"] .exercise-meta span{color:#1d2935;border-color:#94a8bb;
 
 /* Correctif contraste : en theme sombre --text devient clair mais l en-tete reste blanc (hors pages de cours) ; le bouton Plus etait invisible (1,05:1) */
 html[data-theme="dark"] body:not(.course-page):not(.lesson-page) header nav .nav-more > summary{color:rgb(32,43,53)}
+
+/* Contraste nav theme sombre : lien actif lisible sur en-tete clair (2,12 -> 7,17) */
+html[data-theme="dark"] body:not(.course-page):not(.lesson-page) header nav a[aria-current="page"]{color:#245b00!important;background:#e8f4df!important;border-color:#b8d5a6!important}
