@@ -1292,7 +1292,8 @@ html[data-theme="dark"] body:not(.course-page):not(.lesson-page) header nav .nav
 /* Contraste nav theme sombre : lien actif lisible sur en-tete clair (2,12 -> 7,17) */
 html[data-theme="dark"] body:not(.course-page):not(.lesson-page) header nav a[aria-current="page"]{color:#245b00!important;background:#e8f4df!important;border-color:#b8d5a6!important}
 
-/* Mobile : commandes d'affichage dans le flux, sous l'en-tête (ne masquent plus le contenu). */
+/* Commandes d'affichage dans le flux, sous l'en-tete (ne masquent plus le contenu, ne se chevauchent plus). */
 .az-mobile-tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;padding:8px 12px}
-.az-mobile-tools .az-theme-toggle,.az-mobile-tools .az-readable-toggle{position:static;margin:0;max-width:none;min-height:44px;box-shadow:none}
+.az-mobile-tools .az-theme-toggle,.az-mobile-tools .az-readable-toggle{position:static!important;inset:auto!important;margin:0!important;max-width:none!important;min-height:44px;box-shadow:none}
+@media(min-width:761px){.az-mobile-tools{justify-content:flex-end;padding:8px 24px;max-width:1160px;margin:0 auto;box-sizing:border-box}}
 @media print{.az-mobile-tools{display:none!important}}
