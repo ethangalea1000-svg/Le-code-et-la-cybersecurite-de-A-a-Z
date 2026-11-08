@@ -44,7 +44,7 @@ header nav a[aria-current=page]{background:#e8f8dd;border-color:#c9eab5;color:#2
 header a:focus-visible,button:focus-visible,.btn:focus-visible{outline:3px solid #1689c9!important;outline-offset:3px}
 #menuBtn{display:none}
 main{color:var(--ink)}
-main:not(.quiz-page){max-width:1160px}
+main:not(.quiz-page){max-width:1160px;margin-inline:auto}
 .section{padding-top:36px!important}
 .section>small,.eyebrow,.eyebrow,.overline{color:#3d9700!important;font-weight:850;letter-spacing:.12em}
 h1,h2,h3,h4{color:#202b35;letter-spacing:-.035em}
