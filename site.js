@@ -222,33 +222,18 @@ syncGlobalNav();
         header.appendChild(button);
       }
     }
-    /* Mobile : les deux commandes d'affichage suivent le flux de la page au lieu de rester fixes sur le contenu. */
+    /* Les deux commandes d'affichage suivent le flux de la page, sous l'en-tête (le header a un backdrop-filter :
+       en position fixe elles étaient calées sur le header, se chevauchaient et masquaient le contenu). */
     (function placeDisplayTools(){
-      const mq=window.matchMedia?window.matchMedia("(max-width:760px)"):null;
-      if(!mq)return;
       const header=document.querySelector("body > header");
-      if(!header)return;
-      function place(){
-        const theme=document.getElementById("azThemeToggle");
-        const reading=document.getElementById("azReadableToggle");
-        if(!theme||!reading)return;
-        let box=document.getElementById("azMobileTools");
-        if(mq.matches){
-          if(!box){
-            box=document.createElement("div");
-            box.id="azMobileTools";box.className="az-mobile-tools";
-            box.setAttribute("role","group");box.setAttribute("aria-label","Préférences d'affichage");
-            header.insertAdjacentElement("afterend",box);
-          }
-          box.appendChild(theme);box.appendChild(reading);
-        }else{
-          header.appendChild(theme);header.appendChild(reading);
-          if(box)box.remove();
-        }
-      }
-      place();
-      if(mq.addEventListener)mq.addEventListener("change",place);
-      else if(mq.addListener)mq.addListener(place);
+      const theme=document.getElementById("azThemeToggle");
+      const reading=document.getElementById("azReadableToggle");
+      if(!header||!theme||!reading||document.getElementById("azMobileTools"))return;
+      const box=document.createElement("div");
+      box.id="azMobileTools";box.className="az-mobile-tools";
+      box.setAttribute("role","group");box.setAttribute("aria-label","Préférences d'affichage");
+      header.insertAdjacentElement("afterend",box);
+      box.appendChild(theme);box.appendChild(reading);
     })();
     applyReadable();
     if(!document.getElementById("azReadingProgress")){
