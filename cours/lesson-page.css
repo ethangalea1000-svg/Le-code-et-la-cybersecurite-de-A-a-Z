@@ -221,3 +221,9 @@ html body .lesson-step .btn.next-step:disabled{
   .lesson-page-body .pager .btn{width:100%;min-width:0}
   .lesson-page-body .lesson-main{padding-bottom:220px}
 }
+
+/* Small green labels must pass the normal-text contrast threshold. */
+html body .lesson-main .eyebrow{color:#245e12!important}
+html body .lesson-main button.btn,
+html body .lesson-main a.btn{background:#3730a3!important;color:#fff!important;border-color:#3730a3!important}
+html body .lesson-main .btn.alt{background:#fff!important;color:#172033!important;border-color:#68758a!important}
