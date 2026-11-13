@@ -1,5 +1,5 @@
 /* Service worker GitHub Pages — cache borné au site, sans intercepter les API. */
-const CACHE_NAME = "code-cyber-static-v19";
+const CACHE_NAME = "code-cyber-static-v20";
 const BASE = "/Le-code-et-la-cybersecurite-de-A-a-Z/";
 const PRECACHE = [
   "index.html", "offline.html", "style.css", "enhancements.css", "site.js", "learning-focus.js", "guided-challenges.js",
@@ -61,9 +61,10 @@ self.addEventListener("fetch", event => {
         }
         return response;
       } catch (_) {
-        const cached = await caches.match(request);
+        const cache = await caches.open(CACHE_NAME);
+        const cached = await cache.match(request);
         if (cached) return cached;
-        const offline = await caches.match(BASE + "offline.html");
+        const offline = await cache.match(BASE + "offline.html");
         return offline || Response.error();
       }
     })());
@@ -71,7 +72,8 @@ self.addEventListener("fetch", event => {
   }
 
   event.respondWith((async () => {
-    const cached = await caches.match(request);
+    const currentCache = await caches.open(CACHE_NAME);
+    const cached = await currentCache.match(request);
     if (cached) return cached;
     try {
       const response = await fetch(request);
