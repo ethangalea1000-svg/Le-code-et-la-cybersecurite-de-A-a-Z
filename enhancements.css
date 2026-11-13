@@ -1297,3 +1297,73 @@ html[data-theme="dark"] body:not(.course-page):not(.lesson-page) header nav a[ar
 .az-mobile-tools .az-theme-toggle,.az-mobile-tools .az-readable-toggle{position:static!important;inset:auto!important;margin:0!important;max-width:none!important;min-height:44px;box-shadow:none}
 @media(min-width:761px){.az-mobile-tools{justify-content:flex-end;padding:8px 24px;max-width:1160px;margin:0 auto;box-sizing:border-box}}
 @media print{.az-mobile-tools{display:none!important}}
+
+/* Contrast repair, 2026-11-13.
+   Legacy components keep dark panels inside the light shell. Pair foreground
+   and background on the component, independent of the selected device theme. */
+html body:not(.course-page):not(.lesson-page) .feedback-form,
+html body:not(.course-page):not(.lesson-page) .error-search,
+html body:not(.course-page):not(.lesson-page) .error-links a,
+html body:not(.course-page):not(.lesson-page) .admin-action,
+html body:not(.course-page):not(.lesson-page) .library-note {
+  background:#111b26!important;
+  color:#f4f7fb!important;
+}
+html body:not(.course-page):not(.lesson-page) .feedback-form :is(label,p,small,#detailsCount),
+html body:not(.course-page):not(.lesson-page) .error-search :is(label,p),
+html body:not(.course-page):not(.lesson-page) .error-links a :is(strong,small),
+html body:not(.course-page):not(.lesson-page) .admin-action :is(strong,span),
+html body:not(.course-page):not(.lesson-page) .library-note :is(strong,p) {
+  color:#e2e8f0!important;
+}
+html body:not(.course-page):not(.lesson-page) .admin-alert {background:#fff4d6!important;color:#513a08!important}
+html body:not(.course-page):not(.lesson-page) .admin-alert :is(strong,p){color:#513a08!important}
+html body:not(.course-page):not(.lesson-page) .admin-note a{color:#145f46!important;text-decoration:underline}
+html body:not(.course-page):not(.lesson-page) .admin-table th{color:#374151!important}
+html body:not(.course-page):not(.lesson-page) .admin-status.ok{color:#226812!important}
+html body:not(.course-page):not(.lesson-page) .admin-status.wait{color:#76520a!important}
+html body:not(.course-page):not(.lesson-page) .admin-status.fail{color:#a32135!important}
+html body:not(.course-page):not(.lesson-page) .error-code{color:#294a39!important}
+html body:not(.course-page):not(.lesson-page) .error-path code{color:#243746!important;background:#e8eef0!important}
+html body:not(.course-page):not(.lesson-page) .ca-module .ca-heading .ca-kicker{color:#235e40!important}
+html body:not(.course-page):not(.lesson-page) .ca-module .ca-stats b,
+html body:not(.course-page):not(.lesson-page) .ca-module .ca-content h3{color:#f4f7fb!important}
+html body:not(.course-page):not(.lesson-page) .exercise-meta span{color:#1d2935!important;background:#eef3f8!important;border-color:#73869a!important}
+html body:not(.course-page):not(.lesson-page) .chmod-value>span{color:#435363!important}
+/* The reinforced-reading setting must not turn dark text pale on white cards. */
+html[data-readable="true"] body .muted,
+html[data-readable="true"] body .section>p{color:#374151!important}
+html[data-readable="true"] body .section.dark .muted,
+html[data-readable="true"] body .section.dark>p{color:#d5dee6!important}
+/* Focus indicators and control outlines remain visible on both surface types. */
+html body:not(.course-page):not(.lesson-page) :is(input,select,textarea){border-color:#64748b!important}
+html body:not(.course-page):not(.lesson-page) :is(a,button,input,select,textarea,summary):focus-visible {
+  outline:3px solid #00719f!important;outline-offset:3px!important;
+  box-shadow:0 0 0 2px #fff!important;
+}
+
+html body:not(.course-page):not(.lesson-page) .ca-module .ca-track-panel h3{color:#243746!important}
+html body #guidedChallengeLab .gcl-meta span{color:#e2e8f0!important;background:#142231!important}
+html body #guidedChallengeLab .gcl-list h3{color:#f4f7fb!important}
+/* The disclosure is a light surface in both theme settings. */
+html[data-theme] body.home-page main .extra-tools-disclosure>summary{color:#243746!important;background:#fff!important}
+html body.admin-page .admin-hero {background:#0d211b!important;background-image:none!important}
+html body.admin-page a.skip-link{color:#17212b!important}
+/* Open menus and generated learning states were missing from the old audit. */
+html[data-theme] body header nav .nav-more>summary,
+html[data-theme] body header nav .nav-more-menu,
+html[data-theme] body header nav .nav-more-menu a{background:#fff!important;color:#243746!important}
+html[data-theme] body header nav .nav-more>summary:hover,
+html[data-theme] body header nav .nav-more-menu a:hover{background:#e8f4df!important;color:#245b00!important}
+html body #menuBtn{background:#111b26!important;color:#fff!important;border:1px solid #617586!important}
+html body:not(.course-page):not(.lesson-page) .domain-stat{background:#fff!important;color:#243746!important}
+html body:not(.course-page):not(.lesson-page) .domain-stat .domain-stat-head strong{color:#243746!important}
+html body:not(.course-page):not(.lesson-page) .domain-stat .domain-stat-head span{color:#245e12!important}
+html body:not(.course-page):not(.lesson-page) .ca-module .ca-question-area,
+html body:not(.course-page):not(.lesson-page) .ca-module .ca-result{background:#101e2c!important;color:#f4f7fb!important}
+html body:not(.course-page):not(.lesson-page) .ca-module .ca-question-top{background:transparent!important;color:#d4e2ef!important}
+html body:not(.course-page):not(.lesson-page) .ca-module .ca-question-top span{color:#d4e2ef!important}
+html body:not(.course-page):not(.lesson-page) .ca-module .ca-result p,
+html body:not(.course-page):not(.lesson-page) .ca-module .ca-feedback{color:#e2ebf3!important}
+html body:not(.course-page):not(.lesson-page) .domain-stat p.muted{color:#374151!important}
+html body:not(.course-page):not(.lesson-page) .ca-module .ca-question-area>p{color:#e2ebf3!important}
