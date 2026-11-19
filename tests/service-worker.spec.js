@@ -1,7 +1,7 @@
 const {test,expect}=require('@playwright/test');
 const vm=require('node:vm'),fs=require('node:fs'),path=require('node:path');
 test('service worker ignores stale cache entries left by an older active tab',async()=>{
- const handlers={};const current='code-cyber-static-v21';const requested=[];
+ const handlers={};const current='code-cyber-static-v22';const requested=[];
  const context={URL,Response,self:{location:{origin:'https://example.test'},addEventListener:(type,cb)=>handlers[type]=cb},caches:{
   match:async()=>new Response('STALE'),
   open:async name=>({match:async request=>{requested.push({name,url:typeof request==='string'?request:request.url});return new Response('CURRENT')},put:async()=>{}})

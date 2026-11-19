@@ -26,6 +26,11 @@ const starters={
 "14":"README.md\nindex.html\nprojet/\n  src/\n  tests/"
 };
 function splitBody(body){const parts=String(body).split(/(?<=[.!?])\s+/).filter(Boolean);if(parts.length<3)return [body,"Teste l'idée principale dans un exemple.","Explique ensuite ce que tu observes."];return [parts.slice(0,2).join(" "),parts.slice(2,4).join(" "),parts.slice(4,7).join(" ")||parts.slice(2,4).join(" ")]}
+function beginnerGuide(data){
+ if(n!==1||!data.beginnerGuide)return "";
+ const g=data.beginnerGuide;
+ return '<section class="beginner-guide" aria-label="Explication pour commencer"><h3>Comprendre avec un exemple</h3><p>'+esc(g.idea)+'</p><pre style="white-space:pre-wrap;overflow-wrap:anywhere"><code>'+esc(g.example)+'</code></pre><p>'+esc(g.explain)+'</p><h3>Essaie toi-même</h3><p>'+esc(g.try)+'</p><h3>Ce que tu dois observer</h3><p>'+esc(g.observe)+'</p></section>';
+}
 function render(data){
  window.mentorContext={type:"lesson",id:id,n:n,title:"",courseTitle:data.title||"",courseIntro:data.intro||"",chunks:[],question:"",answer:"",exercise:""};
  const sections=Array.isArray(data.sections)?data.sections:[], exercises=Array.isArray(data.exercises)?data.exercises:[], quizzes=Array.isArray(data.quiz)?data.quiz:[];
@@ -40,7 +45,7 @@ function render(data){
  document.querySelector("#app").innerHTML=
  '<div class="crumb"><a href="'+slug+'.html">← '+slug.toUpperCase()+'</a> · Leçon '+n+' / '+sections.length+'</div>'+
  '<section class="hero"><div class="eyebrow">LEÇON '+String(n).padStart(2,"0")+' / '+sections.length+'</div><h1>'+esc(title)+'</h1><p>Une notion à la fois. Comprends, réponds, manipule et valide.</p><button class="btn alt tutorial-open" id="openTutorial" type="button">Voir le tutoriel : comment ça marche ?</button><div class="step-track"><span class="active" data-step="1">1 Comprendre</span><span data-step="2">2 Question</span><span data-step="3">3 Coder</span><span data-step="4">4 Défi</span></div></section>'+
- '<div class="lesson-step active" data-panel="1"><article class="card lesson-card"><div class="step-label">ÉTAPE 1 · COMPRENDRE</div><h2>La notion essentielle</h2><p class="chunk">'+esc(chunks[0])+'</p><div class="box"><strong>À retenir</strong>'+(takeaways?'<ul class="lesson-takeaways">'+takeaways.map(point=>'<li>'+esc(point)+'</li>').join("")+'</ul>':'<p>'+esc(chunks[1])+'</p>')+'</div><button class="btn next-step" data-next="2">J’ai compris →</button></article></div>'+
+ '<div class="lesson-step active" data-panel="1"><article class="card lesson-card"><div class="step-label">ÉTAPE 1 · COMPRENDRE</div><h2>La notion essentielle</h2>'+beginnerGuide(data)+(n===1&&data.beginnerGuide?'<details><summary>Relire les notions du cours</summary><p>'+esc(body)+'</p></details>':'<p class="chunk">'+esc(chunks[0])+'</p>')+'<div class="box"><strong>À retenir</strong>'+(takeaways?'<ul class="lesson-takeaways">'+takeaways.map(point=>'<li>'+esc(point)+'</li>').join("")+'</ul>':'<p>'+esc(chunks[1])+'</p>')+'</div><button class="btn next-step" data-next="2">J’ai compris →</button></article></div>'+
  '<div class="lesson-step" data-panel="2"><article class="card lesson-card"><div class="step-label">ÉTAPE 2 · VÉRIFIER</div><h2>Question express</h2><p>'+esc(question)+'</p><div class="answer-row"><input id="answer" placeholder="Écris ta réponse..." autocomplete="off"><button class="btn" id="checkAnswer">Vérifier</button></div><div id="answerFeedback" class="feedback" aria-live="polite"></div><button class="btn next-step" id="continueQuestion" data-next="3" disabled>Continuer →</button></article></div>'+
  '<div class="lesson-step" data-panel="3"><article class="card lesson-card"><div class="step-label">ÉTAPE 3 · LABORATOIRE</div><h2>Manipule le code</h2><p>'+esc(chunks[2])+'</p><div class="code-workshop"><textarea id="lessonCode" spellcheck="false">'+esc(starter)+'</textarea><div class="workshop-actions"><button class="btn" id="runLessonCode">▶ Exécuter</button><button class="btn alt" id="resetLessonCode">Réinitialiser</button><span id="codeFeedback">Prêt.</span></div><iframe id="lessonPreview" sandbox="allow-scripts" title="Aperçu du code"></iframe></div><button class="btn next-step" data-next="4">Passer au défi →</button></article></div>'+
  '<div class="lesson-step" data-panel="4"><article class="card lesson-card"><div class="step-label">ÉTAPE 4 · MINI-DÉFI</div><h2>À toi de jouer</h2><div class="challenge-text">'+esc(exercise)+'</div><label class="check-line"><input type="checkbox" id="challengeCheck"> J’ai réalisé le défi.</label><div class="box"><strong>Mentor</strong><p>Ne cherche pas la perfection du premier coup : teste, observe, corrige.</p></div><button class="btn" id="finishLesson" disabled>✓ Valider la leçon · +20 XP</button></article></div>'+
@@ -58,8 +63,9 @@ function showStep(num){
 function initQuestion(answer){
  const input=document.querySelector("#answer"),check=document.querySelector("#checkAnswer"),feedback=document.querySelector("#answerFeedback"),cont=document.querySelector("#continueQuestion");
  check.onclick=()=>{
-   const value=input.value.trim().toLowerCase(), expected=String(answer).toLowerCase();
-   const ok=expected&&value.length>1&&(expected.split(/[,.]/)[0].split(/\s+/).slice(0,3).some(w=>value.includes(w))||value.length>Math.min(12,expected.length*.55));
+   const norm=s=>s.normalize("NFD").replace(/[\u0300-\u036f]/g,""),value=norm(input.value.trim().toLowerCase()),expected=norm(String(answer).toLowerCase());
+   const first=expected.split(/[,.]/)[0];let keywords=first.split(/\s+/).filter(w=>w.length>=4);if(!keywords.length)keywords=first.split(/\s+/).filter(w=>w.length>=3);
+   const ok=expected&&value.length>=3&&keywords.length>0&&keywords.some(w=>value.includes(w));
    if(ok){feedback.className="feedback good";feedback.textContent="✓ Bonne piste. "+(answer?"Réponse attendue : "+answer:"Tu as formulé une réponse cohérente.");cont.disabled=false;addXP(5);if(window.Mentor&&window.Mentor.onAnswer)window.Mentor.onAnswer(true)}
    else{feedback.className="feedback retry";feedback.textContent="Pas encore. Relis la notion et essaie de formuler l’idée principale.";if(window.Mentor&&window.Mentor.onAnswer)window.Mentor.onAnswer(false);input.focus()}
  };
@@ -69,10 +75,10 @@ function initCode(starter){
  function execute(notifyMentor=true){
    const code=editor.value;
    if(id==="02"){preview.srcdoc="<!doctype html><html lang='fr'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><style>"+code+"</style></head><body><h1>Mon aperçu CSS</h1><p>Modifie le CSS pour changer cette page.</p><button>Un bouton de démonstration</button></body></html>";status.textContent="Aperçu CSS mis à jour."}else if(id==="01"||id==="11"){preview.srcdoc=code;status.textContent="Aperçu HTML mis à jour."}else{preview.srcdoc="<pre style='font:15px system-ui;padding:20px;white-space:pre-wrap'>"+esc(code)+"</pre>";status.textContent="Code affiché dans le laboratoire."}if(notifyMentor&&window.Mentor&&window.Mentor.onCode)window.Mentor.onCode();
-   addXP(5);
+   if(notifyMentor)addXP(5);
  }
- run.onclick=execute;reset.onclick=()=>{editor.value=starter;execute(false)};editor.addEventListener("keydown",e=>{if(e.key==="Tab"){e.preventDefault();const p=editor.selectionStart;editor.value=editor.value.slice(0,p)+"  "+editor.value.slice(editor.selectionEnd);editor.selectionStart=editor.selectionEnd=p+2}});
- execute();
+ run.onclick=()=>execute();reset.onclick=()=>{editor.value=starter;execute(false)};editor.addEventListener("keydown",e=>{if(e.key==="Tab"){e.preventDefault();const p=editor.selectionStart;editor.value=editor.value.slice(0,p)+"  "+editor.value.slice(editor.selectionEnd);editor.selectionStart=editor.selectionEnd=p+2}});
+ execute(false);
 }
 function initFinish(){
  const check=document.querySelector("#challengeCheck"),finish=document.querySelector("#finishLesson");
