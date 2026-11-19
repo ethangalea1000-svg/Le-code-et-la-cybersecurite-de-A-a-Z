@@ -11,7 +11,10 @@
 
 ## Pages principales
 - [Accueil](https://ethangalea1000-svg.github.io/Le-code-et-la-cybersecurite-de-A-a-Z/)
+- [Commencer ici — guide pour débutants](https://ethangalea1000-svg.github.io/Le-code-et-la-cybersecurite-de-A-a-Z/demarrer.html)
 - [Parcours guidé](https://ethangalea1000-svg.github.io/Le-code-et-la-cybersecurite-de-A-a-Z/parcours.html)
+- [Glossaire en phrases simples](https://ethangalea1000-svg.github.io/Le-code-et-la-cybersecurite-de-A-a-Z/glossaire.html)
+- [Test de positionnement](https://ethangalea1000-svg.github.io/Le-code-et-la-cybersecurite-de-A-a-Z/positionnement.html)
 - [Catalogue des cours](https://ethangalea1000-svg.github.io/Le-code-et-la-cybersecurite-de-A-a-Z/cours.html)
 - [Projets pratiques](https://ethangalea1000-svg.github.io/Le-code-et-la-cybersecurite-de-A-a-Z/projets.html)
 - [Quiz](https://ethangalea1000-svg.github.io/Le-code-et-la-cybersecurite-de-A-a-Z/quiz.html)

@@ -1,0 +1,30 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Glossaire du code et de la cybersécurité en phrases simples : chaque mot technique expliqué clairement, avec un exemple. Pour débutants.">
+<link rel="canonical" href="https://ethangalea1000-svg.github.io/Le-code-et-la-cybersecurite-de-A-a-Z/glossaire.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Le Code &amp; la Cybersécurité de A à Z">
+<meta property="og:title" content="Glossaire en phrases simples | Le Code &amp; la Cybersécurité">
+<meta property="og:description" content="Glossaire du code et de la cybersécurité en phrases simples : chaque mot technique expliqué clairement, avec un exemple. Pour débutants.">
+<meta property="og:url" content="https://ethangalea1000-svg.github.io/Le-code-et-la-cybersecurite-de-A-a-Z/glossaire.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Glossaire en phrases simples | Le Code &amp; la Cybersécurité">
+<meta name="twitter:description" content="Glossaire du code et de la cybersécurité en phrases simples : chaque mot technique expliqué clairement, avec un exemple. Pour débutants.">
+<meta name="twitter:url" content="https://ethangalea1000-svg.github.io/Le-code-et-la-cybersecurite-de-A-a-Z/glossaire.html"><title>Glossaire en phrases simples | Le Code &amp; la Cybersécurité</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="enhancements.css"><script src="site.js" defer></script></head><body><header><a class="brand" href="index.html"><span>&lt;/&gt;</span> LE CODE <b>&amp;</b> LA CYBERSÉCURITÉ</a><nav><a href="parcours.html">Parcours</a><a href="cours.html">Cours</a><a href="projets.html">Projets</a><a href="quiz.html">Quiz</a><a href="exercices.html">Exercices</a><a href="progression.html">Progression</a></nav></header><a class="skip-link" href="#mainContent">Aller directement au contenu</a><main id="mainContent"><section class="section"><small>GLOSSAIRE</small><h1>Les mots techniques, expliqués simplement</h1><p class="muted">Chaque terme du parcours expliqué en une phrase simple, avec un exemple. Si un mot te bloque dans une leçon, cherche-le ici.</p><label class="search-label" for="glossarySearch">Rechercher un mot</label><input id="glossarySearch" class="search-box" type="search" placeholder="Ex. variable, serveur, chiffrement…" autocomplete="off"><p id="glossaryStatus" class="muted" role="status" aria-live="polite"></p><div id="glossaryList" class="cards"></div></section></main><footer>Glossaire local — aucune donnée envoyée.</footer><script src="glossaire.js"></script><script>
+(function(){
+ const box=document.querySelector("#glossarySearch"),list=document.querySelector("#glossaryList"),status=document.querySelector("#glossaryStatus");
+ const data=Array.isArray(window.glossaryData)?window.glossaryData:[];
+ function render(){
+  const q=(box.value||"").trim().toLocaleLowerCase("fr");
+  const results=data.filter(function(x){return !q||(x[0]+" "+x[1]+" "+x[2]).toLocaleLowerCase("fr").includes(q)});
+  list.replaceChildren();
+  results.slice(0,100).forEach(function(x){
+   const card=document.createElement("article"),tag=document.createElement("span"),title=document.createElement("h3"),def=document.createElement("p"),ex=document.createElement("p");
+   tag.className="tag";tag.textContent="Mot expliqué";
+   title.textContent=x[0];def.textContent=x[1];
+   ex.className="muted";ex.textContent=x[2];
+   card.append(tag,title,def,ex);list.appendChild(card);
+  });
+  status.textContent=results.length?results.length+" mot"+(results.length>1?"s":"")+" affiché"+(results.length>1?"s":"")+".":"Aucun mot trouvé. Essaie une autre orthographe.";
+ }
+ box.addEventListener("input",render);render();
+})();
+</script></body></html>

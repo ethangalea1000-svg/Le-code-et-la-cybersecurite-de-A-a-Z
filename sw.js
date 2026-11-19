@@ -1,10 +1,11 @@
 /* Service worker GitHub Pages — cache borné au site, sans intercepter les API. */
-const CACHE_NAME = "code-cyber-static-v20";
+const CACHE_NAME = "code-cyber-static-v21";
 const BASE = "/Le-code-et-la-cybersecurite-de-A-a-Z/";
 const PRECACHE = [
   "index.html", "offline.html", "style.css", "enhancements.css", "site.js", "learning-focus.js", "guided-challenges.js",
   "parcours.html", "cours.html", "projets.html", "quiz.html", "exercices.html", "simulateur-chmod.html",
   "progression.html", "atelier.html", "bibliotheque.html", "recherche.html",
+  "demarrer.html", "glossaire.html", "glossaire.js", "positionnement.html", "positionnement.js",
   "laboratoire-python-sql.html", "retour.html",
   "ressources.html", "examens.html", "certificats.html",
   "cours/html.html", "cours/css.html", "cours/javascript.html", "cours/python.html",
