@@ -5,7 +5,7 @@ const PRECACHE = [
   "index.html", "offline.html", "style.css", "enhancements.css", "site.js", "learning-focus.js", "guided-challenges.js",
   "parcours.html", "cours.html", "projets.html", "quiz.html", "exercices.html", "simulateur-chmod.html",
   "progression.html", "atelier.html", "bibliotheque.html", "recherche.html",
-  "demarrer.html", "glossaire.html", "glossaire.js",
+  "demarrer.html", "glossaire.html", "glossaire.js", "positionnement.html", "positionnement.js",
   "laboratoire-python-sql.html", "retour.html",
   "ressources.html", "examens.html", "certificats.html",
   "cours/html.html", "cours/css.html", "cours/javascript.html", "cours/python.html",

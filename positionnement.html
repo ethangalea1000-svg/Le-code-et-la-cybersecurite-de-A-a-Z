@@ -1,0 +1,69 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Test de positionnement gratuit en 12 questions : trouve par quel cours commencer le parcours code et cybersécurité, sans compte et sans rien installer.">
+<link rel="canonical" href="https://ethangalea1000-svg.github.io/Le-code-et-la-cybersecurite-de-A-a-Z/positionnement.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Le Code &amp; la Cybersécurité de A à Z">
+<meta property="og:title" content="Test de positionnement | Le Code &amp; la Cybersécurité">
+<meta property="og:description" content="Test de positionnement gratuit en 12 questions : trouve par quel cours commencer le parcours code et cybersécurité, sans compte et sans rien installer.">
+<meta property="og:url" content="https://ethangalea1000-svg.github.io/Le-code-et-la-cybersecurite-de-A-a-Z/positionnement.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Test de positionnement | Le Code &amp; la Cybersécurité">
+<meta name="twitter:description" content="Test de positionnement gratuit en 12 questions : trouve par quel cours commencer le parcours code et cybersécurité, sans compte et sans rien installer.">
+<meta name="twitter:url" content="https://ethangalea1000-svg.github.io/Le-code-et-la-cybersecurite-de-A-a-Z/positionnement.html"><title>Test de positionnement | Le Code &amp; la Cybersécurité</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="enhancements.css"><script src="site.js" defer></script></head><body><header><a class="brand" href="index.html"><span>&lt;/&gt;</span> LE CODE <b>&amp;</b> LA CYBERSÉCURITÉ</a><nav><a href="parcours.html">Parcours</a><a href="cours.html">Cours</a><a href="projets.html">Projets</a><a href="quiz.html">Quiz</a><a href="exercices.html">Exercices</a><a href="progression.html">Progression</a></nav></header><a class="skip-link" href="#mainContent">Aller directement au contenu</a><main id="mainContent"><section class="section"><small>TEST DE POSITIONNEMENT</small><h1>Par où commencer ?</h1><p class="muted">12 questions rapides, une par notion du parcours. À la fin, le test te conseille le premier cours à suivre. Aucune note, aucun enjeu : tu peux le refaire quand tu veux et commencer où tu préfères.</p><div id="quizRoot" class="cards"></div></section></main><footer>Test local — aucune donnée envoyée.</footer><script src="positionnement.js"></script><script>
+(function(){
+ const root=document.querySelector("#quizRoot");
+ const data=Array.isArray(window.positionnementData)?window.positionnementData:[];
+ const courses=window.positionnementCourses||{};
+ let index=0,wrong=[];
+ function card(){return root.querySelector("article")}
+ function showQuestion(){
+  root.replaceChildren();
+  const q=data[index],card=document.createElement("article"),tag=document.createElement("span"),title=document.createElement("h3"),opts=document.createElement("div");
+  tag.className="tag";tag.textContent="Question "+(index+1)+" / "+data.length;
+  title.textContent=q.q;
+  card.append(tag,title);
+  q.options.forEach(function(text,i){
+   const b=document.createElement("button");b.type="button";b.className="btn ghost";b.style.marginTop="8px";b.textContent=text;
+   b.addEventListener("click",function(){
+    if(i!==q.answer)wrong.push(q.course);
+    const note=document.createElement("p");note.className="muted";note.textContent=(i===q.answer?"Bonne réponse. ":"Pas grave, c'est fait pour apprendre. ")+q.why;
+    card.querySelectorAll("button").forEach(function(x){x.disabled=true});
+    card.append(note);
+    const next=document.createElement("button");next.type="button";next.className="btn";next.style.marginTop="8px";
+    next.textContent=index+1<data.length?"Question suivante →":"Voir mon point de départ →";
+    next.addEventListener("click",function(){index++;if(index<data.length)showQuestion();else showResult()});
+    card.append(next);next.focus();
+   });
+   opts.appendChild(b);
+  });
+  card.append(opts);root.appendChild(card);
+ }
+ function showResult(){
+  root.replaceChildren();
+  const score=data.length-wrong.length;
+  const firstWrong=Object.keys(courses).find(function(c){return wrong.includes(c)});
+  const card=document.createElement("article"),tag=document.createElement("span"),title=document.createElement("h3"),res=document.createElement("p"),note=document.createElement("p"),actions=document.createElement("div");
+  tag.className="tag";tag.textContent="Résultat : "+score+" / "+data.length;
+  actions.className="path-actions";
+  if(!firstWrong){
+   title.textContent="Tu maîtrises déjà les bases.";
+   res.textContent="Toutes les notions de départ sont acquises. Tu peux viser les cours avancés : sécurité web, OSINT, analyse d'incidents, puis le projet final.";
+   const a=document.createElement("a");a.className="btn";a.href="parcours.html";a.textContent="Choisir un cours avancé →";actions.appendChild(a);
+  }else{
+   const c=courses[firstWrong];
+   title.textContent="Ton point de départ conseillé : "+c[0]+".";
+   res.textContent="Les notions précédentes sont acquises ; commence au cours "+c[0]+" et suis le parcours dans l'ordre ensuite.";
+   const a=document.createElement("a");a.className="btn";a.href=c[1];a.textContent="Commencer le cours "+c[0]+" →";actions.appendChild(a);
+   if(firstWrong==="01"){
+    const g=document.createElement("a");g.className="btn ghost";g.href="demarrer.html";g.textContent="Lire d'abord le guide de départ";actions.appendChild(g);
+   }
+  }
+  note.className="muted";note.textContent="Ce test est indicatif : tu peux commencer où tu veux. Un mot te bloque ? Il est expliqué dans le glossaire.";
+  const retry=document.createElement("button");retry.type="button";retry.className="btn ghost";retry.textContent="Refaire le test";
+  retry.addEventListener("click",function(){index=0;wrong=[];showQuestion()});
+  const glos=document.createElement("a");glos.className="btn ghost";glos.href="glossaire.html";glos.textContent="Glossaire";
+  actions.append(retry,glos);
+  card.append(tag,title,res,note,actions);root.appendChild(card);
+ }
+ showQuestion();
+})();
+</script></body></html>
