@@ -51,8 +51,8 @@ function syncGlobalNav(){
  if(main&&!main.id)main.id="mainContent";
  if(!document.querySelector(".skip-link")&&main){const skip=document.createElement("a");skip.className="skip-link";skip.href="#"+main.id;skip.textContent="Aller directement au contenu";document.body.insertBefore(skip,main)}
  const base="/Le-code-et-la-cybersecurite-de-A-a-Z/";
- const primary=[["Accueil","index.html"],["Parcours","parcours.html"],["Cours","cours.html"],["Projets","projets.html"],["Quiz","quiz.html"],["Progression","progression.html"]];
- const more=[["Exercices","exercices.html"],["Challenges","exercices.html#guidedChallengeLab"],["Atelier de code","atelier.html"],["Python & SQL","laboratoire-python-sql.html"],["Recherche","recherche.html"],["Examens","examens.html"],["Certificats","certificats.html"],["Bibliothèque","bibliotheque.html"],["Ressources","ressources.html"],["Donner un avis","retour.html"]];
+ const primary=[["Accueil","index.html"],["Commencer ici","demarrer.html"],["Parcours","parcours.html"],["Cours","cours.html"],["Projets","projets.html"],["Quiz","quiz.html"],["Progression","progression.html"]];
+ const more=[["Glossaire","glossaire.html"],["Exercices","exercices.html"],["Challenges","exercices.html#guidedChallengeLab"],["Atelier de code","atelier.html"],["Python & SQL","laboratoire-python-sql.html"],["Recherche","recherche.html"],["Examens","examens.html"],["Certificats","certificats.html"],["Bibliothèque","bibliotheque.html"],["Ressources","ressources.html"],["Donner un avis","retour.html"]];
  const h=document.querySelector("header");if(!h)return;
  let n=h.querySelector("nav");if(!n){n=document.createElement("nav");h.appendChild(n)}
  n.id="nav";n.setAttribute("aria-label","Navigation principale");

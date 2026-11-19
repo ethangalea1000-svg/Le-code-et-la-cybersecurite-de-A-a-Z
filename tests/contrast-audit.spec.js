@@ -4,7 +4,7 @@ const pages = [
   "/index.html", "/cours.html", "/parcours.html", "/projets.html",
   "/quiz.html", "/progression.html", "/cours/html.html",
   "/cours/css.html", "/cours/cybersecurite.html",
-  "/exercices.html", "/atelier.html", "/bibliotheque.html", "/recherche.html",
+  "/exercices.html", "/atelier.html", "/bibliotheque.html", "/recherche.html", "/demarrer.html", "/glossaire.html",
   "/ressources.html", "/examens.html", "/certificats.html",
   "/cours/javascript.html", "/cours/python.html", "/cours/git-github.html",
   "/cours/sql.html", "/cours/reseaux.html", "/cours/linux.html",

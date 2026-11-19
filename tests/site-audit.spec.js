@@ -3,7 +3,7 @@ const { test, expect } = require("@playwright/test");
 const pages = [
   "/index.html", "/parcours.html", "/cours.html", "/projets.html", "/quiz.html",
   "/exercices.html", "/progression.html", "/atelier.html", "/bibliotheque.html",
-  "/recherche.html", "/ressources.html", "/examens.html", "/certificats.html",
+  "/recherche.html", "/demarrer.html", "/glossaire.html", "/ressources.html", "/examens.html", "/certificats.html",
   "/cours/html.html", "/cours/css.html", "/cours/javascript.html", "/cours/python.html",
   "/cours/git-github.html", "/cours/sql.html", "/cours/reseaux.html", "/cours/linux.html",
   "/cours/cybersecurite.html", "/cours/cryptographie.html", "/cours/securite-web.html",
