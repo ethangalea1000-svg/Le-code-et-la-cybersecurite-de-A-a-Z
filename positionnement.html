@@ -42,22 +42,22 @@
   const score=data.length-wrong.length;
   const firstWrong=Object.keys(courses).find(function(c){return wrong.includes(c)});
   const card=document.createElement("article"),tag=document.createElement("span"),title=document.createElement("h3"),res=document.createElement("p"),note=document.createElement("p"),actions=document.createElement("div");
-  tag.className="tag";tag.textContent="Résultat : "+score+" / "+data.length;
+  tag.className="tag";tag.textContent="Réponses justes : "+score+" / "+data.length+" (indicatif)";
   actions.className="path-actions";
   if(!firstWrong){
-   title.textContent="Tu maîtrises déjà les bases.";
-   res.textContent="Toutes les notions de départ sont acquises. Tu peux viser les cours avancés : sécurité web, OSINT, analyse d'incidents, puis le projet final.";
-   const a=document.createElement("a");a.className="btn";a.href="parcours.html";a.textContent="Choisir un cours avancé →";actions.appendChild(a);
+   title.textContent="De bonnes réponses partout.";
+   res.textContent="Tes réponses sont justes sur ces 12 notions. Bon signe, mais une question par notion ne prouve pas une maîtrise : vérifie en ouvrant un cours ou en faisant ses missions. Tu peux explorer les cours avancés et revenir aux bases dès qu'une notion bloque.";
+   const a=document.createElement("a");a.className="btn";a.href="parcours.html";a.textContent="Explorer le parcours →";actions.appendChild(a);
   }else{
    const c=courses[firstWrong];
-   title.textContent="Ton point de départ conseillé : "+c[0]+".";
-   res.textContent="Les notions précédentes sont acquises ; commence au cours "+c[0]+" et suis le parcours dans l'ordre ensuite.";
+   title.textContent="Suggestion de point de départ : "+c[0]+".";
+   res.textContent="D'après tes réponses, c'est la première notion à retravailler. Tu peux commencer au cours "+c[0]+" puis suivre le parcours dans l'ordre. Rien ne prouve que les notions précédentes sont acquises : une seule question les concernait. Révise-les si un point bloque.";
    const a=document.createElement("a");a.className="btn";a.href=c[1];a.textContent="Commencer le cours "+c[0]+" →";actions.appendChild(a);
    if(firstWrong==="01"){
     const g=document.createElement("a");g.className="btn ghost";g.href="demarrer.html";g.textContent="Lire d'abord le guide de départ";actions.appendChild(g);
    }
   }
-  note.className="muted";note.textContent="Ce test est indicatif : tu peux commencer où tu veux. Un mot te bloque ? Il est expliqué dans le glossaire.";
+  note.className="muted";note.textContent="Ce nombre de bonnes réponses est indicatif, pas une évaluation : tu peux commencer où tu veux. Un mot te bloque ? Il est expliqué dans le glossaire.";
   const retry=document.createElement("button");retry.type="button";retry.className="btn ghost";retry.textContent="Refaire le test";
   retry.addEventListener("click",function(){index=0;wrong=[];showQuestion()});
   const glos=document.createElement("a");glos.className="btn ghost";glos.href="glossaire.html";glos.textContent="Glossaire";
