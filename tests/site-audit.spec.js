@@ -8,7 +8,7 @@ const pages = [
   "/cours/git-github.html", "/cours/sql.html", "/cours/reseaux.html", "/cours/linux.html",
   "/cours/cybersecurite.html", "/cours/cryptographie.html", "/cours/securite-web.html",
   "/cours/osint.html", "/cours/analyse-incidents.html", "/cours/projet-final.html",
-  "/cours/lecon.html", "/simulateur-chmod.html", "/laboratoire-python-sql.html"
+  "/cours/lecon.html", "/cours/atelier-variables.html", "/simulateur-chmod.html", "/laboratoire-python-sql.html"
 ];
 
 test("les pages principales ne déclenchent pas d'exception JavaScript non interceptée", async ({ page }) => {
