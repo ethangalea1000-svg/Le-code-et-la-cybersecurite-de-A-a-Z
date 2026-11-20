@@ -29,7 +29,7 @@ function splitBody(body){const parts=String(body).split(/(?<=[.!?])\s+/).filter(
 function beginnerGuide(data){
  if(n!==1||!data.beginnerGuide)return "";
  const g=data.beginnerGuide;
- return '<section class="beginner-guide" aria-label="Explication pour commencer"><h3>Comprendre avec un exemple</h3><p>'+esc(g.idea)+'</p><pre style="white-space:pre-wrap;overflow-wrap:anywhere"><code>'+esc(g.example)+'</code></pre><p>'+esc(g.explain)+'</p><h3>Essaie toi-même</h3><p>'+esc(g.try)+'</p><h3>Ce que tu dois observer</h3><p>'+esc(g.observe)+'</p></section>';
+ return '<section class="beginner-guide" aria-label="Explication pour commencer"><h3>Comprendre avec un exemple</h3><p>'+esc(g.idea)+'</p><pre style="white-space:pre-wrap;overflow-wrap:anywhere"><code>'+esc(g.example)+'</code></pre><p>'+esc(g.explain)+'</p><h3>Essaie toi-même</h3><p>'+esc(g.try)+'</p><h3>Ce que tu dois observer</h3><p>'+esc(g.observe)+'</p>'+(g.workshop&&g.workshop.href&&g.workshop.label?'<p class="beginner-workshop"><a class="btn alt" href="'+esc(g.workshop.href)+'">'+esc(g.workshop.label)+'</a></p>':'')+'</section>';
 }
 function render(data){
  window.mentorContext={type:"lesson",id:id,n:n,title:"",courseTitle:data.title||"",courseIntro:data.intro||"",chunks:[],question:"",answer:"",exercise:""};
