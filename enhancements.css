@@ -1548,3 +1548,19 @@ html[data-theme="dark"] body header nav .nav-more-menu a{background:#17212b!impo
 html[data-theme="dark"] body header nav .nav-more>summary:hover,
 html[data-theme="dark"] body header nav .nav-more-menu a:hover,
 html[data-theme="dark"] body header nav .nav-more-menu a[aria-current="page"]{background:#1d2a36!important;color:#b7f7d8!important}
+
+/* Le bouton fixe « Gérer les cookies » ne doit pas masquer la fin de page ni le dernier lien du menu (mobile). */
+@media(max-width:900px){
+  body:has(.az-cookie-manage){padding-bottom:72px}
+}
+
+/* Menu mobile ouvert : fond opaque (le contenu de la page transparaissait derrière les liens) ;
+   bouton « haut de page » placé au-dessus du bouton fixe « Gérer les cookies ». */
+@media(max-width:900px){
+  body header:has(nav.open){background:#fff!important}
+  html[data-theme="dark"] body header:has(nav.open){background:#0f151c!important}
+  body:has(.az-cookie-manage) .az-back-to-top{bottom:64px!important}
+}
+@media(max-width:900px){
+  html[data-theme="dark"][data-theme="dark"][data-theme="dark"][data-theme="dark"] body header:has(nav.open){background:#0f151c!important;background-color:#0f151c!important}
+}
