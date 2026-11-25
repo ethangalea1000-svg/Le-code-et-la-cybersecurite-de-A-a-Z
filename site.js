@@ -80,7 +80,7 @@ syncGlobalNav();
  const card=document.createElement("div");card.className="quick-start-card";const copy=document.createElement("div"),k=document.createElement("div"),h=document.createElement("h2"),p=document.createElement("p"),bar=document.createElement("div"),fill=document.createElement("span"),a=document.createElement("a");
  k.className="quick-kicker";k.textContent=done?"PARCOURS ACCOMPLI":"TA PROCHAINE ÉTAPE";
  h.textContent=done?"Tu as terminé le parcours de base.":pct>0?"Reprends "+course[1]+".":"Commence par "+course[1]+".";
- p.textContent=done?"Passe aux quiz et aux projets pour consolider tes acquis.":pct>0?"Tu as déjà commencé : continue là où tu en es, à ton rythme.":"Une petite séance suffit pour lancer ta progression. Tu pourras reprendre plus tard.";
+ p.textContent=done?"Passe aux quiz et aux projets pour consolider tes acquis.":pct>0?"Tu as déjà commencé : continue là où tu en es, à ton rythme.":"Une courte séance suffit. Tu reprends quand tu veux.";
  bar.className="quick-meter";bar.setAttribute("role","progressbar");bar.setAttribute("aria-label","Progression du cours "+course[1]);bar.setAttribute("aria-valuemin","0");bar.setAttribute("aria-valuemax","100");bar.setAttribute("aria-valuenow",String(pct));bar.setAttribute("aria-valuetext",pct+" % terminé");fill.style.width=pct+"%";bar.appendChild(fill);
  a.className="btn";a.href=done?"quiz.html":course[2];a.textContent=done?"Faire un quiz →":pct>0?"Continuer le cours →":"Commencer le cours →";
  copy.append(k,h,p);if(!done)copy.appendChild(bar);card.append(copy,a);section.appendChild(card);
@@ -205,8 +205,9 @@ syncGlobalNav();
       const button=document.getElementById("azReadableToggle");
       if(button){
         button.setAttribute("aria-pressed",String(readable));
-        button.setAttribute("aria-label",readable?"Désactiver la lisibilité renforcée":"Activer la lisibilité renforcée");
-        button.textContent=readable?"Lisibilité renforcée : activée":"Lisibilité renforcée";
+        button.removeAttribute("aria-label");
+        button.title="Police simple, lignes plus aérées, liens soulignés";
+        button.textContent=readable?"Texte plus lisible : activé":"Texte plus lisible";
       }
     }
     if(!document.getElementById("azReadableToggle")){
@@ -446,8 +447,9 @@ syncGlobalNav();
     style.textContent=
       '.az-cookie-panel{position:fixed;z-index:10000;inset:auto 16px 16px;display:flex;gap:24px;align-items:center;justify-content:space-between;max-width:1100px;margin-inline:auto;padding:22px;border:1px solid #b9c9bd;border-radius:16px;background:#fff;color:#202b35;box-shadow:0 12px 40px #0003;font:15px/1.55 system-ui,sans-serif}' +
       '.az-cookie-copy{max-width:690px}.az-cookie-copy h2{margin:0 0 8px;font-size:20px;color:#202b35}.az-cookie-copy p{margin:7px 0;color:#394651}.az-cookie-copy a{color:#155e3d;text-decoration:underline}' +
-      '.az-cookie-actions{display:flex;flex-direction:column;gap:8px;min-width:230px}.az-cookie-actions button,.az-cookie-manage{min-height:42px;padding:10px 14px;border:1px solid #286447;border-radius:8px;background:#17633f;color:#fff;font:600 14px/1.3 system-ui,sans-serif;cursor:pointer}.az-cookie-actions button[data-cookie-choice="rejected"],.az-cookie-secondary{background:#fff!important;color:#202b35!important;border-color:#7b8992!important}.az-cookie-manage{position:fixed;z-index:9998;right:12px;bottom:12px;box-shadow:0 3px 12px #0002}.az-cookie-status{position:fixed;z-index:10001;left:12px;bottom:12px;max-width:calc(100% - 24px);padding:10px 14px;background:#14251c;color:#fff;border-radius:8px}.az-cookie-status[hidden]{display:none}' +
-      '.az-cookie-panel button:focus-visible,.az-cookie-manage:focus-visible{outline:3px solid #1669c7;outline-offset:3px}@media(max-width:760px){.az-cookie-panel{inset:auto 8px 8px;display:block;max-height:85vh;overflow:auto;padding:17px}.az-cookie-actions{margin-top:12px;min-width:0}.az-cookie-manage{right:8px;bottom:8px}}';
+      '.az-cookie-actions{display:flex;flex-direction:column;gap:8px;min-width:230px}.az-cookie-actions button,.az-cookie-manage{min-height:42px;padding:10px 14px;border:1px solid #286447;border-radius:8px;background:#17633f;color:#fff;font:600 14px/1.3 system-ui,sans-serif;cursor:pointer}.az-cookie-actions button[data-cookie-choice="rejected"],.az-cookie-secondary{background:#fff!important;color:#202b35!important;border-color:#7b8992!important}.az-cookie-manage{position:fixed;z-index:9998;right:12px;bottom:12px;box-shadow:0 3px 12px #0002}.az-cookie-status{position:fixed;z-index:10001;left:12px;top:76px;max-width:calc(100% - 24px);padding:6px 10px;font-size:13px;pointer-events:none;background:#14251c;color:#fff;border-radius:8px}.az-cookie-status[hidden]{display:none}' +
+      '.az-cookie-panel button:focus-visible,.az-cookie-manage:focus-visible{outline:3px solid #1669c7;outline-offset:3px}@media(max-width:760px){.az-cookie-panel{inset:auto 8px 8px;display:block;max-height:85vh;overflow:auto;padding:17px}.az-cookie-actions{margin-top:12px;min-width:0}.az-cookie-manage{right:8px;bottom:8px}}' +
+      '.az-cookie-panel{padding:14px 18px;gap:20px;font-size:14px;line-height:1.45}.az-cookie-copy h2{font-size:17px;margin-bottom:4px}.az-cookie-copy p{margin:4px 0}.az-cookie-actions{min-width:260px}@media(max-width:760px){.az-cookie-panel{padding:12px;font-size:13px;max-height:60vh}.az-cookie-copy h2{font-size:16px}.az-cookie-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}.az-cookie-actions button{min-height:44px;padding:6px 8px;font-size:13px}.az-cookie-actions .az-cookie-secondary{grid-column:1/-1;min-height:40px}}';
     document.head.appendChild(style);
   }
   function setup(){

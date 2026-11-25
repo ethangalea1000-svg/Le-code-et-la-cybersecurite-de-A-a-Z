@@ -83,6 +83,7 @@ function initCode(starter){
 function initFinish(){
  const check=document.querySelector("#challengeCheck"),finish=document.querySelector("#finishLesson");
  check.onchange=()=>finish.disabled=!check.checked;
+ try{const st0=getState();if(st0.lessons&&st0.lessons[id+"-"+n]){check.checked=true;finish.textContent="✓ Leçon validée";finish.disabled=true}}catch(e){}
  finish.onclick=()=>{
    const s=getState();s.lessons=s.lessons||{};const key=id+"-"+n;
    if(!s.lessons[key]){s.lessons[key]=true;s.courseLessons=s.courseLessons||{};s.courseLessons[key]=true;saveState(s);addXP(10)}else{s.courseLessons=s.courseLessons||{};s.courseLessons[key]=true;saveState(s)}
@@ -136,3 +137,22 @@ function initTutorial(){
 loadCourseData();
 function syncGlobalNav(){const base="/Le-code-et-la-cybersecurite-de-A-a-Z/";const links=[["Accueil","index.html"],["Commencer ici","demarrer.html"],["Parcours","parcours.html"],["Glossaire","glossaire.html"],["Cours","cours.html"],["Projets","projets.html"],["Quiz","quiz.html"],["Progression","progression.html"],["Recherche","recherche.html"],["Ressources","ressources.html"],["Examens","examens.html"],["Certificats","certificats.html"]];const h=document.querySelector("header");if(!h)return;let n=h.querySelector("nav");if(!n){n=document.createElement("nav");n.setAttribute("aria-label","Navigation principale");h.appendChild(n)}n.setAttribute("aria-label","Navigation principale");n.innerHTML=links.map(x=>'<a href="'+base+x[1]+'">'+x[0]+"</a>").join("");const current=location.pathname.split("/").pop()||"index.html";n.querySelectorAll("a").forEach(a=>{if(a.getAttribute("href").endsWith("/"+current)||a.getAttribute("href")===base+current)a.setAttribute("aria-current","page")});const b=h.querySelector(".brand")||h.querySelector("a");if(b){b.className="brand";b.href=base+"index.html";b.innerHTML="<span>&lt;/&gt;</span> LE CODE <b>&amp;</b> LA CYBERSÉCURITÉ";}}
 syncGlobalNav();
+
+(function(){
+  function codify(root){
+    var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:function(n){
+      if(n.nodeValue.indexOf("`")<0)return NodeFilter.FILTER_REJECT;
+      for(var p=n.parentNode;p&&p!==root;p=p.parentNode){if(/^(CODE|PRE|TEXTAREA|SCRIPT|STYLE|INPUT)$/.test(p.nodeName))return NodeFilter.FILTER_REJECT}
+      return NodeFilter.FILTER_ACCEPT}});
+    var list=[],n;while((n=w.nextNode()))list.push(n);
+    list.forEach(function(t){
+      var parts=t.nodeValue.split(/`([^`\n]+)`/);if(parts.length<3)return;
+      var f=document.createDocumentFragment();
+      parts.forEach(function(s,i){if(i%2){var c=document.createElement("code");c.textContent=s;f.appendChild(c)}else if(s)f.appendChild(document.createTextNode(s))});
+      t.parentNode.replaceChild(f,t)});
+  }
+  function run(){var r=document.querySelector("main")||document.body;codify(r)}
+  if(document.readyState!=="loading")run();else document.addEventListener("DOMContentLoaded",run);
+  setTimeout(run,300);
+  document.addEventListener("click",function(){setTimeout(run,60)});
+})();
