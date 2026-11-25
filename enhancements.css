@@ -1564,3 +1564,7 @@ html[data-theme="dark"] body header nav .nav-more-menu a[aria-current="page"]{ba
 @media(max-width:900px){
   html[data-theme="dark"][data-theme="dark"][data-theme="dark"][data-theme="dark"] body header:has(nav.open){background:#0f151c!important;background-color:#0f151c!important}
 }
+
+/* Navigation simplifiée (25 nov 2026) : 5 entrées principales, menu « Plus » réduit à 7 liens sur une colonne. */
+header nav .nav-more-menu{grid-template-columns:1fr;width:min(260px,90vw)}
+@media(max-width:900px){header nav .nav-more-menu{width:100%}}
