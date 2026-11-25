@@ -51,12 +51,12 @@ function syncGlobalNav(){
  if(main&&!main.id)main.id="mainContent";
  if(!document.querySelector(".skip-link")&&main){const skip=document.createElement("a");skip.className="skip-link";skip.href="#"+main.id;skip.textContent="Aller directement au contenu";document.body.insertBefore(skip,main)}
  const base="/Le-code-et-la-cybersecurite-de-A-a-Z/";
- const primary=[["Accueil","index.html"],["Commencer ici","demarrer.html"],["Parcours","parcours.html"],["Cours","cours.html"],["Projets","projets.html"]];
- const more=[["Quiz","quiz.html"],["Exercices","exercices.html"],["Atelier de code","atelier.html"],["Python & SQL","laboratoire-python-sql.html"],["Progression","progression.html"],["Ressources","ressources.html"],["Donner un avis","retour.html"]];
+ const primary=[["Commencer ici","demarrer.html","nav-cta"],["Donner un avis","retour.html","nav-avis"]];
+ const more=[["Accueil","index.html"],["Parcours","parcours.html"],["Cours","cours.html"],["Projets","projets.html"],["Quiz","quiz.html"],["Exercices","exercices.html"],["Challenges","exercices.html#guidedChallengeLab"],["Atelier de code","atelier.html"],["Python & SQL","laboratoire-python-sql.html"],["Progression","progression.html"],["Glossaire","glossaire.html"],["Recherche","recherche.html"],["Examens","examens.html"],["Certificats","certificats.html"],["Bibliothèque","bibliotheque.html"],["Ressources","ressources.html"]];
  const h=document.querySelector("header");if(!h)return;
  let n=h.querySelector("nav");if(!n){n=document.createElement("nav");h.appendChild(n)}
  n.id="nav";n.setAttribute("aria-label","Navigation principale");
- n.innerHTML=primary.map(x=>'<a href="'+base+x[1]+'">'+x[0]+'</a>').join("")+
+ n.innerHTML=primary.map(x=>'<a class="'+x[2]+'" href="'+base+x[1]+'">'+x[0]+'</a>').join("")+
  '<details class="nav-more"><summary>Plus <span aria-hidden="true">⌄</span></summary><div class="nav-more-menu">'+more.map(x=>'<a href="'+base+x[1]+'">'+x[0]+'</a>').join("")+'</div></details>';
  const current=location.pathname.split("/").pop()||"index.html";
  n.querySelectorAll("a").forEach(a=>{if(a.getAttribute("href")===base+current||a.getAttribute("href")===base+current+location.hash)a.setAttribute("aria-current","page")});
