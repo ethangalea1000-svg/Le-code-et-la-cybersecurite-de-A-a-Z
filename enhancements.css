@@ -1578,3 +1578,10 @@ header nav .nav-more-menu{grid-template-columns:1fr;width:min(280px,90vw);max-he
 .attest-box{display:grid;gap:10px;max-width:460px;margin-top:14px;padding:16px;border:1px solid #9fb8a6;border-radius:12px;background:#f1f8ee;color:#17212b}
 .attest-box input{min-height:44px;padding:8px 10px;border:1px solid #6b7c70;border-radius:8px;font-size:16px;color:#17212b;background:#fff}
 html[data-theme="dark"] .attest-box{background:#10201a;border-color:#2c5a43;color:#eaf3ee}
+
+/* Mobile : le bouton fixe « Gérer les cookies » ne recouvre ni le menu ouvert ni les commandes du bas. */
+@media(max-width:900px){
+ header nav .nav-more-menu{max-height:none;overflow:visible}
+ body:has(header nav.open) .az-cookie-manage{display:none!important}
+ body{padding-bottom:64px}
+}
