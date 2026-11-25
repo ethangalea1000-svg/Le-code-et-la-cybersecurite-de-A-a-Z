@@ -1535,3 +1535,16 @@ main#mainContent>.section:has(>h1):has(>.cards)>h1{font-size:28px}
 main#mainContent>.section:has(>h1):has(>.cards)>h2{font-size:22px;margin:14px 0 8px}
 main#mainContent>.section:has(>h1):has(>.cards){padding-top:16px}
 }
+
+/* Correctif menu mobile et menu Plus sombre (25 nov 2026) : sur l'accueil, l'en-tête restait sur une seule rangée
+   (nowrap) et le menu ouvert était écrasé à droite ; en mode sombre, les liens de « Plus » étaient clairs sur fond blanc. */
+@media(max-width:900px){
+  body.home-page > header{flex-wrap:wrap!important;height:auto;min-height:68px}
+  body.home-page > header nav{width:100%!important;max-width:100%!important;justify-content:flex-start!important}
+}
+html[data-theme="dark"] body header nav .nav-more>summary,
+html[data-theme="dark"] body header nav .nav-more-menu,
+html[data-theme="dark"] body header nav .nav-more-menu a{background:#17212b!important;color:#e8eef4!important}
+html[data-theme="dark"] body header nav .nav-more>summary:hover,
+html[data-theme="dark"] body header nav .nav-more-menu a:hover,
+html[data-theme="dark"] body header nav .nav-more-menu a[aria-current="page"]{background:#1d2a36!important;color:#b7f7d8!important}
