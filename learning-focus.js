@@ -62,7 +62,7 @@ body:not(.course-page):not(.lesson-page) main .az-focus-panel .az-focus-recent l
   panel.setAttribute("aria-labelledby", "azFocusTitle");
   panel.innerHTML = `
     <p class="az-focus-kicker">MODE FOCUS · SÉANCES LOCALES</p>
-    <div class="az-focus-head"><div><h2 id="azFocusTitle">Une étape à la fois.</h2><p>Choisis un projet, lance une séance et reprends quand tu veux. Tes séances sont enregistrées uniquement dans le stockage local de ce navigateur ; aucun compte n’est nécessaire.</p></div></div>
+    <div class="az-focus-head"><div><h2 id="azFocusTitle">Une étape à la fois.</h2><p>Choisis un projet et reprends quand tu veux. Tes séances sont enregistrées dans ce navigateur, sans compte.</p></div></div>
     <div class="az-focus-layout">
       <div class="az-focus-controls">
         <label for="azFocusProject">Projet à travailler</label><select id="azFocusProject"></select>
